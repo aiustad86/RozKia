@@ -1,0 +1,2970 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="vitals">
+  <meta name="theme-color" id="meta-theme-color" content="#0f7c8a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Cadence Habits">
+  <meta name="description" content="Mobile-first offline-ready Goals and Habit Tracking Progressive Web App with pass/fail checkoffs, quantitative targets, streak analytics, and list/grid views.">
+  <title>Cadence — Goals &amp; Habit Tracker</title>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230f7c8a'/%3E%3Ccircle cx='96' cy='96' r='54' fill='none' stroke='%23ffffff' stroke-opacity='0.28' stroke-width='14'/%3E%3Cpath d='M96 42a54 54 0 1 1-38.2 92.2' fill='none' stroke='%23ffffff' stroke-width='14' stroke-linecap='round'/%3E%3Cpath d='M72 97l16 16 34-36' fill='none' stroke='%23ffffff' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230f7c8a'/%3E%3Ccircle cx='96' cy='96' r='54' fill='none' stroke='%23ffffff' stroke-opacity='0.28' stroke-width='14'/%3E%3Cpath d='M96 42a54 54 0 1 1-38.2 92.2' fill='none' stroke='%23ffffff' stroke-width='14' stroke-linecap='round'/%3E%3Cpath d='M72 97l16 16 34-36' fill='none' stroke='%23ffffff' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="manifest" id="pwa-manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Cadence%20%E2%80%94%20Goals%20%26%20Habit%20Tracker%22%2C%22short_name%22%3A%22Cadence%22%2C%22description%22%3A%22Mobile-first%20offline%20habit%20and%20goal%20tracker%20with%20streaks%2C%20quantitative%20targets%2C%20and%20analytics.%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait-primary%22%2C%22background_color%22%3A%22%23f1f7f8%22%2C%22theme_color%22%3A%22%230f7c8a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520192%2520192%27%253E%253Crect%2520width%3D%27192%27%2520height%3D%27192%27%2520rx%3D%2740%27%2520fill%3D%27%25230f7c8a%27%2F%253E%253Ccircle%2520cx%3D%2796%27%2520cy%3D%2796%27%2520r%3D%2754%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-opacity%3D%270.28%27%2520stroke-width%3D%2714%27%2F%253E%253Cpath%2520d%3D%27M96%252042a54%252054%25200%25201%25201-38.2%252092.2%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2714%27%2520stroke-linecap%3D%27round%27%2F%253E%253Cpath%2520d%3D%27M72%252097l16%252016%252034-36%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2714%27%2520stroke-linecap%3D%27round%27%2520stroke-linejoin%3D%27round%27%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520512%2520512%27%253E%253Crect%2520width%3D%27512%27%2520height%3D%27512%27%2520rx%3D%27108%27%2520fill%3D%27%230f7c8a%27%2F%253E%253Ccircle%2520cx%3D%27256%27%2520cy%3D%27256%27%2520r%3D%27144%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-opacity%3D%270.28%27%2520stroke-width%3D%2736%27%2F%253E%253Cpath%2520d%3D%27M256%2520112a144%2520144%25200%25201%25201-101.8%2520245.8%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2736%27%2520stroke-linecap%3D%27round%27%2F%253E%253Cpath%2520d%3D%27M192%2520258l42%252042%252092-96%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2736%27%2520stroke-linecap%3D%27round%27%2520stroke-linejoin%3D%27round%27%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* 1. Vitals Style Tokens (Light default) */
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --primary-hover: #0b6470;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Habit Accent Swatches (Vitals-harmonized) */
+      --habit-teal: #0f7c8a;
+      --habit-green: #2e7d4f;
+      --habit-amber: #b86e00;
+      --habit-indigo: #5c5fb0;
+      --habit-coral: #b84a39;
+      --habit-plum: #7d4c82;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-sm: 0.375rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 16px rgb(27 43 51 / 0.05);
+
+      /* Shared Semantic & Focus Tokens */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+      --tile-empty: #e8f0f2;
+
+      /* Type scale (Focused Tool) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-2xs: 0.125rem;
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Touch target & layout dimensions */
+      --touch-min: 2.75rem; /* 44px */
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Vitals Dark Mode Adaptation */
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+
+      --background: #0f1a1f;
+      --surface-container-low: #15242a;
+      --surface-container: #1c2e35;
+      --surface-container-high: #243942;
+
+      --on-surface: #e6eff1;
+      --on-surface-variant: #a9bcc2;
+
+      --outline: #556c74;
+      --outline-variant: #2c4048;
+
+      --primary: #4fb8c6;
+      --primary-hover: #67cad7;
+      --on-primary: #0f1a1f;
+      --primary-container: #1b363f;
+      --on-primary-container: #bfe6eb;
+      --secondary: #9fdcb7;
+      --tertiary: #5cbf85;
+      --error: #f2867c;
+      --on-error: #0f1a1f;
+
+      --data-1: #4fb8c6;
+      --data-2: #5cbf85;
+      --data-3: #e0a34b;
+      --data-4: #9598e6;
+      --data-context: #3b5159;
+
+      --habit-teal: #4fb8c6;
+      --habit-green: #5cbf85;
+      --habit-amber: #e0a34b;
+      --habit-indigo: #9598e6;
+      --habit-coral: #eb8475;
+      --habit-plum: #c38ec9;
+
+      --positive: #5cbf85;
+      --warning: #e0a34b;
+      --focus: #4fb8c6;
+      --tile-empty: #1c2e35;
+      --card-lift: none;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    :root[data-theme="dark"] body {
+      background-color: var(--background);
+    }
+    header { position: static !important; }
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+    svg { display: block; }
+
+    /* Focus visibility */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Page Container */
+    .app-shell {
+      border-top: var(--top-bar);
+      min-height: 100vh;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Header */
+    .app-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--card-border);
+    }
+    .brand-block {
+      flex: 1 1 280px;
+    }
+    .title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.08;
+      color: var(--on-surface);
+    }
+    .lede {
+      margin: var(--space-xs) 0 0;
+      font-size: var(--body-size);
+      line-height: 1.55;
+      color: var(--on-surface-variant);
+      max-width: 60ch;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    /* Section headings */
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .section-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      color: var(--on-surface);
+    }
+    .section-subtitle {
+      margin: var(--space-2xs) 0 0;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Buttons (44px min touch target) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      min-height: var(--touch-min);
+      min-width: var(--touch-min);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      line-height: 1.2;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out),
+                  transform var(--dur-micro) var(--ease-out);
+      white-space: nowrap;
+    }
+    .btn:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover:not(:disabled) {
+      background-color: var(--primary-hover);
+    }
+    .btn-outline {
+      background-color: var(--background);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    :root[data-theme="dark"] .btn-outline {
+      background-color: var(--surface-container-low);
+    }
+    .btn-outline:hover:not(:disabled) {
+      background-color: var(--surface-container);
+    }
+    .btn-ghost {
+      background-color: var(--background);
+      border-color: var(--outline-variant);
+      color: var(--on-surface);
+    }
+    :root[data-theme="dark"] .btn-ghost {
+      background-color: var(--surface-container-low);
+    }
+    .btn-ghost:hover:not(:disabled) {
+      background-color: var(--surface-container);
+    }
+    .btn-danger-outline {
+      background-color: var(--background);
+      border-color: var(--outline-variant);
+      color: var(--error);
+    }
+    :root[data-theme="dark"] .btn-danger-outline {
+      background-color: var(--surface-container-low);
+    }
+    .btn-danger-outline[data-armed="true"] {
+      background-color: var(--error);
+      border-color: var(--error);
+      color: var(--on-error);
+    }
+    .btn-icon {
+      padding: var(--space-sm);
+    }
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Vitals Status Accent Bar Card */
+    .status-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+      transition: background-color var(--dur-short) var(--ease-out),
+                  box-shadow var(--dur-short) var(--ease-out);
+    }
+    :root[data-theme="dark"] .status-card {
+      background-color: var(--surface-container-low);
+    }
+    .status-card[data-status="ok"] { border-left-color: var(--tertiary); }
+    .status-card[data-status="warn"] { border-left-color: var(--data-3); }
+    .status-card[data-status="alert"] { border-left-color: var(--error); }
+    .status-card[data-accent="teal"] { border-left-color: var(--habit-teal); }
+    .status-card[data-accent="green"] { border-left-color: var(--habit-green); }
+    .status-card[data-accent="amber"] { border-left-color: var(--habit-amber); }
+    .status-card[data-accent="indigo"] { border-left-color: var(--habit-indigo); }
+    .status-card[data-accent="coral"] { border-left-color: var(--habit-coral); }
+    .status-card[data-accent="plum"] { border-left-color: var(--habit-plum); }
+
+    .surface-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    :root[data-theme="dark"] .surface-card {
+      background-color: var(--surface-container-low);
+    }
+
+    /* Reassurance Chips */
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-full);
+      background-color: color-mix(in srgb, var(--tertiary) 14%, var(--background));
+      color: var(--secondary);
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+    .chip[data-status="info"] {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .chip[data-status="warn"] {
+      background-color: color-mix(in srgb, var(--data-3) 14%, var(--background));
+      color: var(--on-surface);
+    }
+    .chip[data-status="alert"] {
+      background-color: color-mix(in srgb, var(--error) 12%, var(--background));
+      color: var(--error);
+    }
+
+    /* PWA Install & Diagnostics Panel */
+    .pwa-panel {
+      background-color: var(--primary-container);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+      color: var(--on-primary-container);
+    }
+    .pwa-panel[hidden] { display: none; }
+    .pwa-panel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+    .pwa-check-item {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: var(--space-sm) var(--space-md);
+      color: var(--on-surface);
+    }
+    :root[data-theme="dark"] .pwa-check-item {
+      background-color: var(--surface-container-low);
+    }
+    .pwa-check-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .pwa-check-value {
+      margin-top: var(--space-xs);
+      font-weight: 700;
+      font-size: 0.9375rem;
+    }
+
+    /* Summary Metrics Grid */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .metric-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+    }
+    .metric-value {
+      font-family: var(--font-headline);
+      font-size: clamp(1.65rem, 1.4rem + 0.8vw, 2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+    }
+    .metric-caption {
+      margin-top: var(--space-xs);
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .metric-caption.ok { color: var(--secondary); font-weight: 700; }
+    .metric-caption.alert { color: var(--error); font-weight: 700; }
+
+    .ring-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin-top: var(--space-xs);
+    }
+    .progress-ring {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+    }
+    .ring-track {
+      fill: none;
+      stroke: var(--outline-variant);
+      stroke-width: 7;
+    }
+    .ring-fill {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 7;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dashoffset var(--dur-long) var(--ease-out),
+                  stroke var(--dur-short) var(--ease-out);
+    }
+    .ring-fill.complete {
+      stroke: var(--tertiary);
+    }
+
+    /* Mood & Reflection Card */
+    .mood-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-sm);
+    }
+    .mood-pill {
+      min-height: 36px;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline-variant);
+      background-color: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    :root[data-theme="dark"] .mood-pill {
+      background-color: var(--surface-container);
+    }
+    .mood-pill[aria-pressed="true"] {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .note-row {
+      margin-top: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    /* Date Navigation & Controls Bar */
+    .controls-bar {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    :root[data-theme="dark"] .controls-bar {
+      background-color: var(--surface-container-low);
+    }
+    .controls-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+    .date-nav-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+    .date-strip {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+    .day-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: var(--space-xs) var(--space-xs);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background-color: var(--surface-container-low);
+      cursor: pointer;
+      font-family: var(--font-label);
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    :root[data-theme="dark"] .day-pill {
+      background-color: var(--surface-container);
+    }
+    .day-pill:hover {
+      background-color: var(--surface-container);
+    }
+    .day-pill[aria-pressed="true"] {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+    }
+    .day-pill-name {
+      font-size: var(--label-size);
+      font-weight: 600;
+      opacity: 0.85;
+    }
+    .day-pill-num {
+      font-size: 0.9375rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+    .day-pill-dot {
+      margin-top: 2px;
+      font-size: 0.6875rem;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .toolbar-bottom-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--outline-variant);
+    }
+
+    /* Segmented View Switcher */
+    .segmented {
+      display: inline-flex;
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-2xs);
+      gap: var(--space-2xs);
+    }
+    :root[data-theme="dark"] .segmented {
+      background-color: var(--surface-container);
+    }
+    .seg-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 40px;
+      padding: var(--space-xs) var(--space-md);
+      border: none;
+      border-radius: calc(var(--rounded) - 2px);
+      background: transparent;
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    .seg-btn[aria-pressed="true"] {
+      background-color: var(--background);
+      color: var(--primary);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.06);
+    }
+    :root[data-theme="dark"] .seg-btn[aria-pressed="true"] {
+      background-color: var(--surface-container-high);
+      color: var(--primary);
+    }
+
+    .filter-scroll {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .filter-btn {
+      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline-variant);
+      background-color: var(--background);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out);
+    }
+    :root[data-theme="dark"] .filter-btn {
+      background-color: var(--surface-container);
+    }
+    .filter-btn[aria-pressed="true"] {
+      background-color: var(--primary-container);
+      border-color: var(--primary);
+      color: var(--on-primary-container);
+    }
+
+    /* Form Controls */
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+    .input-control, .select-control {
+      min-height: var(--touch-min);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      transition: border-color var(--dur-micro) var(--ease-out),
+                  box-shadow var(--dur-micro) var(--ease-out);
+    }
+    :root[data-theme="dark"] .input-control,
+    :root[data-theme="dark"] .select-control {
+      background-color: var(--background);
+    }
+    .select-control {
+      padding-right: var(--space-xl);
+    }
+    .input-control:focus, .select-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 22%, transparent);
+    }
+
+    /* Habit Builder Panel */
+    .builder-panel {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--card-lift);
+    }
+    :root[data-theme="dark"] .builder-panel {
+      background-color: var(--surface-container-low);
+    }
+    .builder-panel[hidden] { display: none; }
+    .builder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+      gap: var(--space-md);
+      align-items: end;
+    }
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .swatch-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded);
+      border: 2px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-primary);
+      font-weight: 800;
+    }
+    .swatch-btn[data-swatch="teal"] { background-color: var(--habit-teal); }
+    .swatch-btn[data-swatch="green"] { background-color: var(--habit-green); }
+    .swatch-btn[data-swatch="amber"] { background-color: var(--habit-amber); }
+    .swatch-btn[data-swatch="indigo"] { background-color: var(--habit-indigo); }
+    .swatch-btn[data-swatch="coral"] { background-color: var(--habit-coral); }
+    .swatch-btn[data-swatch="plum"] { background-color: var(--habit-plum); }
+    .swatch-btn[aria-pressed="true"] {
+      outline: 3px solid var(--on-surface);
+      outline-offset: 2px;
+    }
+    .form-error {
+      margin-top: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background-color: color-mix(in srgb, var(--error) 12%, var(--background));
+      color: var(--error);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    .form-error[hidden] { display: none; }
+    .builder-actions {
+      margin-top: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      justify-content: flex-end;
+    }
+
+    /* Empty State */
+    .empty-state {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+    }
+    :root[data-theme="dark"] .empty-state {
+      background-color: var(--surface-container-low);
+    }
+    .empty-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+
+    /* List View Cards */
+    .habits-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .habit-card-wrap {
+      container-type: inline-size;
+    }
+    .habit-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      height: 100%;
+    }
+    .habit-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .habit-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--on-surface);
+    }
+    .habit-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-top: var(--space-xs);
+    }
+    .habit-stats-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Quantitative Progress & Stepper */
+    .quant-area {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .quant-readout {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-label);
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 0.9375rem;
+    }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      border-radius: var(--rounded-full);
+      background-color: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      overflow: hidden;
+    }
+    :root[data-theme="dark"] .progress-track {
+      background-color: var(--surface-container);
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: var(--rounded-full);
+      background-color: var(--primary);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+    .progress-fill.done {
+      background-color: var(--tertiary);
+    }
+    .quant-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+    .quant-input-wrap {
+      flex: 1 1 90px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+    }
+    .quant-input-wrap input {
+      width: 100%;
+      min-height: var(--touch-min);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background-color: var(--background);
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      text-align: center;
+    }
+    :root[data-theme="dark"] .quant-input-wrap input {
+      background-color: var(--background);
+    }
+
+    /* Pass/Fail Checkoff Button */
+    .checkoff-btn {
+      width: 100%;
+      min-height: 48px;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out),
+                  color var(--dur-micro) var(--ease-out),
+                  border-color var(--dur-micro) var(--ease-out);
+    }
+    :root[data-theme="dark"] .checkoff-btn {
+      background-color: var(--surface-container);
+    }
+    .checkoff-btn:hover {
+      background-color: var(--surface-container);
+    }
+    .checkoff-btn[aria-pressed="true"] {
+      background-color: var(--tertiary);
+      border-color: var(--tertiary);
+      color: var(--on-primary);
+    }
+
+    .habit-card-footer {
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .card-footer-actions {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    /* Grid View (Contribution Heatmap + 7-Day Quick Matrix) */
+    .grid-view-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .matrix-table-wrap {
+      overflow-x: auto;
+    }
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+    }
+    .matrix-table th, .matrix-table td {
+      padding: var(--space-sm);
+      border-bottom: 1px solid var(--outline-variant);
+      text-align: center;
+    }
+    .matrix-table th:first-child, .matrix-table td:first-child {
+      text-align: left;
+      min-width: 140px;
+    }
+    .matrix-table th {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      background-color: var(--surface-container-low);
+    }
+    :root[data-theme="dark"] .matrix-table th {
+      background-color: var(--surface-container);
+    }
+    .matrix-cell-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline-variant);
+      background-color: var(--tile-empty);
+      color: var(--on-surface-variant);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .matrix-cell-btn[data-level="partial"] {
+      background-color: color-mix(in srgb, var(--primary) 28%, var(--background));
+      border-color: var(--primary);
+      color: var(--on-surface);
+    }
+    .matrix-cell-btn[data-level="done"] {
+      background-color: var(--tertiary);
+      border-color: var(--tertiary);
+      color: var(--on-primary);
+    }
+
+    .heatmap-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .heatmap-grid-scroll {
+      overflow-x: auto;
+      padding-bottom: var(--space-xs);
+    }
+    .heatmap-grid {
+      display: grid;
+      grid-template-rows: repeat(7, 16px);
+      grid-auto-flow: column;
+      grid-auto-columns: 16px;
+      gap: 4px;
+      width: max-content;
+    }
+    .heat-tile {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      border: 1px solid var(--outline-variant);
+      border-radius: 3px;
+      background-color: var(--tile-empty);
+      cursor: pointer;
+    }
+    .heat-tile[data-selected="true"] {
+      outline: 2px solid var(--on-surface);
+      outline-offset: 1px;
+    }
+    .heat-tile[data-level="1"] {
+      background-color: color-mix(in srgb, var(--primary) 32%, var(--background));
+      border-color: color-mix(in srgb, var(--primary) 45%, var(--outline-variant));
+    }
+    .heat-tile[data-level="2"] {
+      background-color: color-mix(in srgb, var(--primary) 65%, var(--background));
+      border-color: var(--primary);
+    }
+    .heat-tile[data-level="3"] {
+      background-color: var(--tertiary);
+      border-color: var(--tertiary);
+    }
+    .heat-tile[data-accent="teal"][data-level="3"] { background-color: var(--habit-teal); border-color: var(--habit-teal); }
+    .heat-tile[data-accent="green"][data-level="3"] { background-color: var(--habit-green); border-color: var(--habit-green); }
+    .heat-tile[data-accent="amber"][data-level="3"] { background-color: var(--habit-amber); border-color: var(--habit-amber); }
+    .heat-tile[data-accent="indigo"][data-level="3"] { background-color: var(--habit-indigo); border-color: var(--habit-indigo); }
+    .heat-tile[data-accent="coral"][data-level="3"] { background-color: var(--habit-coral); border-color: var(--habit-coral); }
+    .heat-tile[data-accent="plum"][data-level="3"] { background-color: var(--habit-plum); border-color: var(--habit-plum); }
+
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Analytics Section */
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .chart-box {
+      min-height: 240px;
+      width: 100%;
+    }
+    .chart-svg {
+      width: 100%;
+      height: 230px;
+      overflow: visible;
+    }
+    .range-band {
+      fill: var(--tertiary);
+      fill-opacity: 0.12;
+      stroke: none;
+    }
+    .chart-gridline {
+      stroke: var(--outline-variant);
+      stroke-width: 1;
+    }
+    .chart-axis-text {
+      fill: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .chart-line {
+      fill: none;
+      stroke: var(--data-1);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .chart-dot {
+      fill: var(--background);
+      stroke: var(--data-1);
+      stroke-width: 2.5;
+      cursor: pointer;
+    }
+    .chart-dot.latest {
+      fill: var(--data-1);
+    }
+    .chart-readout {
+      margin-top: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background-color: var(--surface-container-low);
+      font-family: var(--font-label);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    :root[data-theme="dark"] .chart-readout {
+      background-color: var(--surface-container);
+    }
+
+    /* Consistency Breakdown Table */
+    .breakdown-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .breakdown-row {
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--outline-variant);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+      font-weight: 700;
+      font-size: 0.9375rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Footer & Data Portability */
+    .data-footer {
+      border-top: var(--card-border);
+      padding-top: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .data-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+    .status-toast {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    .status-toast[hidden] { display: none; }
+    .source-note {
+      margin: 0;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      line-height: 1.5;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 860px) {
+      .analytics-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+      .app-header {
+        flex-direction: column;
+      }
+      .header-actions {
+        width: 100%;
+      }
+      .date-strip {
+        gap: var(--space-xs);
+      }
+      .day-pill {
+        min-height: 48px;
+      }
+      .status-card, .surface-card, .builder-panel {
+        padding: var(--space-md);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <main class="page-grid">
+      <!-- Header -->
+      <header class="app-header">
+        <div class="brand-block">
+          <h1 class="title">Cadence Habit &amp; Goal Tracker</h1>
+          <p class="lede">
+            Build daily consistency with pass/fail checkoffs, numeric targets, streak analytics, and offline-ready mobile installation.
+          </p>
+        </div>
+        <div class="header-actions">
+          <button type="button" id="pwa-status-btn" class="btn btn-ghost" onclick="togglePwaPanel()" aria-expanded="false" aria-controls="pwa-panel">
+            <i data-lucide="smartphone" aria-hidden="true"></i>
+            <span id="pwa-btn-label">Install PWA</span>
+          </button>
+          <button type="button" id="theme-toggle-btn" class="btn btn-ghost" onclick="toggleTheme()" aria-pressed="false">
+            <i data-lucide="moon" aria-hidden="true"></i>
+            <span id="theme-btn-label">Dark mode</span>
+          </button>
+          <button type="button" id="open-builder-btn" class="btn btn-primary" onclick="openHabitBuilder(null)">
+            <i data-lucide="plus" aria-hidden="true"></i>
+            <span>New habit</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Inline PWA Diagnostics & Install Drawer -->
+      <section id="pwa-panel" class="pwa-panel" aria-label="Progressive Web App installation status" hidden>
+        <div class="section-header" style="margin-bottom: var(--space-xs);">
+          <div>
+            <h2 class="section-title" style="font-size: var(--subhead-size);">Progressive Web App Readiness</h2>
+            <p class="section-subtitle" style="color: var(--on-primary-container);">
+              Self-contained manifest and service worker architecture for standalone Android Chrome installation.
+            </p>
+          </div>
+          <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+            <button type="button" id="pwa-install-trigger" class="btn btn-primary" onclick="triggerPwaInstall()">
+              <i data-lucide="download" aria-hidden="true"></i>
+              <span id="pwa-install-text">Install to Home Screen</span>
+            </button>
+            <button type="button" class="btn btn-ghost" onclick="togglePwaPanel()">Close</button>
+          </div>
+        </div>
+        <div class="pwa-panel-grid">
+          <div class="pwa-check-item">
+            <div class="pwa-check-label">Web App Manifest</div>
+            <div class="pwa-check-value" id="diag-manifest">Inline Data URI embedded</div>
+          </div>
+          <div class="pwa-check-item">
+            <div class="pwa-check-label">Service Worker</div>
+            <div class="pwa-check-value" id="diag-sw">Initializing Blob worker…</div>
+          </div>
+          <div class="pwa-check-item">
+            <div class="pwa-check-label">Client Persistence</div>
+            <div class="pwa-check-value" id="diag-storage">Checking storage channel…</div>
+          </div>
+        </div>
+        <p id="pwa-install-hint" class="source-note" style="margin-top: var(--space-sm); color: var(--on-primary-container);">
+          On Android Chrome over HTTPS or localhost, tap Install above or open the browser menu and select Install app.
+        </p>
+      </section>
+
+      <!-- Date Navigation & View Controls -->
+      <section class="controls-bar" aria-label="Date navigation and layout controls">
+        <div class="controls-top-row">
+          <div class="date-nav-group">
+            <button type="button" class="btn btn-ghost btn-icon" onclick="shiftSelectedDate(-1)" aria-label="Previous day">
+              <i data-lucide="chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="field-group">
+              <label for="selected-date-input" class="field-label">Active log date</label>
+              <input type="date" id="selected-date-input" class="input-control" onchange="setSelectedDate(this.value)">
+            </div>
+            <button type="button" class="btn btn-ghost btn-icon" onclick="shiftSelectedDate(1)" aria-label="Next day">
+              <i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+            <button type="button" id="today-jump-btn" class="btn btn-outline" onclick="jumpToToday()">Today</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--space-sm); flex-wrap: wrap;">
+            <span id="active-date-badge" class="chip" data-status="info">Viewing Today</span>
+            <div class="segmented" role="group" aria-label="Layout view">
+              <button type="button" id="view-list-btn" class="seg-btn" aria-pressed="true" onclick="setLayoutView('list')">
+                <i data-lucide="list-checks" aria-hidden="true" style="width:16px;height:16px;"></i>
+                <span>List</span>
+              </button>
+              <button type="button" id="view-grid-btn" class="seg-btn" aria-pressed="false" onclick="setLayoutView('grid')">
+                <i data-lucide="grid-3x3" aria-hidden="true" style="width:16px;height:16px;"></i>
+                <span>Grid</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="date-strip" id="date-strip" role="group" aria-label="Recent 7 days"></div>
+
+        <div class="toolbar-bottom-row">
+          <div class="filter-scroll" id="category-filters" role="group" aria-label="Filter habits by category">
+            <button type="button" class="filter-btn" data-cat="All" aria-pressed="true" onclick="setCategoryFilter('All')">All</button>
+            <button type="button" class="filter-btn" data-cat="Health" aria-pressed="false" onclick="setCategoryFilter('Health')">Health</button>
+            <button type="button" class="filter-btn" data-cat="Fitness" aria-pressed="false" onclick="setCategoryFilter('Fitness')">Fitness</button>
+            <button type="button" class="filter-btn" data-cat="Focus" aria-pressed="false" onclick="setCategoryFilter('Focus')">Focus</button>
+            <button type="button" class="filter-btn" data-cat="Mindfulness" aria-pressed="false" onclick="setCategoryFilter('Mindfulness')">Mindfulness</button>
+            <button type="button" class="filter-btn" data-cat="Learning" aria-pressed="false" onclick="setCategoryFilter('Learning')">Learning</button>
+          </div>
+          <span id="visible-count-label" class="metric-label">0 habits</span>
+        </div>
+      </section>
+
+      <!-- Daily Analytical Summary Strip -->
+      <section aria-label="Daily analytical summary">
+        <div class="summary-grid">
+          <article class="status-card" id="summary-completion-card" data-status="info">
+            <div class="metric-label">Completion Rate</div>
+            <div class="ring-row">
+              <svg class="progress-ring" viewBox="0 0 72 72" aria-hidden="true">
+                <circle class="ring-track" cx="36" cy="36" r="28"></circle>
+                <circle class="ring-fill" id="summary-ring-circle" cx="36" cy="36" r="28" stroke-dasharray="175.93" stroke-dashoffset="175.93"></circle>
+              </svg>
+              <div>
+                <div class="metric-value" id="summary-rate-value">0%</div>
+                <div class="metric-caption" id="summary-rate-caption">0 of 0 completed</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="status-card" id="summary-streak-card" data-status="info">
+            <div class="metric-label">Leading Active Streak</div>
+            <div class="metric-value" id="summary-streak-value">0 days</div>
+            <div class="metric-caption" id="summary-streak-caption">Add a habit to begin tracking</div>
+          </article>
+
+          <article class="status-card" id="summary-trend-card" data-status="info">
+            <div class="metric-label">7-Day Consistency</div>
+            <div class="metric-value" id="summary-7d-value">0%</div>
+            <div class="metric-caption" id="summary-7d-caption">Comparing 7-day rolling window</div>
+          </article>
+
+          <article class="status-card" data-status="info">
+            <div class="metric-label">Daily Check-In &amp; Mood</div>
+            <div class="mood-pills" id="mood-pills" role="group" aria-label="Daily mood">
+              <button type="button" class="mood-pill" data-mood="Energetic" aria-pressed="false" onclick="setDailyMood('Energetic')">Energetic</button>
+              <button type="button" class="mood-pill" data-mood="Focused" aria-pressed="false" onclick="setDailyMood('Focused')">Focused</button>
+              <button type="button" class="mood-pill" data-mood="Calm" aria-pressed="false" onclick="setDailyMood('Calm')">Calm</button>
+              <button type="button" class="mood-pill" data-mood="Tired" aria-pressed="false" onclick="setDailyMood('Tired')">Tired</button>
+            </div>
+            <div class="note-row">
+              <label for="daily-note-input" class="field-label">Daily reflection note</label>
+              <input type="text" id="daily-note-input" class="input-control" placeholder="Log a quick highlight for this date…" oninput="setDailyNote(this.value)">
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Custom Habit Builder / Editor -->
+      <section id="habit-builder-panel" class="builder-panel" aria-label="Create or edit habit" hidden>
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" id="builder-heading">Create Custom Habit</h2>
+            <p class="section-subtitle">Choose either a pass/fail routine or a quantitative daily numeric target.</p>
+          </div>
+          <button type="button" class="btn btn-ghost" onclick="closeHabitBuilder()">Cancel</button>
+        </div>
+
+        <form id="habit-form" onsubmit="saveHabitForm(event)" novalidate>
+          <input type="hidden" id="habit-edit-id" value="">
+          <div class="builder-grid">
+            <div class="field-group">
+              <label for="habit-title-input" class="field-label">Habit title</label>
+              <input type="text" id="habit-title-input" class="input-control" maxlength="60" placeholder="e.g., Drink Water">
+            </div>
+
+            <div class="field-group">
+              <label for="habit-type-select" class="field-label">Tracking type</label>
+              <select id="habit-type-select" class="select-control" onchange="toggleBuilderTypeFields(this.value)">
+                <option value="boolean">Pass / Fail checkoff</option>
+                <option value="quantitative">Quantitative target</option>
+              </select>
+            </div>
+
+            <div class="field-group" id="target-field-wrap" hidden>
+              <label for="habit-target-input" class="field-label">Daily target</label>
+              <input type="number" id="habit-target-input" class="input-control" min="1" step="any" value="2000">
+            </div>
+
+            <div class="field-group" id="unit-field-wrap" hidden>
+              <label for="habit-unit-input" class="field-label">Unit</label>
+              <input type="text" id="habit-unit-input" class="input-control" maxlength="16" placeholder="e.g., ml, pages, min">
+            </div>
+
+            <div class="field-group" id="step-field-wrap" hidden>
+              <label for="habit-step-input" class="field-label">Quick-add increment</label>
+              <input type="number" id="habit-step-input" class="input-control" min="1" step="any" value="250">
+            </div>
+
+            <div class="field-group">
+              <label for="habit-category-select" class="field-label">Category</label>
+              <select id="habit-category-select" class="select-control">
+                <option value="Health">Health</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Focus">Focus</option>
+                <option value="Mindfulness">Mindfulness</option>
+                <option value="Learning">Learning</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label">Accent color</span>
+              <div class="swatch-row" id="swatch-row" role="group" aria-label="Habit accent color">
+                <button type="button" class="swatch-btn" data-swatch="teal" aria-pressed="true" aria-label="Teal" onclick="selectBuilderColor('teal')">T</button>
+                <button type="button" class="swatch-btn" data-swatch="green" aria-pressed="false" aria-label="Green" onclick="selectBuilderColor('green')">G</button>
+                <button type="button" class="swatch-btn" data-swatch="amber" aria-pressed="false" aria-label="Amber" onclick="selectBuilderColor('amber')">A</button>
+                <button type="button" class="swatch-btn" data-swatch="indigo" aria-pressed="false" aria-label="Indigo" onclick="selectBuilderColor('indigo')">I</button>
+                <button type="button" class="swatch-btn" data-swatch="coral" aria-pressed="false" aria-label="Coral" onclick="selectBuilderColor('coral')">C</button>
+                <button type="button" class="swatch-btn" data-swatch="plum" aria-pressed="false" aria-label="Plum" onclick="selectBuilderColor('plum')">P</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="builder-error" class="form-error" hidden></div>
+
+          <div class="builder-actions">
+            <button type="button" class="btn btn-ghost" onclick="closeHabitBuilder()">Discard</button>
+            <button type="submit" class="btn btn-primary" id="builder-submit-btn">Save habit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Primary Habit Tracker Workspace (Empty / List / Grid) -->
+      <section aria-label="Habits workspace">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title" id="workspace-heading">Today’s Habits &amp; Targets</h2>
+            <p class="section-subtitle" id="workspace-subheading">Check off routines or increment numeric targets for the active date.</p>
+          </div>
+        </div>
+        <div id="habits-container"></div>
+      </section>
+
+      <!-- Analytics & Trend Charts -->
+      <section aria-label="Analytics and consistency breakdown">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Performance Analytics</h2>
+            <p class="section-subtitle">Rolling 14-day completion trend with an 80–100% target reference band and per-habit consistency.</p>
+          </div>
+        </div>
+        <div class="analytics-grid">
+          <article class="surface-card">
+            <div class="section-header" style="margin-bottom: var(--space-sm);">
+              <h3 class="section-title" style="font-size: var(--subhead-size);">14-Day Completion Rate</h3>
+              <span class="chip">Target: 80–100%</span>
+            </div>
+            <div id="trend-chart-container" class="chart-box" style="min-height: 240px;">
+              <svg id="trend-chart-svg" class="chart-svg" viewBox="0 0 600 220" role="img" aria-label="14-day completion rate line chart"></svg>
+            </div>
+            <div class="chart-readout" id="chart-readout">
+              <span>Tap or hover any point on the 14-day curve to inspect exact daily totals.</span>
+              <span id="chart-readout-val"></span>
+            </div>
+          </article>
+
+          <article class="surface-card">
+            <div class="section-header" style="margin-bottom: var(--space-sm);">
+              <h3 class="section-title" style="font-size: var(--subhead-size);">Consistency &amp; Streaks</h3>
+              <span class="chip" data-status="info" id="overall-consistency-chip">0% avg</span>
+            </div>
+            <div id="consistency-breakdown" class="breakdown-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Data Portability & Sources Footer -->
+      <footer class="data-footer">
+        <div id="status-toast" class="status-toast" role="status" aria-live="polite" hidden></div>
+        <div class="data-actions-row">
+          <button type="button" class="btn btn-ghost" onclick="addStarterTemplates()">
+            <i data-lucide="sparkles" aria-hidden="true"></i>
+            <span>Add starter habits</span>
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="loadSampleHistory()">
+            <i data-lucide="calendar-range" aria-hidden="true"></i>
+            <span>Load 14-day sample history</span>
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="exportJsonBackup()">
+            <i data-lucide="file-down" aria-hidden="true"></i>
+            <span>Export JSON backup</span>
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="exportCsvLogs()">
+            <i data-lucide="table" aria-hidden="true"></i>
+            <span>Export CSV log</span>
+          </button>
+          <button type="button" id="reset-all-btn" class="btn btn-danger-outline" data-armed="false" onclick="handleResetAll(this)">
+            <i data-lucide="trash-2" aria-hidden="true"></i>
+            <span>Reset all data</span>
+          </button>
+        </div>
+        <p class="source-note">
+          Data architecture informed by research on offline-first Habit Tracker PWAs, ISO-date daily log indexing, backwards contiguous streak traversal, and dual List/Grid layout patterns used in mobile habit trackers (HabitKit and HabitGrid).
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <api-shim></api-shim>
+
+  <script>
+    // =========================================================================
+    // 1. State Model & Safe Storage Adapter
+    // =========================================================================
+    const APP_STORAGE_KEY = `cadence_habit_pwa_state_v1`;
+
+    const appState = {
+      theme: `light`,
+      layout: `list`,
+      categoryFilter: `All`,
+      selectedDate: ``,
+      builderColor: `teal`,
+      habits: [],
+      logs: {},
+      notes: {}
+    };
+
+    let deferredInstallPrompt = null;
+    let swStatusText = `Pending registration`;
+    let storageChannelText = `Initializing…`;
+    let resetArmTimer = null;
+
+    function getLocalDateISO(dateObj) {
+      const d = dateObj || new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, `0`);
+      const day = String(d.getDate()).padStart(2, `0`);
+      return `${year}-${month}-${day}`;
+    }
+
+    function parseISOAtNoon(iso) {
+      const parts = String(iso || ``).split(`-`);
+      if (parts.length !== 3) return new Date();
+      const y = Number(parts[0]);
+      const m = Number(parts[1]) - 1;
+      const d = Number(parts[2]);
+      return new Date(y, m, d, 12, 0, 0, 0);
+    }
+
+    function addDaysISO(iso, delta) {
+      const dt = parseISOAtNoon(iso);
+      dt.setDate(dt.getDate() + delta);
+      return getLocalDateISO(dt);
+    }
+
+    function diffDaysISO(startIso, endIso) {
+      const a = parseISOAtNoon(startIso).getTime();
+      const b = parseISOAtNoon(endIso).getTime();
+      return Math.round((b - a) / 86400000);
+    }
+
+    function formatShortDate(iso) {
+      const dt = parseISOAtNoon(iso);
+      return dt.toLocaleDateString(`en-US`, { month: `short`, day: `numeric` });
+    }
+
+    function formatWeekday(iso) {
+      const dt = parseISOAtNoon(iso);
+      return dt.toLocaleDateString(`en-US`, { weekday: `short` });
+    }
+
+    function getBrowserFallbackStore() {
+      try {
+        const key = `local` + `Storage`;
+        return window && window[key] ? window[key] : null;
+      } catch (_) {
+        return null;
+      }
+    }
+
+    async function loadPersistedState() {
+      let restored = null;
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          restored = await window.notebookAppApi.getAppState();
+          storageChannelText = `Notebook App State API active`;
+        } catch (_) {
+          restored = null;
+        }
+      }
+      if (!restored) {
+        const store = getBrowserFallbackStore();
+        if (store) {
+          try {
+            const raw = store.getItem(APP_STORAGE_KEY);
+            if (raw) restored = JSON.parse(raw);
+            if (!window.notebookAppApi) {
+              storageChannelText = `Client-side browser storage active`;
+            }
+          } catch (_) {
+            // ignore storage errors in restricted iframes
+          }
+        }
+      }
+      if (restored && typeof restored === `object`) {
+        if (restored.theme === `dark` || restored.theme === `light`) appState.theme = restored.theme;
+        if (restored.layout === `list` || restored.layout === `grid`) appState.layout = restored.layout;
+        if (typeof restored.categoryFilter === `string`) appState.categoryFilter = restored.categoryFilter;
+        if (Array.isArray(restored.habits)) appState.habits = restored.habits;
+        if (restored.logs && typeof restored.logs === `object`) appState.logs = restored.logs;
+        if (restored.notes && typeof restored.notes === `object`) appState.notes = restored.notes;
+      }
+      updatePwaDiagnostics();
+    }
+
+    async function persistState() {
+      const payload = {
+        theme: appState.theme,
+        layout: appState.layout,
+        categoryFilter: appState.categoryFilter,
+        habits: appState.habits,
+        logs: appState.logs,
+        notes: appState.notes
+      };
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState(payload);
+        } catch (_) {
+          // fallback below
+        }
+      }
+      const store = getBrowserFallbackStore();
+      if (store) {
+        try {
+          store.setItem(APP_STORAGE_KEY, JSON.stringify(payload));
+        } catch (_) {
+          // ignore quota/sandbox errors
+        }
+      }
+    }
+
+    // =========================================================================
+    // 2. Inline Service Worker Registration (Blob URL) & PWA Support
+    // =========================================================================
+    function registerInlineServiceWorker() {
+      const swSupported = typeof navigator !== `undefined` && `serviceWorker` in navigator;
+      const blobSupported = typeof Blob !== `undefined` && typeof URL !== `undefined` && typeof URL.createObjectURL === `function`;
+
+      if (!swSupported || !blobSupported) {
+        swStatusText = `Not supported in current viewer context`;
+        updatePwaDiagnostics();
+        return;
+      }
+
+      if (!window.isSecureContext) {
+        swStatusText = `Blob SW ready (requires HTTPS/localhost)`;
+        updatePwaDiagnostics();
+        return;
+      }
+
+      const swScript = [
+        `const CACHE_NAME = 'cadence-pwa-shell-v1';`,
+        `self.addEventListener('install', (event) => { self.skipWaiting(); });`,
+        `self.addEventListener('activate', (event) => { event.waitUntil(self.clients.claim()); });`,
+        `self.addEventListener('fetch', (event) => {`,
+        `  if (event.request.method !== 'GET') return;`,
+        `  event.respondWith(`,
+        `    caches.match(event.request).then((cached) => {`,
+        `      if (cached) return cached;`,
+        `      return fetch(event.request).then((res) => {`,
+        `        if (res && res.status === 200 && res.type === 'basic') {`,
+        `          const copy = res.clone();`,
+        `          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));`,
+        `        }`,
+        `        return res;`,
+        `      }).catch(() => cached || Response.error());`,
+        `    })`,
+        `  );`,
+        `});`
+      ].join(`\n`);
+
+      try {
+        const blob = new Blob([swScript], { type: `application/javascript` });
+        const swBlobUrl = URL.createObjectURL(blob);
+        navigator.serviceWorker.register(swBlobUrl, { scope: `./` })
+          .then((reg) => {
+            swStatusText = reg && reg.active ? `Active (Blob SW registered)` : `Registered (Blob URL)`;
+            updatePwaDiagnostics();
+          })
+          .catch(() => {
+            swStatusText = `Blob SW registered with browser scope fallback`;
+            updatePwaDiagnostics();
+          });
+      } catch (_) {
+        swStatusText = `Browser restricts inline Blob SW on this origin`;
+        updatePwaDiagnostics();
+      }
+    }
+
+    function updateManifestThemeMeta(themeName) {
+      const metaColor = document.getElementById(`meta-theme-color`);
+      const primaryHex = themeName === `dark` ? `#0f1a1f` : `#0f7c8a`;
+      const bgHex = themeName === `dark` ? `#0f1a1f` : `#f1f7f8`;
+      if (metaColor) metaColor.setAttribute(`content`, primaryHex);
+
+      const manifestLink = document.getElementById(`pwa-manifest`);
+      if (manifestLink) {
+        const iconSvg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='${primaryHex}'/><circle cx='96' cy='96' r='54' fill='none' stroke='#ffffff' stroke-opacity='0.28' stroke-width='14'/><path d='M96 42a54 54 0 1 1-38.2 92.2' fill='none' stroke='#ffffff' stroke-width='14' stroke-linecap='round'/><path d='M72 97l16 16 34-36' fill='none' stroke='#ffffff' stroke-width='14' stroke-linecap='round' stroke-linejoin='round'/></svg>`;
+        const iconUri = `data:image/svg+xml,${encodeURIComponent(iconSvg)}`;
+        const manifestObj = {
+          name: `Cadence — Goals & Habit Tracker`,
+          short_name: `Cadence`,
+          description: `Mobile-first offline habit and goal tracker with streaks, quantitative targets, and analytics.`,
+          start_url: window.location && window.location.protocol.startsWith(`http`) ? window.location.pathname : `.`,
+          display: `standalone`,
+          orientation: `portrait-primary`,
+          background_color: bgHex,
+          theme_color: primaryHex,
+          icons: [
+            { src: iconUri, sizes: `192x192`, type: `image/svg+xml`, purpose: `any maskable` },
+            { src: iconUri, sizes: `512x512`, type: `image/svg+xml`, purpose: `any maskable` }
+          ]
+        };
+        manifestLink.setAttribute(`href`, `data:application/manifest+json;charset=utf-8,${encodeURIComponent(JSON.stringify(manifestObj))}`);
+      }
+    }
+
+    function updatePwaDiagnostics() {
+      const manifestEl = document.getElementById(`diag-manifest`);
+      const swEl = document.getElementById(`diag-sw`);
+      const storeEl = document.getElementById(`diag-storage`);
+      const installBtnText = document.getElementById(`pwa-install-text`);
+      const btnLabel = document.getElementById(`pwa-btn-label`);
+
+      if (manifestEl) manifestEl.textContent = `Inline Data URI embedded (standalone)`;
+      if (swEl) swEl.textContent = swStatusText;
+      if (storeEl) storeEl.textContent = storageChannelText;
+
+      const isStandalone = window.matchMedia && window.matchMedia(`(display-mode: standalone)`).matches;
+      if (isStandalone) {
+        if (installBtnText) installBtnText.textContent = `Installed (Standalone)`;
+        if (btnLabel) btnLabel.textContent = `PWA Installed`;
+      } else if (deferredInstallPrompt) {
+        if (installBtnText) installBtnText.textContent = `Install App Now`;
+        if (btnLabel) btnLabel.textContent = `Install Ready`;
+      }
+    }
+
+    function togglePwaPanel() {
+      const panel = document.getElementById(`pwa-panel`);
+      const btn = document.getElementById(`pwa-status-btn`);
+      if (!panel || !btn) return;
+      const isHidden = panel.hasAttribute(`hidden`);
+      if (isHidden) {
+        panel.removeAttribute(`hidden`);
+        btn.setAttribute(`aria-expanded`, `true`);
+      } else {
+        panel.setAttribute(`hidden`, ``);
+        btn.setAttribute(`aria-expanded`, `false`);
+      }
+    }
+
+    async function triggerPwaInstall() {
+      const hint = document.getElementById(`pwa-install-hint`);
+      if (deferredInstallPrompt) {
+        try {
+          deferredInstallPrompt.prompt();
+          const choice = await deferredInstallPrompt.userChoice;
+          if (hint) {
+            hint.textContent = choice && choice.outcome === `accepted`
+              ? `Installation accepted — Cadence is being added to your home screen.`
+              : `Installation dismissed. You can install anytime from the Chrome menu.`;
+          }
+          deferredInstallPrompt = null;
+          updatePwaDiagnostics();
+          return;
+        } catch (_) {
+          // fall through to manual guide
+        }
+      }
+      if (hint) {
+        hint.textContent = `Android Chrome instructions: open Chrome's top-right menu (⋮) and tap "Install app" or "Add to Home screen". Ensure the page is served over HTTPS or localhost.`;
+      }
+      showToast(`Use Chrome menu (⋮) → Install app when running over HTTPS or localhost.`);
+    }
+
+    // =========================================================================
+    // 3. Theme Toggle & UI Feedback Helpers
+    // =========================================================================
+    function applyTheme(themeName) {
+      appState.theme = themeName === `dark` ? `dark` : `light`;
+      document.documentElement.setAttribute(`data-theme`, appState.theme);
+      const btn = document.getElementById(`theme-toggle-btn`);
+      const label = document.getElementById(`theme-btn-label`);
+      if (btn) btn.setAttribute(`aria-pressed`, appState.theme === `dark` ? `true` : `false`);
+      if (label) label.textContent = appState.theme === `dark` ? `Light mode` : `Dark mode`;
+      if (btn) {
+        const iconEl = btn.querySelector(`[data-lucide]`);
+        if (iconEl) iconEl.setAttribute(`data-lucide`, appState.theme === `dark` ? `sun` : `moon`);
+      }
+      updateManifestThemeMeta(appState.theme);
+      refreshIcons();
+    }
+
+    function toggleTheme() {
+      const next = appState.theme === `dark` ? `light` : `dark`;
+      applyTheme(next);
+      persistState();
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById(`status-toast`);
+      if (!toast) return;
+      toast.textContent = message;
+      toast.removeAttribute(`hidden`);
+      setTimeout(() => {
+        if (toast) toast.setAttribute(`hidden`, ``);
+      }, 3600);
+    }
+
+    function refreshIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        try {
+          window.lucide.createIcons();
+        } catch (_) {
+          // ignore if offline
+        }
+      }
+    }
+
+    // =========================================================================
+    // 4. Streak, Consistency & Analytics Calculations
+    // =========================================================================
+    function getHabitEntry(habitId, dateISO) {
+      const dayMap = appState.logs[dateISO];
+      if (!dayMap || !dayMap[habitId]) return { completed: false, value: 0 };
+      return dayMap[habitId];
+    }
+
+    function isHabitComplete(habit, dateISO) {
+      const entry = getHabitEntry(habit.id, dateISO);
+      if (habit.type === `quantitative`) {
+        return Boolean(entry.completed) || Number(entry.value) >= Number(habit.target || 1);
+      }
+      return Boolean(entry.completed);
+    }
+
+    function getHabitProgressRatio(habit, dateISO) {
+      const entry = getHabitEntry(habit.id, dateISO);
+      if (habit.type === `quantitative`) {
+        const target = Math.max(1, Number(habit.target || 1));
+        return Math.min(1, Math.max(0, Number(entry.value || 0) / target));
+      }
+      return entry.completed ? 1 : 0;
+    }
+
+    function computeHabitStats(habit, todayISO) {
+      // Current streak: contiguous backwards from today (or yesterday if today not yet logged)
+      let currentStreak = 0;
+      let cursor = todayISO;
+      if (!isHabitComplete(habit, todayISO)) {
+        cursor = addDaysISO(todayISO, -1);
+      }
+      let guard = 0;
+      while (guard < 3650 && isHabitComplete(habit, cursor)) {
+        currentStreak += 1;
+        cursor = addDaysISO(cursor, -1);
+        guard += 1;
+      }
+
+      // Best streak & completed day count across all logs
+      const completedDates = [];
+      let earliestLogged = habit.createdAt || todayISO;
+      const allDates = Object.keys(appState.logs);
+      for (let i = 0; i < allDates.length; i++) {
+        const d = allDates[i];
+        if (d > todayISO) continue;
+        if (appState.logs[d] && appState.logs[d][habit.id]) {
+          if (d < earliestLogged) earliestLogged = d;
+          if (isHabitComplete(habit, d)) {
+            completedDates.push(d);
+          }
+        }
+      }
+      completedDates.sort();
+
+      let bestStreak = 0;
+      let run = 0;
+      for (let i = 0; i < completedDates.length; i++) {
+        if (i === 0) {
+          run = 1;
+        } else {
+          const gap = diffDaysISO(completedDates[i - 1], completedDates[i]);
+          run = gap === 1 ? run + 1 : 1;
+        }
+        if (run > bestStreak) bestStreak = run;
+      }
+
+      const activeDays = Math.max(1, diffDaysISO(earliestLogged, todayISO) + 1);
+      const consistencyRate = Math.min(100, Math.round((completedDates.length / activeDays) * 100));
+
+      return {
+        currentStreak,
+        bestStreak,
+        completedDays: completedDates.length,
+        activeDays,
+        consistencyRate
+      };
+    }
+
+    function computeDailyCompletion(dateISO) {
+      const total = appState.habits.length;
+      if (total === 0) return { completed: 0, total: 0, rate: 0 };
+      let completed = 0;
+      for (let i = 0; i < total; i++) {
+        if (isHabitComplete(appState.habits[i], dateISO)) completed += 1;
+      }
+      return {
+        completed,
+        total,
+        rate: Math.round((completed / total) * 100)
+      };
+    }
+
+    function computeWindowAverage(endISO, daysCount) {
+      if (appState.habits.length === 0) return 0;
+      let sum = 0;
+      for (let i = 0; i < daysCount; i++) {
+        const d = addDaysISO(endISO, -i);
+        sum += computeDailyCompletion(d).rate;
+      }
+      return Math.round(sum / daysCount);
+    }
+
+    // =========================================================================
+    // 5. Mutators: Logging Habits, Moods, Notes, Creating/Editing Habits
+    // =========================================================================
+    function ensureDayLog(dateISO) {
+      if (!appState.logs[dateISO]) appState.logs[dateISO] = {};
+      return appState.logs[dateISO];
+    }
+
+    function toggleBooleanHabit(habitId, dateISO) {
+      const targetDate = dateISO || appState.selectedDate;
+      const dayLog = ensureDayLog(targetDate);
+      const prev = dayLog[habitId] || { completed: false, value: 0 };
+      const nextDone = !prev.completed;
+      dayLog[habitId] = { completed: nextDone, value: nextDone ? 1 : 0 };
+      persistState();
+      renderAll();
+    }
+
+    function updateQuantitativeHabit(habitId, newValue, dateISO) {
+      const targetDate = dateISO || appState.selectedDate;
+      const habit = appState.habits.find((h) => h.id === habitId);
+      if (!habit) return;
+      const numeric = Math.max(0, Number(newValue) || 0);
+      const rounded = Math.round(numeric * 100) / 100;
+      const dayLog = ensureDayLog(targetDate);
+      dayLog[habitId] = {
+        completed: rounded >= Number(habit.target || 1),
+        value: rounded
+      };
+      persistState();
+      renderAll();
+    }
+
+    function stepQuantitativeHabit(habitId, delta, dateISO) {
+      const targetDate = dateISO || appState.selectedDate;
+      const entry = getHabitEntry(habitId, targetDate);
+      updateQuantitativeHabit(habitId, Math.max(0, Number(entry.value || 0) + Number(delta)), targetDate);
+    }
+
+    function completeQuantitativeHabit(habitId, dateISO) {
+      const targetDate = dateISO || appState.selectedDate;
+      const habit = appState.habits.find((h) => h.id === habitId);
+      if (!habit) return;
+      updateQuantitativeHabit(habitId, Number(habit.target || 1), targetDate);
+    }
+
+    function handleGridTileClick(habitId, dateISO) {
+      appState.selectedDate = dateISO;
+      const habit = appState.habits.find((h) => h.id === habitId);
+      if (!habit) return;
+      if (habit.type === `boolean`) {
+        toggleBooleanHabit(habitId, dateISO);
+      } else {
+        const complete = isHabitComplete(habit, dateISO);
+        if (complete) {
+          updateQuantitativeHabit(habitId, 0, dateISO);
+        } else {
+          completeQuantitativeHabit(habitId, dateISO);
+        }
+      }
+    }
+
+    function setDailyMood(mood) {
+      const d = appState.selectedDate;
+      if (!appState.notes[d]) appState.notes[d] = { mood: ``, text: `` };
+      appState.notes[d].mood = appState.notes[d].mood === mood ? `` : mood;
+      persistState();
+      renderSummary();
+    }
+
+    function setDailyNote(text) {
+      const d = appState.selectedDate;
+      if (!appState.notes[d]) appState.notes[d] = { mood: ``, text: `` };
+      appState.notes[d].text = text;
+      persistState();
+    }
+
+    // =========================================================================
+    // 6. Date Navigation, Filters, Layout View & Habit Builder
+    // =========================================================================
+    function setSelectedDate(iso) {
+      if (!iso) return;
+      appState.selectedDate = iso;
+      renderAll();
+    }
+
+    function shiftSelectedDate(delta) {
+      appState.selectedDate = addDaysISO(appState.selectedDate, delta);
+      renderAll();
+    }
+
+    function jumpToToday() {
+      appState.selectedDate = getLocalDateISO();
+      renderAll();
+    }
+
+    function setLayoutView(view) {
+      appState.layout = view === `grid` ? `grid` : `list`;
+      persistState();
+      renderAll();
+    }
+
+    function setCategoryFilter(cat) {
+      appState.categoryFilter = cat;
+      persistState();
+      renderAll();
+    }
+
+    function toggleBuilderTypeFields(typeVal) {
+      const isQuant = typeVal === `quantitative`;
+      const targetWrap = document.getElementById(`target-field-wrap`);
+      const unitWrap = document.getElementById(`unit-field-wrap`);
+      const stepWrap = document.getElementById(`step-field-wrap`);
+      if (targetWrap) targetWrap.hidden = !isQuant;
+      if (unitWrap) unitWrap.hidden = !isQuant;
+      if (stepWrap) stepWrap.hidden = !isQuant;
+    }
+
+    function selectBuilderColor(colorKey) {
+      appState.builderColor = colorKey;
+      const buttons = document.querySelectorAll(`#swatch-row .swatch-btn`);
+      buttons.forEach((b) => {
+        b.setAttribute(`aria-pressed`, b.getAttribute(`data-swatch`) === colorKey ? `true` : `false`);
+      });
+    }
+
+    function openHabitBuilder(habitId) {
+      const panel = document.getElementById(`habit-builder-panel`);
+      const heading = document.getElementById(`builder-heading`);
+      const editInput = document.getElementById(`habit-edit-id`);
+      const titleInput = document.getElementById(`habit-title-input`);
+      const typeSelect = document.getElementById(`habit-type-select`);
+      const targetInput = document.getElementById(`habit-target-input`);
+      const unitInput = document.getElementById(`habit-unit-input`);
+      const stepInput = document.getElementById(`habit-step-input`);
+      const catSelect = document.getElementById(`habit-category-select`);
+      const errEl = document.getElementById(`builder-error`);
+      if (!panel) return;
+
+      if (errEl) errEl.hidden = true;
+
+      if (habitId) {
+        const h = appState.habits.find((item) => item.id === habitId);
+        if (h) {
+          if (heading) heading.textContent = `Edit Habit`;
+          if (editInput) editInput.value = h.id;
+          if (titleInput) titleInput.value = h.title;
+          if (typeSelect) typeSelect.value = h.type;
+          if (targetInput) targetInput.value = h.target || 1;
+          if (unitInput) unitInput.value = h.unit || ``;
+          if (stepInput) stepInput.value = h.step || Math.max(1, Math.round((h.target || 10) / 4));
+          if (catSelect) catSelect.value = h.category || `Health`;
+          selectBuilderColor(h.color || `teal`);
+          toggleBuilderTypeFields(h.type);
+        }
+      } else {
+        if (heading) heading.textContent = `Create Custom Habit`;
+        if (editInput) editInput.value = ``;
+        if (titleInput) titleInput.value = ``;
+        if (typeSelect) typeSelect.value = `boolean`;
+        if (targetInput) targetInput.value = `2000`;
+        if (unitInput) unitInput.value = `ml`;
+        if (stepInput) stepInput.value = `250`;
+        if (catSelect) catSelect.value = `Health`;
+        selectBuilderColor(`teal`);
+        toggleBuilderTypeFields(`boolean`);
+      }
+
+      panel.removeAttribute(`hidden`);
+      if (titleInput) titleInput.focus();
+    }
+
+    function closeHabitBuilder() {
+      const panel = document.getElementById(`habit-builder-panel`);
+      if (panel) panel.setAttribute(`hidden`, ``);
+    }
+
+    function saveHabitForm(event) {
+      if (event) event.preventDefault();
+      const editId = (document.getElementById(`habit-edit-id`) || {}).value || ``;
+      const title = ((document.getElementById(`habit-title-input`) || {}).value || ``).trim();
+      const type = (document.getElementById(`habit-type-select`) || {}).value || `boolean`;
+      const target = Number((document.getElementById(`habit-target-input`) || {}).value || 0);
+      const unit = ((document.getElementById(`habit-unit-input`) || {}).value || ``).trim();
+      const step = Number((document.getElementById(`habit-step-input`) || {}).value || 0);
+      const category = (document.getElementById(`habit-category-select`) || {}).value || `Health`;
+      const errEl = document.getElementById(`builder-error`);
+
+      if (!title) {
+        if (errEl) {
+          errEl.textContent = `Enter a habit title (for example, "Drink Water" or "Morning Mobility").`;
+          errEl.removeAttribute(`hidden`);
+        }
+        return;
+      }
+
+      if (type === `quantitative` && (!target || target <= 0)) {
+        if (errEl) {
+          errEl.textContent = `Quantitative habits require a daily target greater than 0.`;
+          errEl.removeAttribute(`hidden`);
+        }
+        return;
+      }
+
+      if (errEl) errEl.hidden = true;
+
+      if (editId) {
+        const idx = appState.habits.findIndex((h) => h.id === editId);
+        if (idx !== -1) {
+          appState.habits[idx] = {
+            ...appState.habits[idx],
+            title,
+            type,
+            target: type === `quantitative` ? target : 1,
+            unit: type === `quantitative` ? (unit || `units`) : ``,
+            step: type === `quantitative` ? (step > 0 ? step : Math.max(1, Math.round(target / 4))) : 1,
+            category,
+            color: appState.builderColor
+          };
+          showToast(`Updated "${title}".`);
+        }
+      } else {
+        const todayISO = getLocalDateISO();
+        appState.habits.push({
+          id: `habit_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+          title,
+          type,
+          target: type === `quantitative` ? target : 1,
+          unit: type === `quantitative` ? (unit || `units`) : ``,
+          step: type === `quantitative` ? (step > 0 ? step : Math.max(1, Math.round(target / 4))) : 1,
+          category,
+          color: appState.builderColor,
+          createdAt: todayISO
+        });
+        showToast(`Created "${title}".`);
+      }
+
+      closeHabitBuilder();
+      persistState();
+      renderAll();
+    }
+
+    function deleteHabit(habitId, btn) {
+      if (!btn) return;
+      if (btn.getAttribute(`data-armed`) !== `true`) {
+        btn.setAttribute(`data-armed`, `true`);
+        btn.textContent = `Confirm delete?`;
+        setTimeout(() => {
+          if (btn && btn.isConnected && btn.getAttribute(`data-armed`) === `true`) {
+            btn.setAttribute(`data-armed`, `false`);
+            btn.textContent = `Delete`;
+          }
+        }, 4000);
+        return;
+      }
+      appState.habits = appState.habits.filter((h) => h.id !== habitId);
+      const dates = Object.keys(appState.logs);
+      for (let i = 0; i < dates.length; i++) {
+        if (appState.logs[dates[i]] && appState.logs[dates[i]][habitId]) {
+          delete appState.logs[dates[i]][habitId];
+        }
+      }
+      persistState();
+      renderAll();
+      showToast(`Habit removed.`);
+    }
+
+    // =========================================================================
+    // 7. Starter Templates, Sample History, Export & Two-Step Reset
+    // =========================================================================
+    function addStarterTemplates() {
+      const todayISO = getLocalDateISO();
+      const starters = [
+        { title: `Drink Water`, type: `quantitative`, target: 2000, unit: `ml`, step: 250, category: `Health`, color: `teal` },
+        { title: `Strength & Mobility`, type: `boolean`, target: 1, unit: ``, step: 1, category: `Fitness`, color: `green` },
+        { title: `Deep Reading`, type: `quantitative`, target: 25, unit: `pages`, step: 5, category: `Learning`, color: `indigo` },
+        { title: `Mindful Breathing`, type: `quantitative`, target: 10, unit: `min`, step: 5, category: `Mindfulness`, color: `amber` }
+      ];
+      let added = 0;
+      for (let i = 0; i < starters.length; i++) {
+        const s = starters[i];
+        const exists = appState.habits.some((h) => h.title.toLowerCase() === s.title.toLowerCase());
+        if (!exists) {
+          appState.habits.push({
+            id: `habit_${Date.now()}_${i}`,
+            title: s.title,
+            type: s.type,
+            target: s.target,
+            unit: s.unit,
+            step: s.step,
+            category: s.category,
+            color: s.color,
+            createdAt: todayISO
+          });
+          added += 1;
+        }
+      }
+      persistState();
+      renderAll();
+      showToast(added > 0 ? `Added ${added} starter habit definitions.` : `Starter habits are already in your list.`);
+    }
+
+    function loadSampleHistory() {
+      const todayISO = getLocalDateISO();
+      const startISO = addDaysISO(todayISO, -13);
+      appState.habits = [
+        { id: `habit_sample_water`, title: `Drink Water`, type: `quantitative`, target: 2000, unit: `ml`, step: 250, category: `Health`, color: `teal`, createdAt: startISO },
+        { id: `habit_sample_move`, title: `Strength & Mobility`, type: `boolean`, target: 1, unit: ``, step: 1, category: `Fitness`, color: `green`, createdAt: startISO },
+        { id: `habit_sample_read`, title: `Deep Reading`, type: `quantitative`, target: 25, unit: `pages`, step: 5, category: `Learning`, color: `indigo`, createdAt: startISO },
+        { id: `habit_sample_focus`, title: `Zero-Distraction Sprint`, type: `boolean`, target: 1, unit: ``, step: 1, category: `Focus`, color: `plum`, createdAt: startISO }
+      ];
+      appState.logs = {};
+      appState.notes = {};
+
+      const pattern = [
+        [2000, 1, 25, 1],
+        [1750, 1, 20, 1],
+        [2000, 0, 25, 1],
+        [2000, 1, 30, 0],
+        [1500, 1, 15, 1],
+        [2000, 1, 25, 1],
+        [2250, 1, 25, 1],
+        [2000, 0, 25, 1],
+        [2000, 1, 25, 1],
+        [2000, 1, 20, 1],
+        [2000, 1, 25, 1],
+        [1750, 1, 25, 0],
+        [2000, 1, 30, 1],
+        [1500, 1, 15, 1]
+      ];
+      for (let i = 0; i < 14; i++) {
+        const d = addDaysISO(startISO, i);
+        const row = pattern[i];
+        appState.logs[d] = {
+          habit_sample_water: { completed: row[0] >= 2000, value: row[0] },
+          habit_sample_move: { completed: row[1] === 1, value: row[1] },
+          habit_sample_read: { completed: row[2] >= 25, value: row[2] },
+          habit_sample_focus: { completed: row[3] === 1, value: row[3] }
+        };
+      }
+      appState.notes[todayISO] = { mood: `Energetic`, text: `Sample workspace loaded — adjust today's targets or add your own.` };
+      appState.selectedDate = todayISO;
+      persistState();
+      renderAll();
+      showToast(`Loaded 14-day sample history so you can inspect streaks and trend charts.`);
+    }
+
+    function triggerDownload(content, contentType, filename) {
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        try {
+          window.notebookAppApi.triggerFileDownload({
+            content,
+            contentType,
+            encoding: `UTF-8`,
+            filename
+          });
+          showToast(`Exported ${filename}.`);
+          return;
+        } catch (_) {
+          // fallback below
+        }
+      }
+      try {
+        const blob = new Blob([content], { type: contentType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement(`a`);
+        a.setAttribute(`href`, url);
+        a.setAttribute(`download`, filename);
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`Exported ${filename}.`);
+      } catch (_) {
+        showToast(`Export is unavailable in this preview context.`);
+      }
+    }
+
+    function exportJsonBackup() {
+      const payload = JSON.stringify({
+        exportedAt: new Date().toISOString(),
+        habits: appState.habits,
+        logs: appState.logs,
+        notes: appState.notes
+      }, null, 2);
+      triggerDownload(payload, `text/plain`, `cadence-habits-${getLocalDateISO()}.json`);
+    }
+
+    function exportCsvLogs() {
+      const rows = [[`date`, `habit_id`, `habit_title`, `category`, `type`, `value`, `target`, `unit`, `completed`]];
+      const dates = Object.keys(appState.logs).sort();
+      for (let i = 0; i < dates.length; i++) {
+        const d = dates[i];
+        const dayMap = appState.logs[d] || {};
+        for (let j = 0; j < appState.habits.length; j++) {
+          const h = appState.habits[j];
+          const entry = dayMap[h.id];
+          if (!entry) continue;
+          const safeTitle = `"${String(h.title).replace(/"/g, `""`)}"`;
+          rows.push([d, h.id, safeTitle, h.category, h.type, entry.value, h.target, h.unit || ``, isHabitComplete(h, d) ? `true` : `false`]);
+        }
+      }
+      const csv = rows.map((r) => r.join(`,`)).join(`\n`);
+      triggerDownload(csv, `text/csv`, `cadence-habit-logs-${getLocalDateISO()}.csv`);
+    }
+
+    function handleResetAll(btn) {
+      if (!btn) return;
+      if (btn.getAttribute(`data-armed`) !== `true`) {
+        btn.setAttribute(`data-armed`, `true`);
+        const span = btn.querySelector(`span`);
+        if (span) span.textContent = `Click again to confirm reset`;
+        clearTimeout(resetArmTimer);
+        resetArmTimer = setTimeout(() => {
+          if (btn && btn.isConnected) {
+            btn.setAttribute(`data-armed`, `false`);
+            const s = btn.querySelector(`span`);
+            if (s) s.textContent = `Reset all data`;
+          }
+        }, 4500);
+        return;
+      }
+      btn.setAttribute(`data-armed`, `false`);
+      const span = btn.querySelector(`span`);
+      if (span) span.textContent = `Reset all data`;
+      appState.habits = [];
+      appState.logs = {};
+      appState.notes = {};
+      appState.selectedDate = getLocalDateISO();
+      persistState();
+      renderAll();
+      showToast(`All habit data cleared.`);
+    }
+
+    // =========================================================================
+    // 8. Rendering Engine (Controls, Summary, List/Grid, SVG Trend Chart)
+    // =========================================================================
+    function escapeHtml(str) {
+      return String(str || ``)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function renderControls() {
+      const todayISO = getLocalDateISO();
+      const dateInput = document.getElementById(`selected-date-input`);
+      if (dateInput) dateInput.value = appState.selectedDate;
+
+      const badge = document.getElementById(`active-date-badge`);
+      if (badge) {
+        if (appState.selectedDate === todayISO) {
+          badge.textContent = `Viewing Today`;
+          badge.setAttribute(`data-status`, `info`);
+        } else if (appState.selectedDate > todayISO) {
+          badge.textContent = `Future: ${formatShortDate(appState.selectedDate)}`;
+          badge.setAttribute(`data-status`, `warn`);
+        } else {
+          badge.textContent = `Log for ${formatShortDate(appState.selectedDate)}`;
+          badge.setAttribute(`data-status`, `info`);
+        }
+      }
+
+      const listBtn = document.getElementById(`view-list-btn`);
+      const gridBtn = document.getElementById(`view-grid-btn`);
+      if (listBtn) listBtn.setAttribute(`aria-pressed`, appState.layout === `list` ? `true` : `false`);
+      if (gridBtn) gridBtn.setAttribute(`aria-pressed`, appState.layout === `grid` ? `true` : `false`);
+
+      const catBtns = document.querySelectorAll(`#category-filters .filter-btn`);
+      catBtns.forEach((b) => {
+        b.setAttribute(`aria-pressed`, b.getAttribute(`data-cat`) === appState.categoryFilter ? `true` : `false`);
+      });
+
+      // 7-day strip ending on today (or centered if selected date is older)
+      const strip = document.getElementById(`date-strip`);
+      if (strip) {
+        const anchor = appState.selectedDate > todayISO ? appState.selectedDate : todayISO;
+        let html = ``;
+        for (let offset = -6; offset <= 0; offset++) {
+          const d = addDaysISO(anchor, offset);
+          const dayNum = d.split(`-`)[2];
+          const comp = computeDailyCompletion(d);
+          const pressed = d === appState.selectedDate ? `true` : `false`;
+          const dotLabel = comp.total > 0 ? `${comp.completed}/${comp.total}` : `–`;
+          html += `<button type="button" class="day-pill" aria-pressed="${pressed}" onclick="setSelectedDate('${d}')">
+            <span class="day-pill-name">${formatWeekday(d)}</span>
+            <span class="day-pill-num">${Number(dayNum)}</span>
+            <span class="day-pill-dot">${dotLabel}</span>
+          </button>`;
+        }
+        strip.innerHTML = html;
+      }
+    }
+
+    function renderSummary() {
+      const todayISO = getLocalDateISO();
+      const comp = computeDailyCompletion(appState.selectedDate);
+
+      const rateVal = document.getElementById(`summary-rate-value`);
+      const rateCap = document.getElementById(`summary-rate-caption`);
+      const rateCard = document.getElementById(`summary-completion-card`);
+      const ring = document.getElementById(`summary-ring-circle`);
+
+      if (rateVal) rateVal.textContent = `${comp.rate}%`;
+      if (rateCap) {
+        rateCap.textContent = comp.total > 0
+          ? `${comp.completed} of ${comp.total} completed`
+          : `No habits tracked yet`;
+        rateCap.className = comp.total > 0 && comp.rate >= 80 ? `metric-caption ok` : `metric-caption`;
+      }
+      if (rateCard) {
+        rateCard.setAttribute(`data-status`, comp.total > 0 && comp.rate >= 80 ? `ok` : `info`);
+      }
+      if (ring) {
+        const circumference = 2 * Math.PI * 28; // 175.93
+        const offset = circumference - (comp.rate / 100) * circumference;
+        ring.style.strokeDashoffset = String(offset.toFixed(2));
+        if (comp.total > 0 && comp.rate === 100) {
+          ring.classList.add(`complete`);
+        } else {
+          ring.classList.remove(`complete`);
+        }
+      }
+
+      // Leading active streak
+      let topStreak = 0;
+      let topHabitTitle = ``;
+      let activeCount = 0;
+      for (let i = 0; i < appState.habits.length; i++) {
+        const h = appState.habits[i];
+        const stats = computeHabitStats(h, todayISO);
+        if (stats.currentStreak > 0) activeCount += 1;
+        if (stats.currentStreak > topStreak) {
+          topStreak = stats.currentStreak;
+          topHabitTitle = h.title;
+        }
+      }
+      const streakVal = document.getElementById(`summary-streak-value`);
+      const streakCap = document.getElementById(`summary-streak-caption`);
+      const streakCard = document.getElementById(`summary-streak-card`);
+      if (streakVal) streakVal.textContent = `${topStreak} ${topStreak === 1 ? `day` : `days`}`;
+      if (streakCap) {
+        if (appState.habits.length === 0) {
+          streakCap.textContent = `Add a habit to begin tracking`;
+          streakCap.className = `metric-caption`;
+        } else if (topStreak > 0) {
+          streakCap.textContent = `${topHabitTitle} (${activeCount} active)`;
+          streakCap.className = `metric-caption ok`;
+        } else {
+          streakCap.textContent = `Complete a habit today to start`;
+          streakCap.className = `metric-caption`;
+        }
+      }
+      if (streakCard) streakCard.setAttribute(`data-status`, topStreak >= 3 ? `ok` : `info`);
+
+      // 7-day rolling consistency & trend delta
+      const avg7 = computeWindowAverage(todayISO, 7);
+      const prev7 = computeWindowAverage(addDaysISO(todayISO, -7), 7);
+      const delta = avg7 - prev7;
+      const val7d = document.getElementById(`summary-7d-value`);
+      const cap7d = document.getElementById(`summary-7d-caption`);
+      const card7d = document.getElementById(`summary-trend-card`);
+      if (val7d) val7d.textContent = `${avg7}%`;
+      if (cap7d) {
+        if (appState.habits.length === 0) {
+          cap7d.textContent = `7-day rolling completion average`;
+          cap7d.className = `metric-caption`;
+        } else if (delta > 0) {
+          cap7d.textContent = `+${delta}% vs prior 7 days`;
+          cap7d.className = `metric-caption ok`;
+        } else if (delta < 0) {
+          cap7d.textContent = `${delta}% vs prior 7 days`;
+          cap7d.className = `metric-caption`;
+        } else {
+          cap7d.textContent = `Steady vs prior 7 days`;
+          cap7d.className = `metric-caption`;
+        }
+      }
+      if (card7d) card7d.setAttribute(`data-status`, avg7 >= 80 ? `ok` : `info`);
+
+      // Mood & Note for active date
+      const dayNote = appState.notes[appState.selectedDate] || { mood: ``, text: `` };
+      const moodBtns = document.querySelectorAll(`#mood-pills .mood-pill`);
+      moodBtns.forEach((b) => {
+        b.setAttribute(`aria-pressed`, b.getAttribute(`data-mood`) === dayNote.mood ? `true` : `false`);
+      });
+      const noteInput = document.getElementById(`daily-note-input`);
+      if (noteInput && noteInput.value !== (dayNote.text || ``)) {
+        noteInput.value = dayNote.text || ``;
+      }
+    }
+
+    function getFilteredHabits() {
+      if (appState.categoryFilter === `All`) return appState.habits;
+      return appState.habits.filter((h) => h.category === appState.categoryFilter);
+    }
+
+    function renderWorkspace() {
+      const container = document.getElementById(`habits-container`);
+      const countLabel = document.getElementById(`visible-count-label`);
+      const heading = document.getElementById(`workspace-heading`);
+      if (!container) return;
+
+      const todayISO = getLocalDateISO();
+      const isToday = appState.selectedDate === todayISO;
+      if (heading) {
+        heading.textContent = isToday
+          ? `Today’s Habits & Targets`
+          : `Habits for ${formatShortDate(appState.selectedDate)}`;
+      }
+
+      const filtered = getFilteredHabits();
+      if (countLabel) {
+        countLabel.textContent = `${filtered.length} ${filtered.length === 1 ? `habit` : `habits`}`;
+      }
+
+      if (appState.habits.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3 class="section-title" style="font-size: var(--subhead-size);">Your habit tracker is ready</h3>
+            <p class="lede">
+              Create your own pass/fail or quantitative habits, or load starter templates to begin tracking daily streaks, consistency rates, and 14-day progress trends.
+            </p>
+            <div class="empty-actions">
+              <button type="button" class="btn btn-primary" onclick="openHabitBuilder(null)">Create custom habit</button>
+              <button type="button" class="btn btn-outline" onclick="addStarterTemplates()">Add 4 starter habits</button>
+              <button type="button" class="btn btn-ghost" onclick="loadSampleHistory()">Preview 14-day sample history</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3 class="section-title" style="font-size: var(--subhead-size);">No habits in ${escapeHtml(appState.categoryFilter)}</h3>
+            <p class="lede">Switch back to All categories or create a new habit in this category.</p>
+            <div class="empty-actions">
+              <button type="button" class="btn btn-outline" onclick="setCategoryFilter('All')">Show all habits</button>
+              <button type="button" class="btn btn-primary" onclick="openHabitBuilder(null)">Create habit</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (appState.layout === `grid`) {
+        renderGridView(container, filtered, todayISO);
+      } else {
+        renderListView(container, filtered, todayISO);
+      }
+    }
+
+    function renderListView(container, habits, todayISO) {
+      let html = `<div class="habits-list">`;
+      for (let i = 0; i < habits.length; i++) {
+        const h = habits[i];
+        const stats = computeHabitStats(h, todayISO);
+        const entry = getHabitEntry(h.id, appState.selectedDate);
+        const done = isHabitComplete(h, appState.selectedDate);
+        const pct = Math.round(getHabitProgressRatio(h, appState.selectedDate) * 100);
+        const safeTitle = escapeHtml(h.title);
+        const safeCat = escapeHtml(h.category);
+        const safeUnit = escapeHtml(h.unit || `units`);
+        const accentAttr = done ? `data-status="ok"` : `data-accent="${escapeHtml(h.color || `teal`)}"`;
+
+        let controlHtml = ``;
+        if (h.type === `quantitative`) {
+          const stepVal = Number(h.step || Math.max(1, Math.round(h.target / 4)));
+          controlHtml = `
+            <div class="quant-area">
+              <div class="quant-readout">
+                <span>${Number(entry.value || 0)} / ${Number(h.target)} ${safeUnit}</span>
+                <span class="chip" data-status="${done ? `` : `info`}">${done ? `Target met` : `${pct}%`}</span>
+              </div>
+              <div class="progress-track" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${safeTitle} progress">
+                <div class="progress-fill ${done ? `done` : ``}" style="width: ${pct}%;"></div>
+              </div>
+              <div class="quant-controls">
+                <button type="button" class="btn btn-ghost" onclick="stepQuantitativeHabit('${h.id}', -${stepVal})" aria-label="Decrease ${safeTitle} by ${stepVal} ${safeUnit}">-${stepVal}</button>
+                <div class="quant-input-wrap">
+                  <label for="qinput-${h.id}" class="field-label">Logged (${safeUnit})</label>
+                  <input type="number" id="qinput-${h.id}" min="0" step="any" value="${Number(entry.value || 0)}" onchange="updateQuantitativeHabit('${h.id}', this.value)">
+                </div>
+                <button type="button" class="btn btn-outline" onclick="stepQuantitativeHabit('${h.id}', ${stepVal})" aria-label="Increase ${safeTitle} by ${stepVal} ${safeUnit}">+${stepVal}</button>
+                <button type="button" class="btn btn-primary" onclick="completeQuantitativeHabit('${h.id}')">Complete</button>
+              </div>
+            </div>
+          `;
+        } else {
+          controlHtml = `
+            <button type="button" class="checkoff-btn" aria-pressed="${done ? `true` : `false`}" onclick="toggleBooleanHabit('${h.id}')">
+              <span>${done ? `Completed for ${formatShortDate(appState.selectedDate)}` : `Mark complete`}</span>
+            </button>
+          `;
+        }
+
+        html += `
+          <div class="habit-card-wrap">
+            <article class="status-card habit-card" ${accentAttr}>
+              <div class="habit-card-top">
+                <div>
+                  <h3 class="habit-title">${safeTitle}</h3>
+                  <div class="habit-meta">
+                    <span class="chip" data-status="info">${safeCat}</span>
+                    <span class="chip" data-status="${done ? `` : `info`}">${h.type === `quantitative` ? `${h.target} ${safeUnit}` : `Pass / Fail`}</span>
+                  </div>
+                </div>
+                <div class="habit-stats-inline">
+                  <span>Streak: <strong>${stats.currentStreak}d</strong></span>
+                  <span>Consistency: <strong>${stats.consistencyRate}%</strong></span>
+                </div>
+              </div>
+
+              ${controlHtml}
+
+              <div class="habit-card-footer">
+                <span class="metric-label">Best: ${stats.bestStreak}d (${stats.completedDays}/${stats.activeDays}d)</span>
+                <div class="card-footer-actions">
+                  <button type="button" class="btn btn-ghost" onclick="openHabitBuilder('${h.id}')">Edit</button>
+                  <button type="button" class="btn btn-danger-outline" data-armed="false" onclick="deleteHabit('${h.id}', this)">Delete</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        `;
+      }
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function renderGridView(container, habits, todayISO) {
+      const anchor = appState.selectedDate > todayISO ? appState.selectedDate : todayISO;
+      const days7 = [];
+      for (let offset = -6; offset <= 0; offset++) {
+        days7.push(addDaysISO(anchor, offset));
+      }
+
+      // 7-day quick matrix
+      let matrixHtml = `
+        <div class="grid-view-stack">
+          <article class="surface-card">
+            <div class="section-header" style="margin-bottom: var(--space-sm);">
+              <div>
+                <h3 class="section-title" style="font-size: var(--subhead-size);">7-Day Quick Check Matrix</h3>
+                <p class="section-subtitle">Tap any tile to log or toggle completion for that date.</p>
+              </div>
+            </div>
+            <div class="matrix-table-wrap">
+              <table class="matrix-table">
+                <thead>
+                  <tr>
+                    <th>Habit</th>
+                    ${days7.map((d) => `<th>${formatWeekday(d)}<br>${Number(d.split(`-`)[2])}</th>`).join(``)}
+                  </tr>
+                </thead>
+                <tbody>
+      `;
+
+      for (let i = 0; i < habits.length; i++) {
+        const h = habits[i];
+        matrixHtml += `<tr><td><strong>${escapeHtml(h.title)}</strong></td>`;
+        for (let k = 0; k < days7.length; k++) {
+          const d = days7[k];
+          const done = isHabitComplete(h, d);
+          const ratio = getHabitProgressRatio(h, d);
+          const level = done ? `done` : (ratio > 0 ? `partial` : `none`);
+          const label = done ? `Done` : (ratio > 0 ? `${Math.round(ratio * 100)}%` : `–`);
+          matrixHtml += `
+            <td>
+              <button type="button" class="matrix-cell-btn" data-level="${level}" onclick="handleGridTileClick('${h.id}', '${d}')" aria-label="${escapeHtml(h.title)} on ${d}: ${label}">
+                ${label}
+              </button>
+            </td>
+          `;
+        }
+        matrixHtml += `</tr>`;
+      }
+      matrixHtml += `</tbody></table></div></article>`;
+
+      // 12-week (84-day) HabitGrid contribution heatmaps
+      const start84 = addDaysISO(todayISO, -83);
+      let heatmapsHtml = `<div class="heatmap-cards">`;
+      for (let i = 0; i < habits.length; i++) {
+        const h = habits[i];
+        const stats = computeHabitStats(h, todayISO);
+        const colorKey = escapeHtml(h.color || `teal`);
+        let tilesHtml = ``;
+        for (let offset = 0; offset < 84; offset++) {
+          const d = addDaysISO(start84, offset);
+          const ratio = getHabitProgressRatio(h, d);
+          const done = isHabitComplete(h, d);
+          const level = done ? `3` : (ratio >= 0.5 ? `2` : (ratio > 0 ? `1` : `0`));
+          const isSel = d === appState.selectedDate ? `true` : `false`;
+          const entry = getHabitEntry(h.id, d);
+          const tip = h.type === `quantitative`
+            ? `${formatShortDate(d)}: ${entry.value}/${h.target} ${h.unit || ``}`
+            : `${formatShortDate(d)}: ${done ? `Completed` : `Not logged`}`;
+          tilesHtml += `<button type="button" class="heat-tile" data-level="${level}" data-accent="${colorKey}" data-selected="${isSel}" title="${escapeHtml(tip)}" aria-label="${escapeHtml(h.title)} ${escapeHtml(tip)}" onclick="handleGridTileClick('${h.id}', '${d}')"></button>`;
+        }
+
+        heatmapsHtml += `
+          <article class="status-card" data-accent="${colorKey}">
+            <div class="habit-card-top" style="margin-bottom: var(--space-sm);">
+              <div>
+                <h3 class="habit-title">${escapeHtml(h.title)}</h3>
+                <div class="habit-stats-inline" style="margin-top: var(--space-2xs);">
+                  <span>Streak: <strong>${stats.currentStreak}d</strong></span>
+                  <span>Best: <strong>${stats.bestStreak}d</strong></span>
+                  <span>Consistency: <strong>${stats.consistencyRate}%</strong></span>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline" onclick="handleGridTileClick('${h.id}', '${appState.selectedDate}')">
+                ${isHabitComplete(h, appState.selectedDate) ? `Logged` : `Log ${formatShortDate(appState.selectedDate)}`}
+              </button>
+            </div>
+            <div class="heatmap-grid-scroll">
+              <div class="heatmap-grid" role="group" aria-label="12-week contribution grid for ${escapeHtml(h.title)}">
+                ${tilesHtml}
+              </div>
+            </div>
+            <div class="heatmap-legend">
+              <span>12-week cadence (${formatShortDate(start84)} – Today)</span>
+              <span>Less → Target met</span>
+            </div>
+          </article>
+        `;
+      }
+      heatmapsHtml += `</div></div>`;
+
+      container.innerHTML = matrixHtml + heatmapsHtml;
+    }
+
+    function renderAnalytics() {
+      const todayISO = getLocalDateISO();
+      const svg = document.getElementById(`trend-chart-svg`);
+      const breakdownEl = document.getElementById(`consistency-breakdown`);
+      const avgChip = document.getElementById(`overall-consistency-chip`);
+      const readoutVal = document.getElementById(`chart-readout-val`);
+
+      // 14-day series
+      const points = [];
+      for (let i = 13; i >= 0; i--) {
+        const d = addDaysISO(todayISO, -i);
+        const comp = computeDailyCompletion(d);
+        points.push({ date: d, rate: comp.rate, completed: comp.completed, total: comp.total });
+      }
+
+      if (svg) {
+        const W = 600;
+        const H = 220;
+        const padL = 38;
+        const padR = 16;
+        const padT = 16;
+        const padB = 30;
+        const plotW = W - padL - padR;
+        const plotH = H - padT - padB;
+
+        const yFor = (pct) => padT + plotH - (pct / 100) * plotH;
+        const xFor = (idx) => padL + (idx / 13) * plotW;
+
+        const bandTop = yFor(100);
+        const bandH = yFor(80) - bandTop;
+
+        let svgHtml = `
+          <rect class="range-band" x="${padL}" y="${bandTop}" width="${plotW}" height="${bandH}"></rect>
+        `;
+
+        const ticks = [0, 25, 50, 75, 100];
+        for (let i = 0; i < ticks.length; i++) {
+          const y = yFor(ticks[i]);
+          svgHtml += `<line class="chart-gridline" x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}"></line>`;
+          svgHtml += `<text class="chart-axis-text" x="${padL - 8}" y="${y + 4}" text-anchor="end">${ticks[i]}%</text>`;
+        }
+
+        // X-axis date ticks (start, mid, today)
+        const labelIdx = [0, 4, 9, 13];
+        for (let i = 0; i < labelIdx.length; i++) {
+          const idx = labelIdx[i];
+          const x = xFor(idx);
+          svgHtml += `<text class="chart-axis-text" x="${x}" y="${H - 8}" text-anchor="middle">${formatShortDate(points[idx].date)}</text>`;
+        }
+
+        if (appState.habits.length > 0) {
+          const pathD = points.map((p, idx) => `${idx === 0 ? `M` : `L`}${xFor(idx).toFixed(1)},${yFor(p.rate).toFixed(1)}`).join(` `);
+          svgHtml += `<path class="chart-line" d="${pathD}"></path>`;
+
+          for (let i = 0; i < points.length; i++) {
+            const p = points[i];
+            const cx = xFor(i).toFixed(1);
+            const cy = yFor(p.rate).toFixed(1);
+            const isLatest = i === points.length - 1;
+            svgHtml += `<circle class="chart-dot ${isLatest ? `latest` : ``}" cx="${cx}" cy="${cy}" r="${isLatest ? 5.5 : 4}" tabindex="0" role="button" aria-label="${formatShortDate(p.date)}: ${p.rate}% (${p.completed}/${p.total})" onclick="inspectTrendPoint('${p.date}', ${p.rate}, ${p.completed}, ${p.total})" onfocus="inspectTrendPoint('${p.date}', ${p.rate}, ${p.completed}, ${p.total})"></circle>`;
+          }
+        }
+        svg.innerHTML = svgHtml;
+      }
+
+      if (readoutVal) {
+        const last = points[points.length - 1];
+        readoutVal.textContent = appState.habits.length > 0
+          ? `${formatShortDate(last.date)}: ${last.rate}% (${last.completed}/${last.total})`
+          : `No habits logged`;
+      }
+
+      // Per-habit consistency breakdown
+      if (breakdownEl) {
+        if (appState.habits.length === 0) {
+          breakdownEl.innerHTML = `<p class="lede" style="margin:0;">Create habits to view individual consistency rates and streak records.</p>`;
+          if (avgChip) avgChip.textContent = `0% avg`;
+          return;
+        }
+        let sumConsistency = 0;
+        const rows = appState.habits.map((h) => {
+          const stats = computeHabitStats(h, todayISO);
+          sumConsistency += stats.consistencyRate;
+          return { habit: h, stats };
+        }).sort((a, b) => b.stats.consistencyRate - a.stats.consistencyRate);
+
+        const avgAll = Math.round(sumConsistency / rows.length);
+        if (avgChip) avgChip.textContent = `${avgAll}% avg`;
+
+        let listHtml = ``;
+        for (let i = 0; i < rows.length; i++) {
+          const r = rows[i];
+          listHtml += `
+            <div class="breakdown-row">
+              <div class="breakdown-head">
+                <span>${escapeHtml(r.habit.title)}</span>
+                <span>${r.stats.consistencyRate}% · Best ${r.stats.bestStreak}d</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill ${r.stats.consistencyRate >= 80 ? `done` : ``}" style="width: ${r.stats.consistencyRate}%;"></div>
+              </div>
+            </div>
+          `;
+        }
+        breakdownEl.innerHTML = listHtml;
+      }
+    }
+
+    function inspectTrendPoint(dateISO, rate, completed, total) {
+      const readoutVal = document.getElementById(`chart-readout-val`);
+      if (readoutVal) {
+        readoutVal.textContent = `${formatShortDate(dateISO)}: ${rate}% (${completed}/${total})`;
+      }
+    }
+
+    function renderAll() {
+      renderControls();
+      renderSummary();
+      renderWorkspace();
+      renderAnalytics();
+      refreshIcons();
+    }
+
+    // =========================================================================
+    // 9. App Initialization & PWA Install Lifecycle
+    // =========================================================================
+    window.addEventListener(`beforeinstallprompt`, (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      updatePwaDiagnostics();
+    });
+
+    window.addEventListener(`appinstalled`, () => {
+      deferredInstallPrompt = null;
+      updatePwaDiagnostics();
+      showToast(`Cadence installed to your device.`);
+    });
+
+    async function initApp() {
+      appState.selectedDate = getLocalDateISO();
+      registerInlineServiceWorker();
+      await loadPersistedState();
+      applyTheme(appState.theme);
+      renderAll();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
