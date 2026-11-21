@@ -1,0 +1,2923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="haven">
+  <meta name="theme-color" content="#3c5a6e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="RozKia">
+  <title>RozKia</title>
+  <link id="pwa-manifest" rel="manifest" href="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Haven base tokens (Light Minimal) */
+      --background: #f5f6f5;
+      --surface-container-low: #ffffff;
+      --surface-container: #e3ebe2;
+      --surface-container-high: #dbe2dd;
+
+      --on-surface: #23272a;
+      --on-surface-variant: #5c6468;
+
+      --outline: #c9d0cc;
+      --outline-variant: #dde2df;
+
+      --primary: #3c5a6e;
+      --on-primary: #ffffff;
+      --primary-container: #e2e9ee;
+      --on-primary-container: #2a4152;
+      --secondary: #4f6b53;
+      --tertiary: #5f7c63;
+      --error: #a63d32;
+      --on-error: #ffffff;
+
+      --positive: #15803d;
+      --warning: #b45309;
+      --focus: #3c5a6e;
+
+      --data-1: #3c5a6e;
+      --data-2: #5f7c63;
+      --data-3: #a8694a;
+      --data-4: #8a7a68;
+      --data-context: #c3cac6;
+
+      --font-headline: 'Outfit', sans-serif;
+      --font-body: 'Hanken Grotesk', sans-serif;
+      --font-label: 'Outfit', sans-serif;
+
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+
+      --rounded: 0.375rem;
+      --rounded-lg: 0.5rem;
+      --rounded-full: 9999px;
+
+      --hairline: 1px solid var(--outline-variant);
+      --hairline-control: 1px solid var(--outline);
+      --elevation: none;
+      --overlay-scrim: rgba(20, 26, 30, 0.45);
+      --drag-ring: rgba(60, 90, 110, 0.28);
+
+      /* Category palette (High contrast accessible tokens) */
+      --cat-health: #059669;
+      --cat-health-ink: #047857;
+      --cat-learning: #2563eb;
+      --cat-learning-ink: #1d4ed8;
+      --cat-religion: #0f766e;
+      --cat-religion-ink: #115e59;
+      --cat-family: #d97706;
+      --cat-family-ink: #b45309;
+      --cat-work: #4f46e5;
+      --cat-work-ink: #4338ca;
+
+      /* Custom category auto-palette */
+      --cat-custom-0: #9333ea;
+      --cat-custom-0-ink: #7e22ce;
+      --cat-custom-1: #e11d48;
+      --cat-custom-1-ink: #be123c;
+      --cat-custom-2: #0284c7;
+      --cat-custom-2-ink: #0369a1;
+      --cat-custom-3: #0d9488;
+      --cat-custom-3-ink: #0f766e;
+      --cat-custom-4: #ea580c;
+      --cat-custom-4-ink: #c2410c;
+      --cat-custom-5: #65a30d;
+      --cat-custom-5-ink: #4d7c0f;
+      --cat-custom-6: #c026d3;
+      --cat-custom-6-ink: #a21caf;
+      --cat-custom-7: #475569;
+      --cat-custom-7-ink: #334155;
+
+      /* Theme swatch previews */
+      --swatch-light-bg: #f5f6f5;
+      --swatch-light-fg: #3c5a6e;
+      --swatch-dark-bg: #0f1419;
+      --swatch-dark-fg: #38bdf8;
+      --swatch-neon-bg: #090910;
+      --swatch-neon-fg: #00f5d4;
+      --swatch-nord-bg: #2e3440;
+      --swatch-nord-fg: #88c0d0;
+      --swatch-sunset-bg: #fdf6f0;
+      --swatch-sunset-fg: #c2410c;
+    }
+
+    /* Crisp Dark Theme */
+    [data-theme="crisp-dark"] {
+      color-scheme: dark;
+      --background: #0f1419;
+      --surface-container-low: #171f26;
+      --surface-container: #1f2a33;
+      --surface-container-high: #26333d;
+      --on-surface: #f1f5f9;
+      --on-surface-variant: #9fb0be;
+      --outline: #3b4b59;
+      --outline-variant: #293540;
+      --primary: #38bdf8;
+      --on-primary: #071926;
+      --primary-container: #163244;
+      --on-primary-container: #bae6fd;
+      --secondary: #6ee7b7;
+      --tertiary: #34d399;
+      --error: #f87171;
+      --on-error: #2b0909;
+      --focus: #38bdf8;
+      --data-1: #38bdf8;
+      --data-2: #34d399;
+      --data-context: #364552;
+      --overlay-scrim: rgba(4, 8, 12, 0.72);
+      --drag-ring: rgba(56, 189, 248, 0.35);
+
+      --cat-health: #10b981;
+      --cat-health-ink: #6ee7b7;
+      --cat-learning: #3b82f6;
+      --cat-learning-ink: #93c5fd;
+      --cat-religion: #14b8a6;
+      --cat-religion-ink: #5eead4;
+      --cat-family: #f59e0b;
+      --cat-family-ink: #fcd34d;
+      --cat-work: #6366f1;
+      --cat-work-ink: #a5b4fc;
+      --cat-custom-0-ink: #d8b4fe;
+      --cat-custom-1-ink: #fda4af;
+      --cat-custom-2-ink: #7dd3fc;
+      --cat-custom-3-ink: #5eead4;
+      --cat-custom-4-ink: #fdba74;
+      --cat-custom-5-ink: #bef264;
+      --cat-custom-6-ink: #f0abfc;
+      --cat-custom-7-ink: #cbd5e1;
+    }
+
+    /* Energetic Neon Theme */
+    [data-theme="energetic-neon"] {
+      color-scheme: dark;
+      --background: #090910;
+      --surface-container-low: #121220;
+      --surface-container: #1b1b30;
+      --surface-container-high: #24243e;
+      --on-surface: #f8fafc;
+      --on-surface-variant: #a7b0c8;
+      --outline: #38385c;
+      --outline-variant: #272745;
+      --primary: #00f5d4;
+      --on-primary: #041d1a;
+      --primary-container: #0c2e33;
+      --on-primary-container: #7efce8;
+      --secondary: #f472b6;
+      --tertiary: #a3e635;
+      --error: #fb7185;
+      --on-error: #2a070f;
+      --focus: #00f5d4;
+      --data-1: #00f5d4;
+      --data-2: #a3e635;
+      --data-context: #303052;
+      --overlay-scrim: rgba(4, 4, 10, 0.78);
+      --drag-ring: rgba(0, 245, 212, 0.35);
+
+      --cat-health: #22c55e;
+      --cat-health-ink: #86efac;
+      --cat-learning: #38bdf8;
+      --cat-learning-ink: #7dd3fc;
+      --cat-religion: #2dd4bf;
+      --cat-religion-ink: #99f6e4;
+      --cat-family: #fbbf24;
+      --cat-family-ink: #fde68a;
+      --cat-work: #818cf8;
+      --cat-work-ink: #c7d2fe;
+      --cat-custom-0-ink: #e879f9;
+      --cat-custom-1-ink: #fda4af;
+      --cat-custom-2-ink: #67e8f9;
+      --cat-custom-3-ink: #5eead4;
+      --cat-custom-4-ink: #fdba74;
+      --cat-custom-5-ink: #d9f99d;
+      --cat-custom-6-ink: #f5d0fe;
+      --cat-custom-7-ink: #cbd5e1;
+    }
+
+    /* Nord Slate Theme */
+    [data-theme="nord-slate"] {
+      color-scheme: dark;
+      --background: #2e3440;
+      --surface-container-low: #3b4252;
+      --surface-container: #434c5e;
+      --surface-container-high: #4c566a;
+      --on-surface: #eceff4;
+      --on-surface-variant: #d8dee9;
+      --outline: #5e6b82;
+      --outline-variant: #4c566a;
+      --primary: #88c0d0;
+      --on-primary: #1d232c;
+      --primary-container: #2c414d;
+      --on-primary-container: #cde7ef;
+      --secondary: #a3be8c;
+      --tertiary: #8fbcbb;
+      --error: #bf616a;
+      --on-error: #ffffff;
+      --focus: #88c0d0;
+      --data-1: #88c0d0;
+      --data-2: #a3be8c;
+      --data-context: #4c566a;
+      --overlay-scrim: rgba(24, 28, 36, 0.72);
+      --drag-ring: rgba(136, 192, 208, 0.35);
+
+      --cat-health: #68a378;
+      --cat-health-ink: #a3be8c;
+      --cat-learning: #5e81ac;
+      --cat-learning-ink: #9cc2eb;
+      --cat-religion: #5a9c9b;
+      --cat-religion-ink: #8fbcbb;
+      --cat-family: #d08770;
+      --cat-family-ink: #ebcb8b;
+      --cat-work: #81a1c1;
+      --cat-work-ink: #b8d0e8;
+      --cat-custom-0-ink: #d1b3d8;
+      --cat-custom-1-ink: #e5989b;
+      --cat-custom-2-ink: #88c0d0;
+      --cat-custom-3-ink: #8fbcbb;
+      --cat-custom-4-ink: #ebcb8b;
+      --cat-custom-5-ink: #a3be8c;
+      --cat-custom-6-ink: #d8a7ca;
+      --cat-custom-7-ink: #d8dee9;
+    }
+
+    /* Sunset Warmth Theme */
+    [data-theme="sunset-warmth"] {
+      color-scheme: light;
+      --background: #fdf6f0;
+      --surface-container-low: #ffffff;
+      --surface-container: #faeadf;
+      --surface-container-high: #f4dccb;
+      --on-surface: #2d1e1a;
+      --on-surface-variant: #6e5248;
+      --outline: #d4b8aa;
+      --outline-variant: #ead8ce;
+      --primary: #c2410c;
+      --on-primary: #ffffff;
+      --primary-container: #ffedd5;
+      --on-primary-container: #7c2d12;
+      --secondary: #9a3412;
+      --tertiary: #d97706;
+      --error: #b91c1c;
+      --on-error: #ffffff;
+      --focus: #c2410c;
+      --data-1: #c2410c;
+      --data-2: #d97706;
+      --data-context: #dec6b8;
+      --overlay-scrim: rgba(45, 30, 26, 0.45);
+      --drag-ring: rgba(194, 65, 12, 0.28);
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    header { position: static !important; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+      padding: var(--space-md);
+      max-width: 640px;
+      margin: 0 auto;
+      min-height: 100dvh;
+      align-content: start;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Focus rings */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Header */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: var(--hairline);
+    }
+    .app-title {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.08;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    /* Options Dropdown */
+    .options-wrap {
+      position: relative;
+      z-index: 30;
+    }
+    .options-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: var(--hairline-control);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .options-trigger:hover {
+      background: var(--surface-container-high);
+    }
+    .options-menu {
+      position: absolute;
+      top: calc(100% + var(--space-xs));
+      right: 0;
+      min-width: 210px;
+      background: var(--surface-container-low);
+      border: var(--hairline-control);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xs);
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 40;
+    }
+    .options-menu.open {
+      display: flex;
+      animation: fadeSlideDown var(--dur-micro) var(--ease-out);
+    }
+    .options-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: transparent;
+      border: none;
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .options-item:hover {
+      background: var(--surface-container-high);
+    }
+    .options-item.danger {
+      color: var(--error);
+    }
+    .options-divider {
+      height: 1px;
+      background: var(--outline-variant);
+      margin: var(--space-xs) 0;
+    }
+
+    /* Install Banner (Android Chrome PWA prompt) */
+    .install-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      font-size: var(--label-size);
+    }
+    .install-banner.visible {
+      display: flex;
+    }
+
+    /* Navigation Tabs */
+    .tab-bar {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-xs);
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xs);
+    }
+    .tab-btn {
+      min-height: 44px;
+      border: none;
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .tab-btn:hover {
+      color: var(--on-surface);
+      background: var(--surface-container-high);
+    }
+    .tab-btn[aria-selected="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    /* Toolbar & Date Nav */
+    .daily-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .date-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded);
+      padding: 2px;
+    }
+    .icon-btn-sm {
+      min-width: 40px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      border-radius: var(--rounded);
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .icon-btn-sm:hover:not(:disabled) {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .icon-btn-sm:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .date-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      padding: 0 var(--space-xs);
+      color: var(--on-surface);
+      white-space: nowrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+    }
+    .btn-primary:hover {
+      opacity: 0.92;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: var(--hairline-control);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+    }
+    .btn-danger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      background: var(--error);
+      color: var(--on-error);
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    /* Category Filter Pills */
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs);
+      scrollbar-width: thin;
+    }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded-full);
+      border: var(--hairline-control);
+      background: var(--surface-container-low);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+    .filter-pill:hover {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .filter-pill[aria-pressed="true"] {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+    .cat-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--rounded-full);
+      background: var(--cat-color, var(--primary));
+      flex-shrink: 0;
+    }
+    .filter-pill[aria-pressed="true"] .cat-dot {
+      background: var(--on-primary);
+    }
+
+    /* Habit List & Cards */
+    .habit-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      position: relative;
+    }
+    .drag-hint {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .habit-card {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-left: 4px solid var(--cat-color, var(--primary));
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-sm) var(--space-md);
+      align-items: start;
+      user-select: none;
+      touch-action: pan-y;
+      transition: transform var(--dur-short) var(--ease-out), background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+      position: relative;
+    }
+    .habit-card.is-dragging {
+      z-index: 25;
+      touch-action: none;
+      transform: scale(1.018);
+      box-shadow: 0 0 0 2px var(--drag-ring);
+      background: var(--surface-container-high);
+      transition: box-shadow var(--dur-micro) var(--ease-out);
+    }
+    .habit-card.is-complete {
+      background: color-mix(in srgb, var(--cat-color, var(--primary)) 5%, var(--surface-container-low));
+    }
+    .habit-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .habit-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs) var(--space-sm);
+    }
+    .habit-title {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      margin: 0;
+      color: var(--on-surface);
+      line-height: 1.25;
+    }
+    .cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px var(--space-sm);
+      border-radius: var(--rounded-full);
+      background: color-mix(in srgb, var(--cat-color, var(--primary)) 12%, var(--surface-container-low));
+      color: var(--cat-ink, var(--primary));
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* Action Icons Column: Pencil directly above Wastebasket */
+    .card-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .card-icon-btn {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: var(--rounded);
+      background: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .card-icon-btn:hover {
+      background: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .card-icon-btn.delete-btn:hover {
+      color: var(--error);
+    }
+
+    /* Check-in Controls */
+    .checkin-bool-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--hairline-control);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .checkin-bool-btn:hover {
+      background: var(--surface-container-high);
+    }
+    .checkin-bool-btn[aria-pressed="true"] {
+      background: var(--cat-color, var(--primary));
+      border-color: var(--cat-color, var(--primary));
+      color: var(--on-primary);
+    }
+    .check-box-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--rounded);
+      border: 2px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Quantitative Controls */
+    .quant-control {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .quant-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+    .step-btn {
+      min-width: 44px;
+      min-height: 44px;
+      border-radius: var(--rounded);
+      border: var(--hairline-control);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .step-btn:hover:not(:disabled) {
+      background: var(--surface-container-high);
+    }
+    .step-btn.plus-btn {
+      background: var(--cat-color, var(--primary));
+      border-color: var(--cat-color, var(--primary));
+      color: var(--on-primary);
+    }
+    .step-btn.plus-btn:hover {
+      opacity: 0.9;
+    }
+    .quant-readout {
+      font-family: var(--font-label);
+      font-variant-numeric: tabular-nums;
+      font-size: var(--body-size);
+      font-weight: 600;
+      color: var(--on-surface);
+      min-width: 90px;
+      text-align: center;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--rounded-full);
+      background: var(--surface-container-high);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--cat-color, var(--primary));
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* 5-Prayer Stock Habit Sub-checkboxes */
+    .prayers-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .prayers-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface-variant);
+      font-weight: 500;
+    }
+    .prayers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+    .prayer-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded);
+      border: var(--hairline-control);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .prayer-chip:hover {
+      background: var(--surface-container-high);
+    }
+    .prayer-chip[aria-pressed="true"] {
+      background: var(--cat-color, var(--primary));
+      border-color: var(--cat-color, var(--primary));
+      color: var(--on-primary);
+    }
+
+    /* Inline Delete Confirmation inside Card */
+    .inline-confirm {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+      padding-top: var(--space-sm);
+      margin-top: var(--space-xs);
+      border-top: var(--hairline);
+      font-size: var(--label-size);
+      color: var(--on-surface);
+    }
+    .inline-confirm-btns {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    .btn-compact {
+      min-height: 36px;
+      padding: 0 var(--space-sm);
+      font-size: var(--label-size);
+    }
+
+    /* Empty State */
+    .empty-panel {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .empty-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 400;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .empty-title strong {
+      font-weight: 600;
+    }
+    .empty-desc {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 55ch;
+    }
+    .empty-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    /* Analytics Screen */
+    .analytics-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .analytics-hero {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: var(--space-lg);
+      align-items: center;
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+    }
+    .ring-wrap {
+      position: relative;
+      width: 112px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ring-svg {
+      width: 112px;
+      height: 112px;
+      transform: rotate(-90deg);
+    }
+    .ring-bg {
+      fill: none;
+      stroke: var(--surface-container-high);
+      stroke-width: 10;
+    }
+    .ring-fg {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset var(--dur-long) var(--ease-out);
+    }
+    .ring-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .ring-pct {
+      font-family: var(--font-headline);
+      font-size: 1.45rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+      color: var(--on-surface);
+    }
+    .ring-sub {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      color: var(--on-surface-variant);
+    }
+    .hero-stats-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .hero-heading {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 400;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .hero-heading strong { font-weight: 600; }
+    .hero-caption {
+      font-size: var(--body-size);
+      color: var(--secondary);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: var(--space-sm);
+    }
+    .kpi-tile {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .kpi-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface-variant);
+    }
+    .kpi-val {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      line-height: 1.2;
+    }
+
+    /* Consistency Logs Section */
+    .section-head-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      border-top: var(--hairline);
+      padding-top: var(--space-lg);
+    }
+    .section-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 600;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .section-range {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+    .consistency-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .consistency-card {
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-left: 4px solid var(--cat-color, var(--primary));
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .clog-top-line {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .clog-title {
+      font-family: var(--font-headline);
+      font-size: var(--subhead-size);
+      font-weight: 600;
+      color: var(--on-surface);
+      margin: 0;
+    }
+    .clog-target {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--cat-ink, var(--primary));
+      white-space: nowrap;
+    }
+    .clog-stats-line,
+    .clog-logged-line {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface-variant);
+      margin: 0;
+    }
+    .clog-stats-line strong,
+    .clog-logged-line strong {
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+    .history-row {
+      display: grid;
+      grid-template-columns: repeat(14, minmax(0, 1fr));
+      gap: 4px;
+      margin-top: var(--space-xs);
+    }
+    .day-sq {
+      aspect-ratio: 1 / 1;
+      min-height: 24px;
+      border-radius: 5px;
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-high);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: transform var(--dur-micro) var(--ease-out);
+    }
+    .day-sq:hover {
+      transform: translateY(-1px);
+    }
+    .day-sq.logged {
+      background: var(--cat-color, var(--primary));
+      border-color: var(--cat-color, var(--primary));
+      color: var(--on-primary);
+      font-weight: 600;
+    }
+    .day-sq.partial {
+      background: color-mix(in srgb, var(--cat-color, var(--primary)) 28%, var(--surface-container-low));
+      border-color: var(--cat-color, var(--primary));
+      color: var(--on-surface);
+      font-weight: 600;
+    }
+    .history-axis {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      color: var(--on-surface-variant);
+      margin-top: 2px;
+    }
+    .day-detail-toast {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface);
+      background: var(--surface-container);
+      border-radius: var(--rounded);
+      padding: 4px var(--space-sm);
+      margin-top: var(--space-xs);
+      display: none;
+    }
+    .day-detail-toast.visible {
+      display: block;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay-scrim);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+      z-index: 60;
+    }
+    .modal-backdrop.open {
+      display: flex;
+      animation: fadeIn var(--dur-micro) var(--ease-out);
+    }
+    .modal-dialog {
+      width: 100%;
+      max-width: 440px;
+      max-height: 90dvh;
+      overflow-y: auto;
+      background: var(--surface-container-low);
+      border: var(--hairline-control);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+    .modal-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 600;
+      margin: 0;
+      color: var(--on-surface);
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .form-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      color: var(--on-surface);
+    }
+    .form-input,
+    .form-select {
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      color: var(--on-surface);
+      border: var(--hairline-control);
+      border-radius: var(--rounded);
+      font-size: var(--body-size);
+      width: 100%;
+    }
+    .form-select {
+      padding-right: var(--space-xl);
+    }
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--primary);
+      outline: 2px solid var(--focus);
+      outline-offset: 1px;
+    }
+    .type-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+    .type-option {
+      min-height: 44px;
+      padding: var(--space-sm);
+      border-radius: var(--rounded);
+      border: var(--hairline-control);
+      background: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .type-option[aria-pressed="true"] {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+    .quant-fields {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-sm);
+      align-items: end;
+    }
+    .form-error {
+      font-size: var(--label-size);
+      color: var(--error);
+      margin: 0;
+      min-height: 1.1em;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    /* Stock Habits List */
+    .stock-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .stock-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      border: var(--hairline);
+      border-left: 4px solid var(--cat-color, var(--primary));
+      border-radius: var(--rounded);
+      background: var(--background);
+    }
+    .stock-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stock-name {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--body-size);
+      color: var(--on-surface);
+    }
+    .stock-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    /* Category List inside Add Category Modal */
+    .existing-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    /* Theme Grid */
+    .theme-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .theme-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      min-height: 52px;
+      padding: var(--space-sm) var(--space-md);
+      border: var(--hairline-control);
+      border-radius: var(--rounded);
+      background: var(--background);
+      color: var(--on-surface);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-label);
+      font-size: var(--body-size);
+      font-weight: 500;
+    }
+    .theme-card[aria-pressed="true"] {
+      border-color: var(--primary);
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 600;
+    }
+    .theme-swatch-pair {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .swatch-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--outline);
+    }
+    .swatch-light-bg { background: var(--swatch-light-bg); }
+    .swatch-light-fg { background: var(--swatch-light-fg); }
+    .swatch-dark-bg { background: var(--swatch-dark-bg); }
+    .swatch-dark-fg { background: var(--swatch-dark-fg); }
+    .swatch-neon-bg { background: var(--swatch-neon-bg); }
+    .swatch-neon-fg { background: var(--swatch-neon-fg); }
+    .swatch-nord-bg { background: var(--swatch-nord-bg); }
+    .swatch-nord-fg { background: var(--swatch-nord-fg); }
+    .swatch-sunset-bg { background: var(--swatch-sunset-bg); }
+    .swatch-sunset-fg { background: var(--swatch-sunset-fg); }
+
+    /* Exit Screen */
+    .exited-screen {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+      background: var(--surface-container-low);
+      border: var(--hairline);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-lg);
+    }
+    .exited-screen.visible {
+      display: flex;
+    }
+
+    /* Utility classes for Category Colors */
+    .cat-health { --cat-color: var(--cat-health); --cat-ink: var(--cat-health-ink); }
+    .cat-learning { --cat-color: var(--cat-learning); --cat-ink: var(--cat-learning-ink); }
+    .cat-religion { --cat-color: var(--cat-religion); --cat-ink: var(--cat-religion-ink); }
+    .cat-family { --cat-color: var(--cat-family); --cat-ink: var(--cat-family-ink); }
+    .cat-work { --cat-color: var(--cat-work); --cat-ink: var(--cat-work-ink); }
+    .cat-custom-0 { --cat-color: var(--cat-custom-0); --cat-ink: var(--cat-custom-0-ink); }
+    .cat-custom-1 { --cat-color: var(--cat-custom-1); --cat-ink: var(--cat-custom-1-ink); }
+    .cat-custom-2 { --cat-color: var(--cat-custom-2); --cat-ink: var(--cat-custom-2-ink); }
+    .cat-custom-3 { --cat-color: var(--cat-custom-3); --cat-ink: var(--cat-custom-3-ink); }
+    .cat-custom-4 { --cat-color: var(--cat-custom-4); --cat-ink: var(--cat-custom-4-ink); }
+    .cat-custom-5 { --cat-color: var(--cat-custom-5); --cat-ink: var(--cat-custom-5-ink); }
+    .cat-custom-6 { --cat-color: var(--cat-custom-6); --cat-ink: var(--cat-custom-6-ink); }
+    .cat-custom-7 { --cat-color: var(--cat-custom-7); --cat-ink: var(--cat-custom-7-ink); }
+
+    .hidden { display: none !important; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-sm);
+        gap: var(--space-sm);
+      }
+      .analytics-hero {
+        grid-template-columns: 1fr;
+        justify-items: start;
+        gap: var(--space-md);
+      }
+      .history-row {
+        gap: 3px;
+      }
+      .day-sq {
+        min-height: 20px;
+        font-size: 0.625rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid" id="app-shell">
+    <!-- Top Header: ONLY "RozKia" on left (zero subtext) and "Options" dropdown on right -->
+    <header class="app-header">
+      <h1 class="app-title">RozKia</h1>
+      <div class="options-wrap" id="options-wrap">
+        <button type="button" class="options-trigger" id="options-btn" aria-haspopup="menu" aria-expanded="false" onclick="toggleOptionsMenu(event)">
+          <span>Options</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="options-menu" id="options-menu" role="menu" aria-label="App options">
+          <button type="button" class="options-item" role="menuitem" onclick="openStockModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            <span>Add Stock Habit</span>
+          </button>
+          <button type="button" class="options-item" role="menuitem" onclick="openCategoryModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
+            <span>Add Habit Category</span>
+          </button>
+          <button type="button" class="options-item" role="menuitem" onclick="openThemeModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2Z"/></svg>
+            <span>Change Theme</span>
+          </button>
+          <div class="options-divider" role="separator"></div>
+          <button type="button" class="options-item danger" role="menuitem" onclick="openExitModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+            <span>Exit</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- PWA Install Prompt Banner (visible on Android Chrome when installable) -->
+    <div class="install-banner" id="install-banner">
+      <span>Install RozKia on your home screen for instant offline access.</span>
+      <button type="button" class="btn-primary btn-compact" onclick="triggerPwaInstall()">Install</button>
+    </div>
+
+    <!-- Main App Content -->
+    <main id="main-content">
+      <!-- Primary Navigation Tabs -->
+      <nav class="tab-bar" role="tablist" aria-label="Main views">
+        <button type="button" class="tab-btn" id="tab-daily" role="tab" aria-selected="true" onclick="switchTab('daily')">Daily Habits</button>
+        <button type="button" class="tab-btn" id="tab-analytics" role="tab" aria-selected="false" onclick="switchTab('analytics')">Analytics</button>
+      </nav>
+
+      <!-- TAB 1: DAILY HABITS -->
+      <section id="view-daily" aria-labelledby="tab-daily" style="margin-top: var(--space-md); display: flex; flex-direction: column; gap: var(--space-md);">
+        <div class="daily-toolbar">
+          <div class="date-nav" aria-label="Active logging date">
+            <button type="button" class="icon-btn-sm" id="prev-day-btn" aria-label="Previous day" onclick="shiftActiveDay(-1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <span class="date-label" id="active-date-label">Today</span>
+            <button type="button" class="icon-btn-sm" id="next-day-btn" aria-label="Next day" onclick="shiftActiveDay(1)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <button type="button" class="btn-primary" onclick="openHabitModal(null)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            <span>Add Habit</span>
+          </button>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="filter-pills" id="category-pills" role="group" aria-label="Filter habits by category"></div>
+
+        <!-- Habit Cards List -->
+        <p class="drag-hint" id="drag-hint">
+          <span>Hold any card briefly to drag and reorder</span>
+          <span id="daily-progress-summary"></span>
+        </p>
+        <div class="habit-list" id="habit-list"></div>
+      </section>
+
+      <!-- TAB 2: ANALYTICS -->
+      <section id="view-analytics" class="hidden" aria-labelledby="tab-analytics" style="margin-top: var(--space-md);">
+        <div class="analytics-stack" id="analytics-content"></div>
+      </section>
+    </main>
+
+    <!-- Exited View -->
+    <section class="exited-screen" id="exited-screen" aria-live="polite">
+      <h2 class="empty-title">You have exited <strong>RozKia</strong>.</h2>
+      <p class="empty-desc">Your habits and daily logs remain safely stored offline on this device.</p>
+      <button type="button" class="btn-primary" onclick="reopenApp()">Return to RozKia</button>
+    </section>
+  </div>
+
+  <!-- MODAL: Add / Edit Habit -->
+  <div class="modal-backdrop" id="habit-modal" role="dialog" aria-modal="true" aria-labelledby="habit-modal-title" onclick="handleBackdropClick(event, 'habit-modal')">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h2 class="modal-title" id="habit-modal-title">Add Habit</h2>
+        <button type="button" class="icon-btn-sm" aria-label="Close modal" onclick="closeModal('habit-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form id="habit-form" onsubmit="saveHabitForm(event)" style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <input type="hidden" id="habit-edit-id" value="">
+        <div class="form-group">
+          <label class="form-label" for="habit-name-input">Habit Name</label>
+          <input class="form-input" id="habit-name-input" type="text" maxlength="80" placeholder="e.g., Morning Walk" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="habit-cat-select">Category</label>
+          <select class="form-select" id="habit-cat-select"></select>
+        </div>
+        <div class="form-group" id="habit-type-group">
+          <span class="form-label">Habit Type</span>
+          <div class="type-toggle">
+            <button type="button" class="type-option" id="type-opt-boolean" aria-pressed="true" onclick="selectHabitType('boolean')">Checkbox (Pass / Fail)</button>
+            <button type="button" class="type-option" id="type-opt-quantitative" aria-pressed="false" onclick="selectHabitType('quantitative')">Quantitative Target</button>
+          </div>
+        </div>
+        <div class="quant-fields hidden" id="quant-fields">
+          <div class="form-group">
+            <label class="form-label" for="habit-target-input">Target Value</label>
+            <input class="form-input" id="habit-target-input" type="number" min="1" max="100000" value="10">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="habit-unit-input">Unit</label>
+            <input class="form-input" id="habit-unit-input" type="text" maxlength="24" value="glasses" placeholder="e.g., pages, min">
+          </div>
+        </div>
+        <p class="form-error" id="habit-form-error" aria-live="polite"></p>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('habit-modal')">Cancel</button>
+          <button type="submit" class="btn-primary" id="habit-save-btn">Save Habit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Stock Habit Library -->
+  <div class="modal-backdrop" id="stock-modal" role="dialog" aria-modal="true" aria-labelledby="stock-modal-title" onclick="handleBackdropClick(event, 'stock-modal')">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h2 class="modal-title" id="stock-modal-title">Add Stock Habit</h2>
+        <button type="button" class="icon-btn-sm" aria-label="Close modal" onclick="closeModal('stock-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="stock-list" id="stock-list"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal('stock-modal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Habit Category -->
+  <div class="modal-backdrop" id="category-modal" role="dialog" aria-modal="true" aria-labelledby="category-modal-title" onclick="handleBackdropClick(event, 'category-modal')">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h2 class="modal-title" id="category-modal-title">Add Habit Category</h2>
+        <button type="button" class="icon-btn-sm" aria-label="Close modal" onclick="closeModal('category-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="form-group">
+        <span class="form-label">Active Categories</span>
+        <div class="existing-cats" id="existing-cats-list"></div>
+      </div>
+      <form id="category-form" onsubmit="saveCategoryForm(event)" style="display: flex; flex-direction: column; gap: var(--space-md);">
+        <div class="form-group">
+          <label class="form-label" for="cat-name-input">New Category Name</label>
+          <input class="form-input" id="cat-name-input" type="text" maxlength="28" placeholder="e.g., Mindfulness" required>
+        </div>
+        <p class="form-error" id="cat-form-error" aria-live="polite"></p>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('category-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Create Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Change Theme -->
+  <div class="modal-backdrop" id="theme-modal" role="dialog" aria-modal="true" aria-labelledby="theme-modal-title" onclick="handleBackdropClick(event, 'theme-modal')">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h2 class="modal-title" id="theme-modal-title">Change Theme</h2>
+        <button type="button" class="icon-btn-sm" aria-label="Close modal" onclick="closeModal('theme-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="theme-list" id="theme-list"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal('theme-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Exit Confirmation -->
+  <div class="modal-backdrop" id="exit-modal" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title" onclick="handleBackdropClick(event, 'exit-modal')">
+    <div class="modal-dialog">
+      <div class="modal-head">
+        <h2 class="modal-title" id="exit-modal-title">Exit RozKia</h2>
+        <button type="button" class="icon-btn-sm" aria-label="Close modal" onclick="closeModal('exit-modal')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <p style="margin: 0; color: var(--on-surface);">Are you sure you want to exit RozKia?</p>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal('exit-modal')">No</button>
+        <button type="button" class="btn-danger" onclick="confirmExitApp()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <api-shim></api-shim>
+  <script>
+    const PRAYER_NAMES = [`Fajr`, `Zuhr`, `Asr`, `Maghrib`, `Isha`];
+
+    const DEFAULT_CATEGORIES = [
+      { id: `health`, name: `Health`, colorClass: `cat-health` },
+      { id: `learning`, name: `Learning`, colorClass: `cat-learning` },
+      { id: `religion`, name: `Religion`, colorClass: `cat-religion` },
+      { id: `family`, name: `Family`, colorClass: `cat-family` },
+      { id: `work`, name: `Work`, colorClass: `cat-work` }
+    ];
+
+    const STOCK_HABITS = [
+      {
+        stockId: `stock_prayer_jamaat`,
+        title: `Offer prayer with Jamaat`,
+        categoryId: `religion`,
+        type: `prayers`,
+        target: 5,
+        unit: `prayers`,
+        subtitle: `5 daily prayers (Fajr, Zuhr, Asr, Maghrib, Isha)`
+      },
+      {
+        stockId: `stock_recite_quran`,
+        title: `Recite Quran`,
+        categoryId: `religion`,
+        type: `boolean`,
+        target: 1,
+        unit: ``,
+        subtitle: `Pass / Fail checkbox`
+      },
+      {
+        stockId: `stock_drink_water`,
+        title: `Drink Water Daily`,
+        categoryId: `health`,
+        type: `quantitative`,
+        target: 10,
+        unit: `glasses`,
+        subtitle: `Quantitative target: 10 glasses`
+      },
+      {
+        stockId: `stock_family_time`,
+        title: `Give time to family`,
+        categoryId: `family`,
+        type: `boolean`,
+        target: 1,
+        unit: ``,
+        subtitle: `Pass / Fail checkbox`
+      }
+    ];
+
+    const THEMES = [
+      { id: `light-minimal`, label: `Light Minimal`, swatchBg: `swatch-light-bg`, swatchFg: `swatch-light-fg` },
+      { id: `crisp-dark`, label: `Crisp Dark`, swatchBg: `swatch-dark-bg`, swatchFg: `swatch-dark-fg` },
+      { id: `energetic-neon`, label: `Energetic Neon`, swatchBg: `swatch-neon-bg`, swatchFg: `swatch-neon-fg` },
+      { id: `nord-slate`, label: `Nord Slate`, swatchBg: `swatch-nord-bg`, swatchFg: `swatch-nord-fg` },
+      { id: `sunset-warmth`, label: `Sunset Warmth`, swatchBg: `swatch-sunset-bg`, swatchFg: `swatch-sunset-fg` }
+    ];
+
+    const STORAGE_KEY = `rozkia_pwa_state_v1`;
+
+    let appState = {
+      theme: `light-minimal`,
+      activeTab: `daily`,
+      activeCategoryFilter: `all`,
+      categories: [],
+      habits: [],
+      logs: {}
+    };
+
+    let activeDateOffset = 0;
+    let selectedModalHabitType = `boolean`;
+    let pendingDeleteId = null;
+    let deferredInstallPrompt = null;
+    let selectedHistoryInspect = {};
+
+    function getLocalDateISO(offsetDays) {
+      const now = new Date();
+      const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + (offsetDays || 0));
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, `0`);
+      const day = String(d.getDate()).padStart(2, `0`);
+      return `${y}-${m}-${day}`;
+    }
+
+    function parseLocalDate(isoStr) {
+      const parts = isoStr.split(`-`).map(Number);
+      return new Date(parts[0], parts[1] - 1, parts[2]);
+    }
+
+    function formatShortDate(isoStr) {
+      const months = [`Jan`, `Feb`, `Mar`, `Apr`, `May`, `Jun`, `Jul`, `Aug`, `Sep`, `Oct`, `Nov`, `Dec`];
+      const d = parseLocalDate(isoStr);
+      return `${months[d.getMonth()]} ${d.getDate()}`;
+    }
+
+    function getHistoryWindow() {
+      const days = [];
+      for (let i = -13; i <= 0; i++) {
+        days.push(getLocalDateISO(i));
+      }
+      return days;
+    }
+
+    function cloneDefaultCategories() {
+      return DEFAULT_CATEGORIES.map(function (c) {
+        return { id: c.id, name: c.name, colorClass: c.colorClass };
+      });
+    }
+
+    function getCategoryById(catId) {
+      const found = appState.categories.find(function (c) { return c.id === catId; });
+      if (found) return found;
+      return appState.categories[0] || { id: `health`, name: `Health`, colorClass: `cat-health` };
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function getHabitLog(dateISO, habit) {
+      const dayBucket = appState.logs[dateISO];
+      const raw = dayBucket ? dayBucket[habit.id] : null;
+      if (habit.type === `prayers`) {
+        const prayers = {};
+        let count = 0;
+        for (let i = 0; i < PRAYER_NAMES.length; i++) {
+          const p = PRAYER_NAMES[i];
+          const checked = Boolean(raw && raw.prayers && raw.prayers[p]);
+          prayers[p] = checked;
+          if (checked) count++;
+        }
+        return { prayers: prayers, count: count, completed: count === 5 };
+      }
+      if (habit.type === `quantitative`) {
+        const val = raw && typeof raw.value === `number` ? Math.max(0, raw.value) : 0;
+        const target = Math.max(1, Number(habit.target) || 1);
+        return { value: val, target: target, completed: val >= target };
+      }
+      return { completed: Boolean(raw && raw.completed) };
+    }
+
+    function isDayPartial(dateISO, habit) {
+      const log = getHabitLog(dateISO, habit);
+      if (log.completed) return false;
+      if (habit.type === `prayers`) return log.count > 0;
+      if (habit.type === `quantitative`) return log.value > 0;
+      return false;
+    }
+
+    function getFallbackWebStore() {
+      try {
+        const key = `local` + `Storage`;
+        return window[key] || null;
+      } catch (err) {
+        return null;
+      }
+    }
+
+    async function loadPersistedState() {
+      let loaded = null;
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+        try {
+          loaded = await window.notebookAppApi.getAppState();
+        } catch (err) {
+          loaded = null;
+        }
+      }
+      if (!loaded) {
+        const webStore = getFallbackWebStore();
+        if (webStore) {
+          try {
+            const raw = webStore.getItem(STORAGE_KEY);
+            if (raw) loaded = JSON.parse(raw);
+          } catch (err) {
+            loaded = null;
+          }
+        }
+      }
+      if (loaded && typeof loaded === `object`) {
+        appState.theme = typeof loaded.theme === `string` ? loaded.theme : `light-minimal`;
+        appState.activeTab = loaded.activeTab === `analytics` ? `analytics` : `daily`;
+        appState.activeCategoryFilter = typeof loaded.activeCategoryFilter === `string` ? loaded.activeCategoryFilter : `all`;
+        appState.categories = Array.isArray(loaded.categories) && loaded.categories.length > 0
+          ? loaded.categories
+          : cloneDefaultCategories();
+        appState.habits = Array.isArray(loaded.habits) ? loaded.habits : [];
+        appState.logs = loaded.logs && typeof loaded.logs === `object` ? loaded.logs : {};
+      } else {
+        appState.categories = cloneDefaultCategories();
+      }
+    }
+
+    async function persistState() {
+      const snapshot = {
+        theme: appState.theme,
+        activeTab: appState.activeTab,
+        activeCategoryFilter: appState.activeCategoryFilter,
+        categories: appState.categories,
+        habits: appState.habits,
+        logs: appState.logs
+      };
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+        try {
+          await window.notebookAppApi.setAppState(snapshot);
+        } catch (err) {
+          /* ignore transient save errors */
+        }
+      } else {
+        const webStore = getFallbackWebStore();
+        if (webStore) {
+          try {
+            webStore.setItem(STORAGE_KEY, JSON.stringify(snapshot));
+          } catch (err) {
+            /* ignore quota errors */
+          }
+        }
+      }
+    }
+
+    function applyTheme(themeId) {
+      appState.theme = themeId;
+      if (themeId === `light-minimal`) {
+        document.documentElement.removeAttribute(`data-theme`);
+      } else {
+        document.documentElement.setAttribute(`data-theme`, themeId);
+      }
+    }
+
+    function setupEmbeddedPwa() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192"><rect width="192" height="192" rx="40" fill="%233c5a6e"/><path d="M54 100l28 28 56-62" fill="none" stroke="%23ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+      const iconUri = `data:image/svg+xml;utf8,${iconSvg}`;
+      const manifestObj = {
+        name: `RozKia`,
+        short_name: `RozKia`,
+        start_url: `./`,
+        display: `standalone`,
+        background_color: `#f5f6f5`,
+        theme_color: `#3c5a6e`,
+        orientation: `portrait`,
+        icons: [
+          { src: iconUri, sizes: `192x192`, type: `image/svg+xml`, purpose: `any maskable` },
+          { src: iconUri, sizes: `512x512`, type: `image/svg+xml`, purpose: `any maskable` }
+        ]
+      };
+      const manifestLink = document.getElementById(`pwa-manifest`);
+      if (manifestLink) {
+        manifestLink.setAttribute(
+          `href`,
+          `data:application/manifest+json;charset=utf-8,${encodeURIComponent(JSON.stringify(manifestObj))}`
+        );
+      }
+
+      if (`serviceWorker` in navigator && window.location.protocol === `https:`) {
+        const swSource = [
+          `const CACHE_NAME = 'rozkia-offline-v1';`,
+          `self.addEventListener('install', (e) => { self.skipWaiting(); });`,
+          `self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });`,
+          `self.addEventListener('fetch', (e) => {`,
+          `  if (e.request.method !== 'GET') return;`,
+          `  e.respondWith(caches.open(CACHE_NAME).then((cache) => cache.match(e.request).then((cached) => cached || fetch(e.request).then((resp) => { cache.put(e.request, resp.clone()); return resp; }))));`,
+          `});`
+        ].join(`\n`);
+        try {
+          const blob = new Blob([swSource], { type: `application/javascript` });
+          const swUrl = URL.createObjectURL(blob);
+          navigator.serviceWorker.register(swUrl).catch(function () {});
+        } catch (err) {
+          /* Sandboxed or unsupported Blob SW registration */
+        }
+      }
+
+      window.addEventListener(`beforeinstallprompt`, function (e) {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        const banner = document.getElementById(`install-banner`);
+        if (banner) banner.classList.add(`visible`);
+      });
+
+      window.addEventListener(`appinstalled`, function () {
+        deferredInstallPrompt = null;
+        const banner = document.getElementById(`install-banner`);
+        if (banner) banner.classList.remove(`visible`);
+      });
+    }
+
+    async function triggerPwaInstall() {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      try {
+        await deferredInstallPrompt.userChoice;
+      } catch (err) {}
+      deferredInstallPrompt = null;
+      const banner = document.getElementById(`install-banner`);
+      if (banner) banner.classList.remove(`visible`);
+    }
+
+    function toggleOptionsMenu(event) {
+      if (event) event.stopPropagation();
+      const menu = document.getElementById(`options-menu`);
+      const btn = document.getElementById(`options-btn`);
+      if (!menu || !btn) return;
+      const willOpen = !menu.classList.contains(`open`);
+      menu.classList.toggle(`open`, willOpen);
+      btn.setAttribute(`aria-expanded`, willOpen ? `true` : `false`);
+    }
+
+    function closeOptionsMenu() {
+      const menu = document.getElementById(`options-menu`);
+      const btn = document.getElementById(`options-btn`);
+      if (menu) menu.classList.remove(`open`);
+      if (btn) btn.setAttribute(`aria-expanded`, `false`);
+    }
+
+    function openModal(id) {
+      closeOptionsMenu();
+      const el = document.getElementById(id);
+      if (el) el.classList.add(`open`);
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove(`open`);
+    }
+
+    function handleBackdropClick(event, id) {
+      if (event.target && event.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    function switchTab(tabName) {
+      appState.activeTab = tabName;
+      const tabDaily = document.getElementById(`tab-daily`);
+      const tabAnalytics = document.getElementById(`tab-analytics`);
+      const viewDaily = document.getElementById(`view-daily`);
+      const viewAnalytics = document.getElementById(`view-analytics`);
+      if (tabDaily) tabDaily.setAttribute(`aria-selected`, tabName === `daily` ? `true` : `false`);
+      if (tabAnalytics) tabAnalytics.setAttribute(`aria-selected`, tabName === `analytics` ? `true` : `false`);
+      if (viewDaily) viewDaily.classList.toggle(`hidden`, tabName !== `daily`);
+      if (viewAnalytics) viewAnalytics.classList.toggle(`hidden`, tabName !== `analytics`);
+      render();
+      persistState();
+    }
+
+    function shiftActiveDay(delta) {
+      const next = activeDateOffset + delta;
+      if (next > 0 || next < -13) return;
+      activeDateOffset = next;
+      pendingDeleteId = null;
+      renderDailyView();
+    }
+
+    function setCategoryFilter(catId) {
+      appState.activeCategoryFilter = catId;
+      pendingDeleteId = null;
+      renderDailyView();
+      persistState();
+    }
+
+    function openHabitModal(habitId) {
+      const titleEl = document.getElementById(`habit-modal-title`);
+      const idInput = document.getElementById(`habit-edit-id`);
+      const nameInput = document.getElementById(`habit-name-input`);
+      const catSelect = document.getElementById(`habit-cat-select`);
+      const targetInput = document.getElementById(`habit-target-input`);
+      const unitInput = document.getElementById(`habit-unit-input`);
+      const typeGroup = document.getElementById(`habit-type-group`);
+      const errEl = document.getElementById(`habit-form-error`);
+
+      if (!catSelect || !nameInput || !idInput || !titleEl) return;
+      if (errEl) errEl.textContent = ``;
+
+      catSelect.innerHTML = appState.categories.map(function (c) {
+        return `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`;
+      }).join(``);
+
+      if (habitId) {
+        const habit = appState.habits.find(function (h) { return h.id === habitId; });
+        if (!habit) return;
+        titleEl.textContent = `Edit Habit`;
+        idInput.value = habit.id;
+        nameInput.value = habit.title;
+        catSelect.value = habit.categoryId;
+
+        if (habit.type === `prayers`) {
+          if (typeGroup) typeGroup.classList.add(`hidden`);
+          selectHabitType(`boolean`);
+          const qFields = document.getElementById(`quant-fields`);
+          if (qFields) qFields.classList.add(`hidden`);
+        } else {
+          if (typeGroup) typeGroup.classList.remove(`hidden`);
+          selectHabitType(habit.type === `quantitative` ? `quantitative` : `boolean`);
+          if (targetInput) targetInput.value = habit.target || 10;
+          if (unitInput) unitInput.value = habit.unit || `units`;
+        }
+      } else {
+        titleEl.textContent = `Add Habit`;
+        idInput.value = ``;
+        nameInput.value = ``;
+        catSelect.value = appState.activeCategoryFilter !== `all`
+          ? appState.activeCategoryFilter
+          : (appState.categories[0] ? appState.categories[0].id : `health`);
+        if (typeGroup) typeGroup.classList.remove(`hidden`);
+        selectHabitType(`boolean`);
+        if (targetInput) targetInput.value = `10`;
+        if (unitInput) unitInput.value = `glasses`;
+      }
+
+      openModal(`habit-modal`);
+      setTimeout(function () { nameInput.focus(); }, 40);
+    }
+
+    function selectHabitType(type) {
+      selectedModalHabitType = type === `quantitative` ? `quantitative` : `boolean`;
+      const btnBool = document.getElementById(`type-opt-boolean`);
+      const btnQuant = document.getElementById(`type-opt-quantitative`);
+      const qFields = document.getElementById(`quant-fields`);
+      if (btnBool) btnBool.setAttribute(`aria-pressed`, selectedModalHabitType === `boolean` ? `true` : `false`);
+      if (btnQuant) btnQuant.setAttribute(`aria-pressed`, selectedModalHabitType === `quantitative` ? `true` : `false`);
+      if (qFields) qFields.classList.toggle(`hidden`, selectedModalHabitType !== `quantitative`);
+    }
+
+    function saveHabitForm(event) {
+      event.preventDefault();
+      const idInput = document.getElementById(`habit-edit-id`);
+      const nameInput = document.getElementById(`habit-name-input`);
+      const catSelect = document.getElementById(`habit-cat-select`);
+      const targetInput = document.getElementById(`habit-target-input`);
+      const unitInput = document.getElementById(`habit-unit-input`);
+      const errEl = document.getElementById(`habit-form-error`);
+
+      if (!nameInput || !catSelect) return;
+      const title = nameInput.value.trim();
+      if (!title) {
+        if (errEl) errEl.textContent = `Please enter a habit name.`;
+        return;
+      }
+
+      const categoryId = catSelect.value;
+      const editId = idInput ? idInput.value.trim() : ``;
+      let targetVal = 1;
+      let unitVal = ``;
+
+      if (selectedModalHabitType === `quantitative`) {
+        targetVal = parseInt(targetInput ? targetInput.value : `0`, 10);
+        unitVal = unitInput ? unitInput.value.trim() : ``;
+        if (!targetVal || targetVal < 1) {
+          if (errEl) errEl.textContent = `Please enter a valid target value of 1 or higher.`;
+          return;
+        }
+        if (!unitVal) {
+          if (errEl) errEl.textContent = `Please enter a unit (such as glasses, pages, or min).`;
+          return;
+        }
+      }
+
+      if (editId) {
+        const existing = appState.habits.find(function (h) { return h.id === editId; });
+        if (existing) {
+          existing.title = title;
+          existing.categoryId = categoryId;
+          if (existing.type !== `prayers`) {
+            existing.type = selectedModalHabitType;
+            existing.target = selectedModalHabitType === `quantitative` ? targetVal : 1;
+            existing.unit = selectedModalHabitType === `quantitative` ? unitVal : ``;
+          }
+        }
+      } else {
+        appState.habits.push({
+          id: `habit_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+          title: title,
+          categoryId: categoryId,
+          type: selectedModalHabitType,
+          target: selectedModalHabitType === `quantitative` ? targetVal : 1,
+          unit: selectedModalHabitType === `quantitative` ? unitVal : ``,
+          createdAt: getLocalDateISO(0)
+        });
+      }
+
+      closeModal(`habit-modal`);
+      render();
+      persistState();
+    }
+
+    function openStockModal() {
+      renderStockList();
+      openModal(`stock-modal`);
+    }
+
+    function renderStockList() {
+      const container = document.getElementById(`stock-list`);
+      if (!container) return;
+      container.innerHTML = STOCK_HABITS.map(function (stock) {
+        const cat = getCategoryById(stock.categoryId);
+        const alreadyAdded = appState.habits.some(function (h) {
+          return h.stockId === stock.stockId || h.title.toLowerCase() === stock.title.toLowerCase();
+        });
+        return `
+          <div class="stock-item ${escapeHtml(cat.colorClass)}">
+            <div class="stock-info">
+              <span class="stock-name">${escapeHtml(stock.title)}</span>
+              <span class="stock-meta">${escapeHtml(cat.name)} · ${escapeHtml(stock.subtitle)}</span>
+            </div>
+            <button type="button" class="${alreadyAdded ? `btn-secondary` : `btn-primary`} btn-compact" onclick="addStockHabit('${escapeHtml(stock.stockId)}')" ${alreadyAdded ? `disabled` : ``}>
+              ${alreadyAdded ? `Added` : `Add`}
+            </button>
+          </div>
+        `;
+      }).join(``);
+    }
+
+    function addStockHabit(stockId) {
+      const stock = STOCK_HABITS.find(function (s) { return s.stockId === stockId; });
+      if (!stock) return;
+      const exists = appState.habits.some(function (h) {
+        return h.stockId === stock.stockId || h.title.toLowerCase() === stock.title.toLowerCase();
+      });
+      if (exists) return;
+      appState.habits.push({
+        id: `habit_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+        stockId: stock.stockId,
+        title: stock.title,
+        categoryId: stock.categoryId,
+        type: stock.type,
+        target: stock.target,
+        unit: stock.unit,
+        createdAt: getLocalDateISO(0)
+      });
+      renderStockList();
+      render();
+      persistState();
+    }
+
+    function openCategoryModal() {
+      const input = document.getElementById(`cat-name-input`);
+      const err = document.getElementById(`cat-form-error`);
+      if (input) input.value = ``;
+      if (err) err.textContent = ``;
+      renderExistingCategories();
+      openModal(`category-modal`);
+      if (input) setTimeout(function () { input.focus(); }, 40);
+    }
+
+    function renderExistingCategories() {
+      const el = document.getElementById(`existing-cats-list`);
+      if (!el) return;
+      el.innerHTML = appState.categories.map(function (c) {
+        return `<span class="cat-badge ${escapeHtml(c.colorClass)}"><span class="cat-dot"></span>${escapeHtml(c.name)}</span>`;
+      }).join(``);
+    }
+
+    function saveCategoryForm(event) {
+      event.preventDefault();
+      const input = document.getElementById(`cat-name-input`);
+      const err = document.getElementById(`cat-form-error`);
+      if (!input) return;
+      const name = input.value.trim();
+      if (!name) {
+        if (err) err.textContent = `Please enter a category name.`;
+        return;
+      }
+      const duplicate = appState.categories.some(function (c) {
+        return c.name.toLowerCase() === name.toLowerCase();
+      });
+      if (duplicate) {
+        if (err) err.textContent = `That category already exists.`;
+        return;
+      }
+      const customCount = Math.max(0, appState.categories.length - DEFAULT_CATEGORIES.length);
+      const colorClass = `cat-custom-${customCount % 8}`;
+      const newId = `cat_${Date.now()}`;
+      appState.categories.push({ id: newId, name: name, colorClass: colorClass });
+      input.value = ``;
+      if (err) err.textContent = ``;
+      renderExistingCategories();
+      render();
+      persistState();
+      closeModal(`category-modal`);
+    }
+
+    function openThemeModal() {
+      renderThemeList();
+      openModal(`theme-modal`);
+    }
+
+    function renderThemeList() {
+      const el = document.getElementById(`theme-list`);
+      if (!el) return;
+      el.innerHTML = THEMES.map(function (t) {
+        const active = appState.theme === t.id;
+        return `
+          <button type="button" class="theme-card" aria-pressed="${active ? `true` : `false`}" onclick="selectTheme('${escapeHtml(t.id)}')">
+            <span>${escapeHtml(t.label)}</span>
+            <span class="theme-swatch-pair" aria-hidden="true">
+              <span class="swatch-dot ${escapeHtml(t.swatchBg)}"></span>
+              <span class="swatch-dot ${escapeHtml(t.swatchFg)}"></span>
+            </span>
+          </button>
+        `;
+      }).join(``);
+    }
+
+    function selectTheme(themeId) {
+      applyTheme(themeId);
+      renderThemeList();
+      persistState();
+    }
+
+    function openExitModal() {
+      openModal(`exit-modal`);
+    }
+
+    function confirmExitApp() {
+      closeModal(`exit-modal`);
+      const main = document.getElementById(`main-content`);
+      const exited = document.getElementById(`exited-screen`);
+      const opts = document.getElementById(`options-wrap`);
+      if (main) main.classList.add(`hidden`);
+      if (opts) opts.classList.add(`hidden`);
+      if (exited) exited.classList.add(`visible`);
+      try {
+        if (window.matchMedia && window.matchMedia(`(display-mode: standalone)`).matches && window.opener) {
+          window.close();
+        }
+      } catch (err) {}
+    }
+
+    function reopenApp() {
+      const main = document.getElementById(`main-content`);
+      const exited = document.getElementById(`exited-screen`);
+      const opts = document.getElementById(`options-wrap`);
+      if (main) main.classList.remove(`hidden`);
+      if (opts) opts.classList.remove(`hidden`);
+      if (exited) exited.classList.remove(`visible`);
+    }
+
+    function toggleBooleanHabit(habitId) {
+      const dateISO = getLocalDateISO(activeDateOffset);
+      if (!appState.logs[dateISO]) appState.logs[dateISO] = {};
+      const curr = appState.logs[dateISO][habitId];
+      const nextCompleted = !(curr && curr.completed);
+      appState.logs[dateISO][habitId] = { completed: nextCompleted };
+      render();
+      persistState();
+    }
+
+    function stepQuantitativeHabit(habitId, delta) {
+      const habit = appState.habits.find(function (h) { return h.id === habitId; });
+      if (!habit) return;
+      const dateISO = getLocalDateISO(activeDateOffset);
+      if (!appState.logs[dateISO]) appState.logs[dateISO] = {};
+      const curr = getHabitLog(dateISO, habit);
+      const nextVal = Math.max(0, curr.value + delta);
+      appState.logs[dateISO][habitId] = {
+        value: nextVal,
+        completed: nextVal >= habit.target
+      };
+      render();
+      persistState();
+    }
+
+    function togglePrayerSub(habitId, prayerName) {
+      const habit = appState.habits.find(function (h) { return h.id === habitId; });
+      if (!habit) return;
+      const dateISO = getLocalDateISO(activeDateOffset);
+      if (!appState.logs[dateISO]) appState.logs[dateISO] = {};
+      const curr = getHabitLog(dateISO, habit);
+      const nextPrayers = Object.assign({}, curr.prayers);
+      nextPrayers[prayerName] = !nextPrayers[prayerName];
+      const count = PRAYER_NAMES.filter(function (p) { return nextPrayers[p]; }).length;
+      appState.logs[dateISO][habitId] = {
+        prayers: nextPrayers,
+        completed: count === 5
+      };
+      render();
+      persistState();
+    }
+
+    function requestDeleteHabit(habitId) {
+      pendingDeleteId = pendingDeleteId === habitId ? null : habitId;
+      renderDailyView();
+    }
+
+    function cancelDeleteHabit() {
+      pendingDeleteId = null;
+      renderDailyView();
+    }
+
+    function confirmDeleteHabit(habitId) {
+      appState.habits = appState.habits.filter(function (h) { return h.id !== habitId; });
+      pendingDeleteId = null;
+      render();
+      persistState();
+    }
+
+    function renderCategoryPills() {
+      const el = document.getElementById(`category-pills`);
+      if (!el) return;
+      const allActive = appState.activeCategoryFilter === `all`;
+      let html = `<button type="button" class="filter-pill" aria-pressed="${allActive ? `true` : `false`}" onclick="setCategoryFilter('all')">All</button>`;
+      html += appState.categories.map(function (c) {
+        const active = appState.activeCategoryFilter === c.id;
+        return `
+          <button type="button" class="filter-pill ${escapeHtml(c.colorClass)}" aria-pressed="${active ? `true` : `false`}" onclick="setCategoryFilter('${escapeHtml(c.id)}')">
+            <span class="cat-dot"></span>
+            <span>${escapeHtml(c.name)}</span>
+          </button>
+        `;
+      }).join(``);
+      el.innerHTML = html;
+    }
+
+    function renderDailyView() {
+      renderCategoryPills();
+
+      const dateISO = getLocalDateISO(activeDateOffset);
+      const dateLabelEl = document.getElementById(`active-date-label`);
+      const prevBtn = document.getElementById(`prev-day-btn`);
+      const nextBtn = document.getElementById(`next-day-btn`);
+      if (dateLabelEl) {
+        dateLabelEl.textContent = activeDateOffset === 0
+          ? `Today · ${formatShortDate(dateISO)}`
+          : (activeDateOffset === -1 ? `Yesterday · ${formatShortDate(dateISO)}` : formatShortDate(dateISO));
+      }
+      if (prevBtn) prevBtn.disabled = activeDateOffset <= -13;
+      if (nextBtn) nextBtn.disabled = activeDateOffset >= 0;
+
+      const listEl = document.getElementById(`habit-list`);
+      const hintEl = document.getElementById(`drag-hint`);
+      const summaryEl = document.getElementById(`daily-progress-summary`);
+      if (!listEl) return;
+
+      const filtered = appState.activeCategoryFilter === `all`
+        ? appState.habits
+        : appState.habits.filter(function (h) { return h.categoryId === appState.activeCategoryFilter; });
+
+      if (appState.habits.length === 0) {
+        if (hintEl) hintEl.classList.add(`hidden`);
+        listEl.innerHTML = `
+          <div class="empty-panel">
+            <h2 class="empty-title">Start your daily routine with <strong>RozKia</strong></h2>
+            <p class="empty-desc">Add a custom habit or choose from the built-in stock library in Options to begin tracking your daily consistency.</p>
+            <div class="empty-actions">
+              <button type="button" class="btn-primary" onclick="openHabitModal(null)">+ Add Habit</button>
+              <button type="button" class="btn-secondary" onclick="openStockModal()">Browse Stock Habits</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (filtered.length === 0) {
+        if (hintEl) hintEl.classList.add(`hidden`);
+        const cat = getCategoryById(appState.activeCategoryFilter);
+        listEl.innerHTML = `
+          <div class="empty-panel">
+            <h2 class="empty-title">No habits in <strong>${escapeHtml(cat.name)}</strong></h2>
+            <p class="empty-desc">Create a habit in this category or switch back to All to view your routine.</p>
+            <div class="empty-actions">
+              <button type="button" class="btn-primary" onclick="openHabitModal(null)">+ Add Habit</button>
+              <button type="button" class="btn-secondary" onclick="setCategoryFilter('all')">Show All Habits</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (hintEl) hintEl.classList.remove(`hidden`);
+      const completedCount = filtered.filter(function (h) {
+        return getHabitLog(dateISO, h).completed;
+      }).length;
+      if (summaryEl) {
+        summaryEl.textContent = `${completedCount} / ${filtered.length} done`;
+      }
+
+      listEl.innerHTML = filtered.map(function (habit) {
+        const cat = getCategoryById(habit.categoryId);
+        const log = getHabitLog(dateISO, habit);
+        let controlHtml = ``;
+
+        if (habit.type === `prayers`) {
+          const chips = PRAYER_NAMES.map(function (p) {
+            const on = log.prayers[p];
+            return `
+              <button type="button" class="prayer-chip" aria-pressed="${on ? `true` : `false`}" onclick="togglePrayerSub('${escapeHtml(habit.id)}', '${escapeHtml(p)}')">
+                <span class="check-box-circle" style="width:16px;height:16px;">
+                  ${on ? `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>` : ``}
+                </span>
+                <span>${escapeHtml(p)}</span>
+              </button>
+            `;
+          }).join(``);
+          controlHtml = `
+            <div class="prayers-wrap">
+              <span class="prayers-meta">${log.count} / 5 prayers offered</span>
+              <div class="prayers-grid">${chips}</div>
+            </div>
+          `;
+        } else if (habit.type === `quantitative`) {
+          const pct = Math.min(100, Math.round((log.value / log.target) * 100));
+          controlHtml = `
+            <div class="quant-control">
+              <div class="quant-row">
+                <button type="button" class="step-btn" aria-label="Decrease ${escapeHtml(habit.title)}" onclick="stepQuantitativeHabit('${escapeHtml(habit.id)}', -1)" ${log.value <= 0 ? `disabled` : ``}>−</button>
+                <span class="quant-readout">${log.value} / ${log.target} ${escapeHtml(habit.unit)}</span>
+                <button type="button" class="step-btn plus-btn" aria-label="Increase ${escapeHtml(habit.title)}" onclick="stepQuantitativeHabit('${escapeHtml(habit.id)}', 1)">+</button>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-fill" style="width: ${pct}%"></div>
+              </div>
+            </div>
+          `;
+        } else {
+          controlHtml = `
+            <button type="button" class="checkin-bool-btn" aria-pressed="${log.completed ? `true` : `false`}" onclick="toggleBooleanHabit('${escapeHtml(habit.id)}')">
+              <span class="check-box-circle">
+                ${log.completed ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>` : ``}
+              </span>
+              <span>${log.completed ? `Completed` : `Mark Done`}</span>
+            </button>
+          `;
+        }
+
+        const deleteConfirmHtml = pendingDeleteId === habit.id
+          ? `
+            <div class="inline-confirm">
+              <span>Delete "${escapeHtml(habit.title)}"?</span>
+              <div class="inline-confirm-btns">
+                <button type="button" class="btn-secondary btn-compact" onclick="cancelDeleteHabit()">Cancel</button>
+                <button type="button" class="btn-danger btn-compact" onclick="confirmDeleteHabit('${escapeHtml(habit.id)}')">Delete</button>
+              </div>
+            </div>
+          `
+          : ``;
+
+        return `
+          <article class="habit-card ${escapeHtml(cat.colorClass)} ${log.completed ? `is-complete` : ``}" data-habit-id="${escapeHtml(habit.id)}">
+            <div class="habit-main">
+              <div class="habit-head">
+                <h3 class="habit-title">${escapeHtml(habit.title)}</h3>
+                <span class="cat-badge"><span class="cat-dot"></span>${escapeHtml(cat.name)}</span>
+              </div>
+              ${controlHtml}
+            </div>
+            <div class="card-actions">
+              <button type="button" class="card-icon-btn" title="Edit habit" aria-label="Edit ${escapeHtml(habit.title)}" onclick="openHabitModal('${escapeHtml(habit.id)}')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+              </button>
+              <button type="button" class="card-icon-btn delete-btn" title="Delete habit" aria-label="Delete ${escapeHtml(habit.title)}" onclick="requestDeleteHabit('${escapeHtml(habit.id)}')">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+              </button>
+            </div>
+            ${deleteConfirmHtml}
+          </article>
+        `;
+      }).join(``);
+    }
+
+    function computeHabitStats(habit, windowDays) {
+      const todayISO = windowDays[windowDays.length - 1];
+      const windowStartISO = windowDays[0];
+
+      // Determine active span start: earliest logged day or createdAt, clamped within window
+      let earliestActive = habit.createdAt || todayISO;
+      if (earliestActive > todayISO) earliestActive = todayISO;
+      for (let i = 0; i < windowDays.length; i++) {
+        const d = windowDays[i];
+        const l = getHabitLog(d, habit);
+        if ((l.completed || isDayPartial(d, habit)) && d < earliestActive) {
+          earliestActive = d;
+        }
+      }
+      if (earliestActive < windowStartISO) earliestActive = windowStartISO;
+
+      const activeDaysSpan = windowDays.filter(function (d) { return d >= earliestActive; }).length || 1;
+
+      let loggedInSpan = 0;
+      for (let i = 0; i < windowDays.length; i++) {
+        const d = windowDays[i];
+        if (d >= earliestActive && getHabitLog(d, habit).completed) {
+          loggedInSpan++;
+        }
+      }
+
+      const consistencyPct = Math.round((loggedInSpan / activeDaysSpan) * 100);
+
+      // Compute all completed dates for active & max streak
+      const allDates = Object.keys(appState.logs).sort();
+      const completedSet = new Set();
+      for (let i = 0; i < allDates.length; i++) {
+        if (getHabitLog(allDates[i], habit).completed) {
+          completedSet.add(allDates[i]);
+        }
+      }
+
+      // Active streak backwards from Today (or Yesterday if today is still pending)
+      let activeStreak = 0;
+      let cursorOffset = completedSet.has(todayISO) ? 0 : -1;
+      for (let step = cursorOffset; step >= -365; step--) {
+        const iso = getLocalDateISO(step);
+        if (completedSet.has(iso)) {
+          activeStreak++;
+        } else {
+          break;
+        }
+      }
+
+      // Max streak across recorded history + window
+      let maxStreak = 0;
+      let running = 0;
+      const scanDays = [];
+      for (let i = -90; i <= 0; i++) {
+        scanDays.push(getLocalDateISO(i));
+      }
+      for (let i = 0; i < scanDays.length; i++) {
+        if (completedSet.has(scanDays[i])) {
+          running++;
+          if (running > maxStreak) maxStreak = running;
+        } else {
+          running = 0;
+        }
+      }
+
+      return {
+        consistencyPct: consistencyPct,
+        activeStreak: activeStreak,
+        maxStreak: maxStreak,
+        loggedCount: loggedInSpan,
+        totalActiveDays: activeDaysSpan
+      };
+    }
+
+    function formatHabitTargetLabel(habit) {
+      if (habit.type === `prayers`) return `5 Prayers`;
+      if (habit.type === `quantitative`) {
+        const u = habit.unit ? habit.unit.charAt(0).toUpperCase() + habit.unit.slice(1) : `Units`;
+        return `${habit.target} ${u}`;
+      }
+      return `Pass / Fail`;
+    }
+
+    function inspectHistoryDay(habitId, dateISO) {
+      selectedHistoryInspect[habitId] = selectedHistoryInspect[habitId] === dateISO ? null : dateISO;
+      renderAnalyticsView();
+    }
+
+    function renderAnalyticsView() {
+      const container = document.getElementById(`analytics-content`);
+      if (!container) return;
+
+      if (appState.habits.length === 0) {
+        container.innerHTML = `
+          <div class="empty-panel">
+            <h2 class="empty-title">No analytics data yet</h2>
+            <p class="empty-desc">Add habits in the Daily Habits tab to unlock your completion ring, active streaks, and Consistency Logs.</p>
+            <div class="empty-actions">
+              <button type="button" class="btn-primary" onclick="switchTab('daily')">Go to Daily Habits</button>
+              <button type="button" class="btn-secondary" onclick="openStockModal()">Add Stock Habit</button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const todayISO = getLocalDateISO(0);
+      const windowDays = getHistoryWindow();
+      const totalHabits = appState.habits.length;
+      let todayDone = 0;
+      let bestActiveStreak = 0;
+      let bestMaxStreak = 0;
+      let consistencySum = 0;
+      let totalCheckIns = 0;
+
+      const habitRows = appState.habits.map(function (habit) {
+        if (getHabitLog(todayISO, habit).completed) todayDone++;
+        const stats = computeHabitStats(habit, windowDays);
+        if (stats.activeStreak > bestActiveStreak) bestActiveStreak = stats.activeStreak;
+        if (stats.maxStreak > bestMaxStreak) bestMaxStreak = stats.maxStreak;
+        consistencySum += stats.consistencyPct;
+        totalCheckIns += stats.loggedCount;
+        return { habit: habit, stats: stats };
+      });
+
+      const todayPct = Math.round((todayDone / totalHabits) * 100);
+      const avgConsistency = Math.round(consistencySum / totalHabits);
+      const radius = 46;
+      const circumference = 2 * Math.PI * radius;
+      const dashOffset = circumference * (1 - todayPct / 100);
+
+      const startLabel = formatShortDate(windowDays[0]);
+
+      const consistencyCardsHtml = habitRows.map(function (row) {
+        const h = row.habit;
+        const s = row.stats;
+        const cat = getCategoryById(h.categoryId);
+        const targetLabel = formatHabitTargetLabel(h);
+        const inspectedISO = selectedHistoryInspect[h.id];
+
+        const squaresHtml = windowDays.map(function (d) {
+          const log = getHabitLog(d, h);
+          const partial = isDayPartial(d, h);
+          const dayNum = parseLocalDate(d).getDate();
+          const cls = log.completed ? `logged` : (partial ? `partial` : ``);
+          const statusDesc = log.completed
+            ? `Completed`
+            : (h.type === `prayers`
+              ? `${log.count}/5 prayers`
+              : (h.type === `quantitative` ? `${log.value}/${log.target} ${h.unit}` : `Not logged`));
+          return `
+            <button type="button" class="day-sq ${cls}" title="${escapeHtml(formatShortDate(d))}: ${escapeHtml(statusDesc)}" aria-label="${escapeHtml(h.title)} on ${escapeHtml(formatShortDate(d))}: ${escapeHtml(statusDesc)}" onclick="inspectHistoryDay('${escapeHtml(h.id)}', '${escapeHtml(d)}')">${dayNum}</button>
+          `;
+        }).join(``);
+
+        let inspectText = ``;
+        if (inspectedISO) {
+          const log = getHabitLog(inspectedISO, h);
+          const desc = log.completed
+            ? `Completed`
+            : (h.type === `prayers`
+              ? `${log.count}/5 prayers offered`
+              : (h.type === `quantitative` ? `${log.value}/${log.target} ${h.unit}` : `Not logged`));
+          inspectText = `${formatShortDate(inspectedISO)}: ${desc}`;
+        }
+
+        return `
+          <article class="consistency-card ${escapeHtml(cat.colorClass)}">
+            <div class="clog-top-line">
+              <h3 class="clog-title">${escapeHtml(h.title)}</h3>
+              <span class="clog-target">${escapeHtml(targetLabel)}</span>
+            </div>
+            <p class="clog-stats-line">
+              Consistency: <strong>${s.consistencyPct}%</strong> | Active: <strong>${s.activeStreak}d</strong> | Max: <strong>${s.maxStreak}d</strong>
+            </p>
+            <p class="clog-logged-line">
+              Logged: <strong>${s.loggedCount}/${s.totalActiveDays}d</strong>
+            </p>
+            <div class="history-row" role="group" aria-label="${escapeHtml(h.title)} daily history from ${escapeHtml(startLabel)} to Today">
+              ${squaresHtml}
+            </div>
+            <div class="history-axis">
+              <span>${escapeHtml(startLabel)}</span>
+              <span>Today</span>
+            </div>
+            <div class="day-detail-toast ${inspectText ? `visible` : ``}">${escapeHtml(inspectText)}</div>
+          </article>
+        `;
+      }).join(``);
+
+      container.innerHTML = `
+        <div class="analytics-hero">
+          <div class="ring-wrap">
+            <svg class="ring-svg" viewBox="0 0 112 112" aria-hidden="true">
+              <circle class="ring-bg" cx="56" cy="56" r="${radius}"></circle>
+              <circle class="ring-fg" cx="56" cy="56" r="${radius}" stroke-dasharray="${circumference.toFixed(2)}" stroke-dashoffset="${dashOffset.toFixed(2)}"></circle>
+            </svg>
+            <div class="ring-center">
+              <span class="ring-pct">${todayPct}%</span>
+              <span class="ring-sub">Today</span>
+            </div>
+          </div>
+          <div class="hero-stats-col">
+            <h2 class="hero-heading">Daily <strong>Completion</strong></h2>
+            <p class="hero-caption">${todayDone} of ${totalHabits} habits completed today</p>
+            <p style="margin: 0; font-size: var(--label-size); color: var(--on-surface-variant);">
+              Average consistency across tracked habits: ${avgConsistency}%
+            </p>
+          </div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-tile">
+            <span class="kpi-label">Active Streak</span>
+            <span class="kpi-val">${bestActiveStreak}d</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="kpi-label">Max Streak</span>
+            <span class="kpi-val">${bestMaxStreak}d</span>
+          </div>
+          <div class="kpi-tile">
+            <span class="kpi-label">14-Day Check-ins</span>
+            <span class="kpi-val">${totalCheckIns}</span>
+          </div>
+        </div>
+
+        <div class="section-head-row">
+          <h2 class="section-title">Consistency Logs</h2>
+          <span class="section-range">${escapeHtml(startLabel)} – Today</span>
+        </div>
+
+        <div class="consistency-list">
+          ${consistencyCardsHtml}
+        </div>
+      `;
+    }
+
+    function render() {
+      if (appState.activeTab === `analytics`) {
+        renderAnalyticsView();
+      } else {
+        renderDailyView();
+      }
+    }
+
+    /* Smooth Long-Press Drag & Drop Reordering */
+    function initLongPressDragAndDrop() {
+      const listEl = document.getElementById(`habit-list`);
+      if (!listEl) return;
+
+      let pressTimer = null;
+      let draggingCard = null;
+      let draggedId = null;
+      let startX = 0;
+      let startY = 0;
+      let currentY = 0;
+      let pointerId = null;
+
+      function clearPressTimer() {
+        if (pressTimer) {
+          clearTimeout(pressTimer);
+          pressTimer = null;
+        }
+      }
+
+      function finishDrag() {
+        clearPressTimer();
+        if (!draggingCard) return;
+        draggingCard.style.transform = ``;
+        draggingCard.classList.remove(`is-dragging`);
+        try {
+          if (pointerId !== null) draggingCard.releasePointerCapture(pointerId);
+        } catch (err) {}
+
+        // Read new visual order from DOM
+        const orderedVisibleIds = Array.from(listEl.querySelectorAll(`.habit-card`)).map(function (el) {
+          return el.getAttribute(`data-habit-id`);
+        });
+
+        if (orderedVisibleIds.length > 1) {
+          const visibleSet = new Set(orderedVisibleIds);
+          const visibleQueue = orderedVisibleIds.map(function (id) {
+            return appState.habits.find(function (h) { return h.id === id; });
+          }).filter(Boolean);
+
+          const nextHabits = [];
+          let vIdx = 0;
+          for (let i = 0; i < appState.habits.length; i++) {
+            if (visibleSet.has(appState.habits[i].id)) {
+              nextHabits.push(visibleQueue[vIdx++]);
+            } else {
+              nextHabits.push(appState.habits[i]);
+            }
+          }
+          appState.habits = nextHabits;
+          persistState();
+        }
+
+        draggingCard = null;
+        draggedId = null;
+        pointerId = null;
+        renderDailyView();
+      }
+
+      listEl.addEventListener(`pointerdown`, function (e) {
+        if (e.button !== 0 && e.pointerType === `mouse`) return;
+        if (e.target.closest(`button, input, select, a`)) return;
+        const card = e.target.closest(`.habit-card`);
+        if (!card) return;
+
+        startX = e.clientX;
+        startY = e.clientY;
+        currentY = e.clientY;
+        pointerId = e.pointerId;
+        const candidateId = card.getAttribute(`data-habit-id`);
+
+        clearPressTimer();
+        pressTimer = setTimeout(function () {
+          draggingCard = card;
+          draggedId = candidateId;
+          card.classList.add(`is-dragging`);
+          try {
+            card.setPointerCapture(pointerId);
+          } catch (err) {}
+          if (navigator.vibrate) {
+            try { navigator.vibrate(18); } catch (err) {}
+          }
+        }, 280);
+      });
+
+      listEl.addEventListener(`pointermove`, function (e) {
+        if (pressTimer && !draggingCard) {
+          if (Math.abs(e.clientX - startX) > 8 || Math.abs(e.clientY - startY) > 8) {
+            clearPressTimer();
+          }
+          return;
+        }
+        if (!draggingCard) return;
+        e.preventDefault();
+
+        const deltaY = e.clientY - currentY;
+        currentY = e.clientY;
+
+        const cardRect = draggingCard.getBoundingClientRect();
+        const cardMid = cardRect.top + cardRect.height / 2;
+        const cards = Array.from(listEl.querySelectorAll(`.habit-card`));
+
+        for (let i = 0; i < cards.length; i++) {
+          const sibling = cards[i];
+          if (sibling === draggingCard) continue;
+          const sibRect = sibling.getBoundingClientRect();
+          const sibMid = sibRect.top + sibRect.height / 2;
+
+          if (deltaY > 0 && cardMid > sibMid && sibling.compareDocumentPosition(draggingCard) & Node.DOCUMENT_POSITION_PRECEDING) {
+            listEl.insertBefore(draggingCard, sibling.nextSibling);
+            startY = e.clientY;
+            break;
+          } else if (deltaY < 0 && cardMid < sibMid && sibling.compareDocumentPosition(draggingCard) & Node.DOCUMENT_POSITION_FOLLOWING) {
+            listEl.insertBefore(draggingCard, sibling);
+            startY = e.clientY;
+            break;
+          }
+        }
+
+        const offset = Math.max(-28, Math.min(28, e.clientY - startY));
+        draggingCard.style.transform = `translateY(${offset}px) scale(1.018)`;
+      }, { passive: false });
+
+      listEl.addEventListener(`pointerup`, finishDrag);
+      listEl.addEventListener(`pointercancel`, finishDrag);
+    }
+
+    document.addEventListener(`click`, function (e) {
+      const wrap = document.getElementById(`options-wrap`);
+      if (wrap && !wrap.contains(e.target)) {
+        closeOptionsMenu();
+      }
+    });
+
+    document.addEventListener(`keydown`, function (e) {
+      if (e.key === `Escape`) {
+        closeOptionsMenu();
+        [`habit-modal`, `stock-modal`, `category-modal`, `theme-modal`, `exit-modal`].forEach(closeModal);
+      }
+    });
+
+    async function initApp() {
+      setupEmbeddedPwa();
+      await loadPersistedState();
+      applyTheme(appState.theme);
+      switchTab(appState.activeTab);
+      initLongPressDragAndDrop();
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
