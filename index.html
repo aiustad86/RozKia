@@ -1,0 +1,2818 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="vitals">
+  <meta name="theme-color" content="#0f7c8a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="RozKia">
+  <title>RozKia</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230f7c8a'/%3E%3Cpath d='M18 33l9 9 19-20' fill='none' stroke='%23ffffff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22RozKia%20Habit%20Tracker%22%2C%22short_name%22%3A%22RozKia%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%230f7c8a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520192%2520192%27%253E%253Crect%2520width%3D%27192%27%2520height%3D%27192%27%2520rx%3D%2742%27%2520fill%3D%27%25230f7c8a%27%2F%253E%253Cpath%2520d%3D%27M54%252099l27%252027%252057-60%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2718%27%2520stroke-linecap%3D%27round%27%2520stroke-linejoin%3D%27round%27%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%2520viewBox%3D%270%25200%2520512%2520512%27%253E%253Crect%2520width%3D%27512%27%2520height%3D%27512%27%2520rx%3D%27112%27%2520fill%3D%27%25230f7c8a%27%2F%253E%253Cpath%2520d%3D%27M144%2520264l72%252072%2520152-160%27%2520fill%3D%27none%27%2520stroke%3D%27%2523ffffff%27%2520stroke-width%3D%2748%27%2520stroke-linecap%3D%27round%27%2520stroke-linejoin%3D%27round%27%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:wght@300..900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces (Vitals) */
+      --background: #ffffff;
+      --surface-container-low: #f1f7f8;
+      --surface-container: #e3f1f3;
+      --surface-container-high: #d5e9ec;
+
+      /* Text */
+      --on-surface: #1b2b33;
+      --on-surface-variant: #46585f;
+
+      /* Rules */
+      --outline: #7b9198;
+      --outline-variant: #d5e3e5;
+
+      /* Accents */
+      --primary: #0f7c8a;
+      --on-primary: #ffffff;
+      --primary-container: #e3f1f3;
+      --on-primary-container: #0a5560;
+      --secondary: #1d5e3a;
+      --tertiary: #2e7d4f;
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Semantic */
+      --positive: #2e7d4f;
+      --warning: #b86e00;
+      --focus: #0f7c8a;
+
+      /* Category Color Tokens (Android High-Contrast HEX) */
+      --cat-health: #10b981;
+      --cat-learning: #3b82f6;
+      --cat-religion: #0d9488;
+      --cat-family: #f59e0b;
+      --cat-work: #6366f1;
+
+      /* Data series */
+      --data-1: #0f7c8a;
+      --data-2: #2e7d4f;
+      --data-3: #b86e00;
+      --data-4: #5c5fb0;
+      --data-context: #b8c7ca;
+
+      /* Fonts */
+      --font-headline: 'Figtree', sans-serif;
+      --font-body: 'Atkinson Hyperlegible', sans-serif;
+      --font-label: 'Figtree', sans-serif;
+
+      /* Type Scale (Focused Tool) */
+      --display-size: clamp(1.65rem, 1.35rem + 1vw, 2.1rem);
+      --headline-size: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+      --subhead-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Shape */
+      --rounded: 0.625rem;
+      --rounded-lg: 0.875rem;
+      --rounded-full: 9999px;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+
+      /* Style effects */
+      --top-bar: 6px solid var(--primary);
+      --status-bar-width: 4px;
+      --card-border: 1px solid var(--outline-variant);
+      --card-lift: 0 1px 2px rgb(27 43 51 / 0.06), 0 8px 20px rgb(27 43 51 / 0.08);
+      --nav-bg: #ffffff;
+      --backdrop: rgb(15 26 31 / 0.45);
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #0f1a1f;
+      --surface-container-low: #15242a;
+      --surface-container: #1c2e35;
+      --surface-container-high: #243a42;
+      --on-surface: #e6eff1;
+      --on-surface-variant: #a9bcc2;
+      --outline: #58727b;
+      --outline-variant: #2c4048;
+      --primary: #4fb8c6;
+      --on-primary: #0f1a1f;
+      --primary-container: #1b363e;
+      --on-primary-container: #bfe6eb;
+      --secondary: #9fdcb7;
+      --tertiary: #5cbf85;
+      --error: #f2867c;
+      --on-error: #0f1a1f;
+      --positive: #5cbf85;
+      --warning: #eab308;
+      --focus: #4fb8c6;
+      --data-1: #4fb8c6;
+      --data-2: #5cbf85;
+      --data-context: #3d555e;
+      --card-lift: 0 2px 10px rgb(0 0 0 / 0.35);
+      --nav-bg: #15242a;
+      --backdrop: rgb(0 0 0 / 0.65);
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    header { position: static !important; }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2.5px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* App Shell */
+    .app-shell {
+      max-width: 720px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background-color: var(--surface-container-low);
+      border-top: var(--top-bar);
+      padding: var(--space-md) var(--space-md) calc(5.5rem + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .app-shell * { min-width: 0; }
+
+    /* Header (Titled "RozKia" with zero subtext) */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding-bottom: var(--space-xs);
+      position: static !important;
+    }
+
+    .app-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--display-size);
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      color: var(--on-surface);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      position: relative;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color var(--dur-micro) var(--ease-out), transform var(--dur-micro) var(--ease-out);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(0.94);
+    }
+
+    .btn-outline {
+      background-color: var(--background);
+      color: var(--on-surface);
+      border-color: var(--outline);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--surface-container);
+    }
+
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--on-surface-variant);
+      border-color: transparent;
+    }
+
+    .btn-ghost:hover {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .btn-danger {
+      background-color: var(--error);
+      color: var(--on-error);
+    }
+
+    /* Options Dropdown Menu */
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + var(--space-xs));
+      right: 0;
+      min-width: 225px;
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--card-lift);
+      padding: var(--space-xs);
+      z-index: 60;
+      display: none;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dropdown-menu.open {
+      display: flex;
+      animation: fadeSlideDown var(--dur-short) var(--ease-out);
+    }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      width: 100%;
+      min-height: 44px;
+      padding: var(--space-sm) var(--space-md);
+      background: transparent;
+      border: 0;
+      border-radius: var(--rounded);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .dropdown-item:hover {
+      background-color: var(--surface-container);
+    }
+
+    .dropdown-item.danger {
+      color: var(--error);
+    }
+
+    .dropdown-divider {
+      height: 1px;
+      background-color: var(--outline-variant);
+      margin: var(--space-xs) 0;
+    }
+
+    /* Date Context Bar */
+    .date-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    .date-nav-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 0;
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      background-color: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+
+    .icon-btn:hover:not(:disabled) {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .icon-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .date-label {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+      padding: 0 var(--space-xs);
+    }
+
+    .date-right-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .progress-chip {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      font-variant-numeric: tabular-nums;
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded-full);
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      white-space: nowrap;
+    }
+
+    .today-jump-btn {
+      min-height: 36px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded-full);
+      border: 1px solid var(--primary);
+      background-color: transparent;
+      color: var(--primary);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      cursor: pointer;
+    }
+
+    /* Category Filter Pills */
+    .filter-scroll {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      overflow-x: auto;
+      padding-bottom: var(--space-xs);
+      scrollbar-width: none;
+    }
+
+    .filter-scroll::-webkit-scrollbar { display: none; }
+
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded-full);
+      border: 1.5px solid var(--outline-variant);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+      forced-color-adjust: none;
+    }
+
+    .cat-pill:active { transform: scale(0.97); }
+
+    .cat-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: var(--rounded-full);
+      display: inline-block;
+      flex-shrink: 0;
+      forced-color-adjust: none;
+    }
+
+    /* Habits List & Cards */
+    .habits-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .habit-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: var(--space-sm);
+      align-items: start;
+      transition: transform var(--dur-short) var(--ease-out), box-shadow var(--dur-short) var(--ease-out), opacity var(--dur-micro) var(--ease-out);
+      user-select: none;
+      -webkit-user-select: none;
+      forced-color-adjust: none;
+    }
+
+    .habit-card.dragging {
+      opacity: 0.92;
+      transform: scale(1.02);
+      box-shadow: var(--card-lift);
+      outline: 2px solid var(--primary);
+      z-index: 30;
+      position: relative;
+      touch-action: none;
+    }
+
+    .habit-card.drag-over {
+      outline: 2px dashed var(--primary);
+      background-color: var(--surface-container-low);
+    }
+
+    .drag-handle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      min-height: 44px;
+      color: var(--outline);
+      cursor: grab;
+      touch-action: none;
+      border-radius: var(--rounded);
+      margin-left: -4px;
+    }
+
+    .drag-handle:active { cursor: grabbing; color: var(--primary); }
+
+    .habit-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      min-width: 0;
+    }
+
+    .habit-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 10px;
+      border-radius: var(--rounded-full);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.75rem;
+      line-height: 1.4;
+      forced-color-adjust: none;
+    }
+
+    .streak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 8px;
+      border-radius: var(--rounded-full);
+      background-color: var(--surface-container);
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.75rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .habit-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.0625rem;
+      line-height: 1.25;
+      color: var(--on-surface);
+      word-break: break-word;
+    }
+
+    .habit-title.is-done {
+      color: var(--on-surface-variant);
+    }
+
+    /* Habit Action Column: Edit pencil stacked above Delete trash */
+    .habit-actions-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .action-stack-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded);
+      border: 1px solid transparent;
+      background-color: transparent;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+
+    .action-stack-btn:hover {
+      background-color: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .action-stack-btn.delete-btn:hover {
+      background-color: color-mix(in srgb, var(--error) 12%, var(--background));
+      color: var(--error);
+    }
+
+    /* Inline delete confirm bar inside card */
+    .delete-confirm-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-xs) var(--space-sm);
+      border-radius: var(--rounded);
+      background-color: color-mix(in srgb, var(--error) 10%, var(--background));
+      border: 1px solid color-mix(in srgb, var(--error) 35%, transparent);
+      margin-top: var(--space-xs);
+    }
+
+    .delete-confirm-text {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--error);
+    }
+
+    .delete-confirm-actions {
+      display: flex;
+      gap: var(--space-xs);
+    }
+
+    .mini-btn {
+      min-height: 36px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      border: 1px solid var(--outline-variant);
+      background-color: var(--background);
+      color: var(--on-surface);
+    }
+
+    .mini-btn.confirm-del {
+      background-color: var(--error);
+      border-color: var(--error);
+      color: var(--on-error);
+    }
+
+    /* Boolean Habit Toggle */
+    .bool-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .check-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded);
+      border: 1.5px solid var(--outline);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+      forced-color-adjust: none;
+    }
+
+    .check-pill-btn:active { transform: scale(0.97); }
+
+    .check-box-square {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 2px solid currentColor;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* 5-Prayer Checklist */
+    .prayer-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .prayer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .prayer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .prayer-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      min-height: 44px;
+      padding: 0 11px;
+      border-radius: var(--rounded);
+      border: 1.5px solid var(--outline-variant);
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: transform var(--dur-micro) var(--ease-out);
+      forced-color-adjust: none;
+    }
+
+    .prayer-chip:active { transform: scale(0.96); }
+
+    /* Quantitative Stepper */
+    .quant-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .quant-bar-track {
+      width: 100%;
+      height: 8px;
+      border-radius: var(--rounded-full);
+      background-color: var(--surface-container);
+      overflow: hidden;
+    }
+
+    .quant-bar-fill {
+      height: 100%;
+      border-radius: var(--rounded-full);
+      transition: width var(--dur-short) var(--ease-out);
+      forced-color-adjust: none;
+    }
+
+    .quant-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .stepper-group {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .step-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: var(--rounded);
+      border: 1.5px solid var(--outline);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+    }
+
+    .step-btn:hover { background-color: var(--surface-container); }
+    .step-btn:active { transform: scale(0.95); }
+
+    .quant-value {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      padding: 0 var(--space-xs);
+    }
+
+    /* Analytics Page */
+    .view-panel {
+      display: none;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .view-panel.active {
+      display: flex;
+    }
+
+    /* 4 Clean, Perfectly Aligned Metric Summary Cards */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-sm);
+    }
+
+    @media (min-width: 560px) {
+      .metrics-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .metric-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-left: var(--status-bar-width) solid var(--primary);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      min-height: 112px;
+    }
+
+    .metric-card[data-status="ok"] {
+      border-left-color: var(--tertiary);
+    }
+
+    .metric-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--on-surface-variant);
+      line-height: 1.25;
+    }
+
+    .metric-value {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: clamp(1.5rem, 1.2rem + 1vw, 1.85rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+    }
+
+    .metric-caption {
+      font-size: 0.78rem;
+      color: var(--on-surface-variant);
+      line-height: 1.25;
+    }
+
+    /* Consistency Logs Section */
+    .section-header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    .section-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: var(--headline-size);
+      letter-spacing: -0.015em;
+      color: var(--on-surface);
+    }
+
+    .section-meta {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+
+    .consistency-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .consistency-card {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      forced-color-adjust: none;
+    }
+
+    .consistency-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .consistency-title-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .consistency-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--on-surface);
+      line-height: 1.25;
+    }
+
+    .consistency-stats {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .consistency-pct {
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.05rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface);
+      line-height: 1.15;
+    }
+
+    .consistency-days {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.75rem;
+      font-variant-numeric: tabular-nums;
+      color: var(--on-surface-variant);
+    }
+
+    /* Horizontal Date Progress Squares leading up to Today */
+    .squares-grid {
+      display: grid;
+      grid-template-columns: repeat(14, minmax(0, 1fr));
+      gap: 4px;
+      align-items: center;
+    }
+
+    .day-square {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid var(--outline-variant);
+      background-color: var(--surface-container-low);
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      transition: transform var(--dur-micro) var(--ease-out);
+      forced-color-adjust: none;
+    }
+
+    .day-square:hover {
+      transform: scale(1.12);
+      z-index: 2;
+    }
+
+    .day-square.is-today {
+      outline: 2px solid var(--on-surface);
+      outline-offset: 1px;
+    }
+
+    .squares-axis {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+    }
+
+    .squares-axis-today {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .square-detail-note {
+      font-size: 0.78rem;
+      color: var(--on-surface-variant);
+      min-height: 1.1em;
+    }
+
+    /* Fixed Bottom Navigation Bar */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 40;
+      background-color: var(--nav-bg);
+      border-top: 1px solid var(--outline-variant);
+      box-shadow: 0 -2px 12px rgb(0 0 0 / 0.06);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    .bottom-nav-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bottom-nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      min-height: 58px;
+      padding: 6px var(--space-sm);
+      background: transparent;
+      border: 0;
+      border-top: 3px solid transparent;
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.8125rem;
+      cursor: pointer;
+      transition: color var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .bottom-nav-btn.active {
+      color: var(--primary);
+      border-top-color: var(--primary);
+      background-color: color-mix(in srgb, var(--primary) 6%, transparent);
+    }
+
+    /* Empty State */
+    .empty-state {
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .empty-state.visible { display: flex; }
+
+    .empty-state-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--on-surface);
+    }
+
+    .empty-state-desc {
+      margin: 0;
+      color: var(--on-surface-variant);
+      max-width: 40ch;
+      font-size: 0.9375rem;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: var(--backdrop);
+      z-index: 80;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+      animation: fadeIn var(--dur-micro) var(--ease-out);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 460px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background-color: var(--background);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      box-shadow: var(--card-lift);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .modal-title {
+      margin: 0;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--on-surface);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-sm);
+    }
+
+    .form-label {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--on-surface);
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 var(--space-md);
+      border-radius: var(--rounded);
+      border: 1.5px solid var(--outline);
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-size: 0.95rem;
+    }
+
+    .form-select {
+      padding-right: var(--space-xl);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 20%, transparent);
+    }
+
+    .form-error {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--error);
+      min-height: 1.2em;
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-sm);
+      margin-top: var(--space-xs);
+    }
+
+    /* Color Swatches */
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .swatch-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--rounded-full);
+      border: 2px solid transparent;
+      cursor: pointer;
+      forced-color-adjust: none;
+    }
+
+    .swatch-btn.selected {
+      outline: 2.5px solid var(--on-surface);
+      outline-offset: 2px;
+    }
+
+    /* Stock Habit Item inside Stock Modal */
+    .stock-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .stock-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded);
+      border: var(--card-border);
+      background-color: var(--surface-container-low);
+      forced-color-adjust: none;
+    }
+
+    .stock-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .stock-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--on-surface);
+    }
+
+    .stock-desc {
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Custom categories manager list */
+    .custom-cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      padding: 6px 10px;
+      border-radius: var(--rounded);
+      border: var(--card-border);
+      background-color: var(--surface-container-low);
+    }
+
+    /* Toast Banner */
+    .toast-banner {
+      position: fixed;
+      bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background-color: var(--on-surface);
+      color: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--rounded-full);
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: 0.85rem;
+      box-shadow: var(--card-lift);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+      z-index: 90;
+      max-width: calc(100vw - 2rem);
+      text-align: center;
+    }
+
+    .toast-banner.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      .app-shell {
+        padding: var(--space-sm) var(--space-sm) calc(5.25rem + env(safe-area-inset-bottom, 0px));
+      }
+      .habit-card {
+        padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app-shell" class="app-shell">
+    <!-- Header: Titled "RozKia" with zero subtext -->
+    <header class="app-header">
+      <h1 class="app-title">RozKia</h1>
+      <div class="header-actions">
+        <button type="button" class="btn btn-primary" onclick="openHabitModal()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          <span>New Habit</span>
+        </button>
+        <button type="button" id="options-btn" class="btn btn-outline" aria-haspopup="true" aria-expanded="false" onclick="toggleOptionsMenu(event)">
+          <span>Options</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+
+        <div id="options-menu" class="dropdown-menu" role="menu">
+          <button type="button" class="dropdown-item" role="menuitem" onclick="openStockModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M12 22V12"/><path d="m3.3 7 8.7 5 8.7-5"/></svg>
+            <span>Add Stock Habit</span>
+          </button>
+          <button type="button" class="dropdown-item" role="menuitem" onclick="openCategoryModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><path d="M7 7h.01"/></svg>
+            <span>Add Habit Category</span>
+          </button>
+          <button type="button" class="dropdown-item" role="menuitem" onclick="toggleTheme()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <span id="theme-menu-label">Change Theme (Dark)</span>
+          </button>
+          <button type="button" id="install-pwa-btn" class="dropdown-item" role="menuitem" style="display:none;" onclick="triggerPwaInstall()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Install RozKia App</span>
+          </button>
+          <div class="dropdown-divider"></div>
+          <button type="button" class="dropdown-item danger" role="menuitem" onclick="openExitModal()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span>Exit</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN VIEW 1: DAILY HABITS -->
+    <main id="view-habits" class="view-panel active">
+      <!-- Date Context Switcher -->
+      <div class="date-strip">
+        <div class="date-nav-group">
+          <button type="button" id="date-prev-btn" class="icon-btn" aria-label="Previous day" onclick="shiftActiveDate(-1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <span id="date-label" class="date-label">Today</span>
+          <button type="button" id="date-next-btn" class="icon-btn" aria-label="Next day" onclick="shiftActiveDate(1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+        </div>
+        <div class="date-right-group">
+          <button type="button" id="date-today-btn" class="today-jump-btn" style="display:none;" onclick="jumpToToday()">Today</button>
+          <span id="daily-progress-pill" class="progress-chip">0 / 0 done</span>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div id="category-filters" class="filter-scroll" role="tablist" aria-label="Filter habits by category"></div>
+
+      <!-- Habit Cards List -->
+      <div id="habits-list" class="habits-list"></div>
+
+      <!-- Empty State -->
+      <div id="habits-empty-state" class="empty-state">
+        <p class="empty-state-title">No habits in this view</p>
+        <p class="empty-state-desc">Add a custom habit or choose a ready-to-track stock habit to begin building your daily routine.</p>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="btn btn-primary" onclick="openHabitModal()">Add Custom Habit</button>
+          <button type="button" class="btn btn-outline" onclick="openStockModal()">Add Stock Habit</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- MAIN VIEW 2: ANALYTICS -->
+    <section id="view-analytics" class="view-panel" aria-label="Analytics and Consistency Logs">
+      <!-- Top Section: 4 Clean, Aligned Metric Summary Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card" data-status="ok">
+          <span class="metric-label">Daily Completion</span>
+          <span id="metric-daily-val" class="metric-value">0%</span>
+          <span id="metric-daily-sub" class="metric-caption">0 of 0 today</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Active Streak</span>
+          <span id="metric-streak-val" class="metric-value">0 days</span>
+          <span id="metric-streak-sub" class="metric-caption">Current run</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Max Streak</span>
+          <span id="metric-max-val" class="metric-value">0 days</span>
+          <span id="metric-max-sub" class="metric-caption">Best record</span>
+        </div>
+        <div class="metric-card" data-status="ok">
+          <span class="metric-label">14-Day Check-ins</span>
+          <span id="metric-checkins-val" class="metric-value">0</span>
+          <span id="metric-checkins-sub" class="metric-caption">Logged completions</span>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Consistency Logs -->
+      <div class="section-header-row">
+        <h2 class="section-title">Consistency Logs</h2>
+        <span id="consistency-range-label" class="section-meta">Last 14 Days</span>
+      </div>
+
+      <div id="analytics-category-filters" class="filter-scroll" role="tablist" aria-label="Filter consistency logs by category"></div>
+
+      <div id="consistency-list" class="consistency-list"></div>
+    </section>
+  </div>
+
+  <!-- Fixed Bottom Navigation Bar (Daily Habits vs Analytics) -->
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <div class="bottom-nav-inner">
+      <button type="button" id="nav-habits" class="bottom-nav-btn active" onclick="switchView('habits')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span>Daily Habits</span>
+      </button>
+      <button type="button" id="nav-analytics" class="bottom-nav-btn" onclick="switchView('analytics')">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7" rx="1"/><rect x="12" y="6" width="3" height="11" rx="1"/><rect x="17" y="13" width="3" height="4" rx="1"/></svg>
+        <span>Analytics</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MODAL 1: Add / Edit Custom Habit -->
+  <div id="habit-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="habit-modal-title" onclick="closeModalOnBackdrop(event, 'habit-modal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="habit-modal-title" class="modal-title">New Habit</h2>
+        <button type="button" class="icon-btn" aria-label="Close modal" onclick="closeModal('habit-modal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <input type="hidden" id="habit-edit-id" value="">
+
+      <div class="form-group">
+        <label class="form-label" for="habit-name-input">Habit Name</label>
+        <input type="text" id="habit-name-input" class="form-input" placeholder="e.g., Read 20 pages" maxlength="80">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="habit-cat-select">Category</label>
+        <select id="habit-cat-select" class="form-select"></select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="habit-type-select">Habit Type</label>
+        <select id="habit-type-select" class="form-select" onchange="toggleQuantFields()">
+          <option value="boolean">Checkbox (Done / Not Done)</option>
+          <option value="quantitative">Quantitative (Numeric Target &amp; Unit)</option>
+          <option value="checklist">5-Prayer Checklist (Fajr, Zuhr, Asr, Maghrib, Isha)</option>
+        </select>
+      </div>
+
+      <div id="quant-fields" class="form-row-2" style="display:none;">
+        <div class="form-group">
+          <label class="form-label" for="habit-target-input">Daily Target</label>
+          <input type="number" id="habit-target-input" class="form-input" min="1" max="100000" value="10">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="habit-unit-input">Unit</label>
+          <input type="text" id="habit-unit-input" class="form-input" value="glasses" placeholder="e.g., glasses, mins">
+        </div>
+      </div>
+
+      <div id="habit-form-error" class="form-error" aria-live="polite"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeModal('habit-modal')">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="saveHabitFromModal()">Save Habit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: Add Stock Habit -->
+  <div id="stock-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="stock-modal-title" onclick="closeModalOnBackdrop(event, 'stock-modal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="stock-modal-title" class="modal-title">Add Stock Habit</h2>
+        <button type="button" class="icon-btn" aria-label="Close modal" onclick="closeModal('stock-modal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="stock-habits-list" class="stock-list"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('stock-modal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: Add Habit Category -->
+  <div id="category-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="category-modal-title" onclick="closeModalOnBackdrop(event, 'category-modal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="category-modal-title" class="modal-title">Add Habit Category</h2>
+        <button type="button" class="icon-btn" aria-label="Close modal" onclick="closeModal('category-modal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="cat-name-input">Category Name</label>
+        <input type="text" id="cat-name-input" class="form-input" placeholder="e.g., Mindfulness, Fitness" maxlength="28">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="cat-color-input">Category Color</label>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <input type="color" id="cat-color-input" value="#ec4899" style="width:52px; height:44px; padding:2px; border-radius:8px; border:1.5px solid var(--outline); background:var(--background); cursor:pointer;">
+          <div id="cat-swatches" class="swatch-row"></div>
+        </div>
+      </div>
+
+      <div id="cat-form-error" class="form-error" aria-live="polite"></div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" onclick="closeModal('category-modal')">Cancel</button>
+        <button type="button" class="btn btn-primary" onclick="saveCategoryFromModal()">Add Category</button>
+      </div>
+
+      <div id="custom-cats-list" style="display:flex; flex-direction:column; gap:6px; margin-top:4px;"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 4: Exit / Session Summary -->
+  <div id="exit-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exit-modal-title" onclick="closeModalOnBackdrop(event, 'exit-modal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="exit-modal-title" class="modal-title">Session Saved</h2>
+        <button type="button" class="icon-btn" aria-label="Close modal" onclick="closeModal('exit-modal')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <p id="exit-summary-text" style="margin:0; color:var(--on-surface-variant);">Your habits and daily logs are stored safely. You may close the app or export a backup below.</p>
+      <div class="modal-footer" style="justify-content:space-between; flex-wrap:wrap;">
+        <button type="button" class="btn btn-outline" onclick="exportBackupJson()">Export Backup</button>
+        <button type="button" class="btn btn-primary" onclick="closeModal('exit-modal')">Resume RozKia</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-banner" class="toast-banner" role="status" aria-live="polite"></div>
+
+  <api-shim></api-shim>
+
+  <script>
+    const PRAYERS = [`Fajr`, `Zuhr`, `Asr`, `Maghrib`, `Isha`];
+
+    const DEFAULT_CATEGORIES = [
+      { id: `Health`, name: `Health`, color: `#10b981`, custom: false },
+      { id: `Learning`, name: `Learning`, color: `#3b82f6`, custom: false },
+      { id: `Religion`, name: `Religion`, color: `#0d9488`, custom: false },
+      { id: `Family`, name: `Family`, color: `#f59e0b`, custom: false },
+      { id: `Work`, name: `Work`, color: `#6366f1`, custom: false }
+    ];
+
+    const STOCK_HABITS = [
+      {
+        stockKey: `jamaat_prayer`,
+        title: `Offer prayer with Jamaat`,
+        category: `Religion`,
+        type: `checklist`,
+        items: [`Fajr`, `Zuhr`, `Asr`, `Maghrib`, `Isha`],
+        target: 5,
+        unit: `prayers`,
+        description: `5 daily prayers checklist (Fajr, Zuhr, Asr, Maghrib, Isha)`
+      },
+      {
+        stockKey: `recite_quran`,
+        title: `Recite Quran`,
+        category: `Religion`,
+        type: `boolean`,
+        target: 1,
+        unit: `session`,
+        description: `Daily recitation check-in`
+      },
+      {
+        stockKey: `drink_water`,
+        title: `Drink Water Daily`,
+        category: `Health`,
+        type: `quantitative`,
+        target: 10,
+        unit: `glasses`,
+        description: `Target: 10 glasses per day`
+      },
+      {
+        stockKey: `family_time`,
+        title: `Give time to family`,
+        category: `Family`,
+        type: `boolean`,
+        target: 1,
+        unit: `session`,
+        description: `Daily quality time check-in`
+      }
+    ];
+
+    const SWATCH_COLORS = [
+      `#10b981`, `#3b82f6`, `#0d9488`, `#f59e0b`, `#6366f1`,
+      `#ec4899`, `#e11d48`, `#8b5cf6`, `#0ea5e9`, `#84cc16`
+    ];
+
+    let appState = {
+      theme: `light`,
+      categories: DEFAULT_CATEGORIES.map(c => ({ ...c })),
+      habits: [],
+      logs: {}
+    };
+
+    let currentView = `habits`;
+    let selectedCategory = `All`;
+    let activeDateStr = getTodayIso();
+    let armedDeleteId = null;
+    let deferredInstallPrompt = null;
+    let toastTimer = null;
+
+    // Drag & Drop state
+    let dragState = {
+      active: false,
+      habitId: null,
+      pointerId: null,
+      longPressTimer: null,
+      startX: 0,
+      startY: 0,
+      sourceEl: null
+    };
+
+    function getTodayIso() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, `0`);
+      const d = String(now.getDate()).padStart(2, `0`);
+      return `${y}-${m}-${d}`;
+    }
+
+    function addDaysIso(isoStr, delta) {
+      const parts = isoStr.split(`-`).map(Number);
+      const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+      dt.setDate(dt.getDate() + delta);
+      const y = dt.getFullYear();
+      const m = String(dt.getMonth() + 1).padStart(2, `0`);
+      const d = String(dt.getDate()).padStart(2, `0`);
+      return `${y}-${m}-${d}`;
+    }
+
+    function formatShortDate(isoStr) {
+      const parts = isoStr.split(`-`).map(Number);
+      const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+      return dt.toLocaleDateString(`en-US`, { month: `short`, day: `numeric` });
+    }
+
+    function formatHeaderDate(isoStr) {
+      const today = getTodayIso();
+      if (isoStr === today) {
+        const parts = isoStr.split(`-`).map(Number);
+        const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+        return `Today · ${dt.toLocaleDateString(`en-US`, { weekday: `short`, month: `short`, day: `numeric` })}`;
+      }
+      if (isoStr === addDaysIso(today, -1)) {
+        return `Yesterday · ${formatShortDate(isoStr)}`;
+      }
+      const parts = isoStr.split(`-`).map(Number);
+      const dt = new Date(parts[0], parts[1] - 1, parts[2]);
+      return dt.toLocaleDateString(`en-US`, { weekday: `short`, month: `short`, day: `numeric` });
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function getContrastText(hex) {
+      const clean = String(hex || `#0f7c8a`).replace(`#`, ``);
+      if (clean.length !== 6) return `#ffffff`;
+      const r = parseInt(clean.slice(0, 2), 16) / 255;
+      const g = parseInt(clean.slice(2, 4), 16) / 255;
+      const b = parseInt(clean.slice(4, 6), 16) / 255;
+      const toLin = c => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+      const lum = 0.2126 * toLin(r) + 0.7152 * toLin(g) + 0.0722 * toLin(b);
+      return lum > 0.22 ? `#0f172a` : `#ffffff`;
+    }
+
+    function getCategoryMeta(catId) {
+      const found = appState.categories.find(c => c.id === catId || c.name === catId);
+      if (found) return found;
+      return { id: catId || `Health`, name: catId || `Health`, color: `#10b981`, custom: false };
+    }
+
+    function buildDefaultHabits() {
+      const today = getTodayIso();
+      return STOCK_HABITS.map((s, idx) => ({
+        id: `habit_stock_${s.stockKey}`,
+        stockKey: s.stockKey,
+        title: s.title,
+        category: s.category,
+        type: s.type,
+        items: s.items ? [...s.items] : undefined,
+        target: s.target,
+        unit: s.unit,
+        createdAt: today,
+        order: idx
+      }));
+    }
+
+    async function persistState() {
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === `function`) {
+          await window.notebookAppApi.setAppState(appState);
+        } else if (`caches` in window) {
+          const cache = await caches.open(`rozkia-pwa-state-v1`);
+          await cache.put(`/rozkia-state.json`, new Response(JSON.stringify(appState), {
+            headers: { 'Content-Type': `application/json` }
+          }));
+        }
+      } catch (err) {
+        // Non-fatal persistence safeguard
+      }
+    }
+
+    async function loadPersistedState() {
+      let loaded = null;
+      try {
+        if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === `function`) {
+          loaded = await window.notebookAppApi.getAppState();
+        } else if (`caches` in window) {
+          const cache = await caches.open(`rozkia-pwa-state-v1`);
+          const res = await cache.match(`/rozkia-state.json`);
+          if (res) loaded = await res.json();
+        }
+      } catch (err) {
+        loaded = null;
+      }
+
+      if (loaded && typeof loaded === `object`) {
+        appState.theme = loaded.theme === `dark` ? `dark` : `light`;
+        appState.categories = Array.isArray(loaded.categories) && loaded.categories.length
+          ? loaded.categories
+          : DEFAULT_CATEGORIES.map(c => ({ ...c }));
+        appState.habits = Array.isArray(loaded.habits) ? loaded.habits : buildDefaultHabits();
+        appState.logs = loaded.logs && typeof loaded.logs === `object` ? loaded.logs : {};
+      } else {
+        appState.habits = buildDefaultHabits();
+      }
+    }
+
+    function applyTheme() {
+      const htmlEl = document.documentElement;
+      htmlEl.setAttribute(`data-theme`, appState.theme);
+      const labelEl = document.getElementById(`theme-menu-label`);
+      if (labelEl) {
+        labelEl.textContent = appState.theme === `dark` ? `Change Theme (Light)` : `Change Theme (Dark)`;
+      }
+      const themeMeta = document.querySelector(`meta[name="theme-color"]`);
+      if (themeMeta) {
+        themeMeta.setAttribute(`content`, appState.theme === `dark` ? `#0f1a1f` : `#0f7c8a`);
+      }
+    }
+
+    function toggleTheme() {
+      appState.theme = appState.theme === `dark` ? `light` : `dark`;
+      applyTheme();
+      closeOptionsMenu();
+      persistState();
+      showToast(appState.theme === `dark` ? `Dark theme enabled` : `Light theme enabled`);
+    }
+
+    function showToast(msg) {
+      const banner = document.getElementById(`toast-banner`);
+      if (!banner) return;
+      banner.textContent = msg;
+      banner.classList.add(`visible`);
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        banner.classList.remove(`visible`);
+      }, 2400);
+    }
+
+    function getHabitLog(habit, dateStr) {
+      const dayLogs = appState.logs[dateStr];
+      if (!dayLogs || !dayLogs[habit.id]) {
+        if (habit.type === `checklist`) {
+          return { completed: false, value: 0, checks: {} };
+        }
+        return { completed: false, value: 0 };
+      }
+      return dayLogs[habit.id];
+    }
+
+    function getHabitRatio(habit, dateStr) {
+      const log = getHabitLog(habit, dateStr);
+      if (habit.type === `boolean`) {
+        return log.completed ? 1 : 0;
+      }
+      if (habit.type === `checklist`) {
+        const items = Array.isArray(habit.items) && habit.items.length ? habit.items : PRAYERS;
+        const checks = log.checks || {};
+        const doneCount = items.filter(name => Boolean(checks[name])).length;
+        return items.length > 0 ? doneCount / items.length : 0;
+      }
+      const target = Math.max(1, Number(habit.target) || 1);
+      const val = Math.max(0, Number(log.value) || 0);
+      return Math.min(1, val / target);
+    }
+
+    function isHabitCompleted(habit, dateStr) {
+      return getHabitRatio(habit, dateStr) >= 1;
+    }
+
+    function computeHabitStreak(habit) {
+      const today = getTodayIso();
+      let streak = 0;
+      let cursor = today;
+      if (!isHabitCompleted(habit, cursor)) {
+        cursor = addDaysIso(today, -1);
+      }
+      for (let i = 0; i < 365; i++) {
+        if (isHabitCompleted(habit, cursor)) {
+          streak += 1;
+          cursor = addDaysIso(cursor, -1);
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    function isDayActiveCompleted(dateStr) {
+      if (!appState.habits.length) return false;
+      return appState.habits.some(h => isHabitCompleted(h, dateStr));
+    }
+
+    function computeOverallStreaks() {
+      const today = getTodayIso();
+      let activeStreak = 0;
+      let cursor = today;
+      if (!isDayActiveCompleted(cursor)) {
+        cursor = addDaysIso(today, -1);
+      }
+      for (let i = 0; i < 365; i++) {
+        if (isDayActiveCompleted(cursor)) {
+          activeStreak += 1;
+          cursor = addDaysIso(cursor, -1);
+        } else {
+          break;
+        }
+      }
+
+      // Compute max streak across all logged dates + last 90 days
+      const allDates = new Set(Object.keys(appState.logs));
+      for (let i = 0; i < 90; i++) {
+        allDates.add(addDaysIso(today, -i));
+      }
+      const sortedDates = Array.from(allDates).sort();
+      let maxStreak = 0;
+      let running = 0;
+      let prevDate = null;
+
+      for (const dt of sortedDates) {
+        if (isDayActiveCompleted(dt)) {
+          if (prevDate && addDaysIso(prevDate, 1) === dt) {
+            running += 1;
+          } else {
+            running = 1;
+          }
+          if (running > maxStreak) maxStreak = running;
+        } else {
+          running = 0;
+        }
+        prevDate = dt;
+      }
+
+      return { activeStreak, maxStreak };
+    }
+
+    function switchView(viewName) {
+      currentView = viewName === `analytics` ? `analytics` : `habits`;
+      const habitsView = document.getElementById(`view-habits`);
+      const analyticsView = document.getElementById(`view-analytics`);
+      const navHabits = document.getElementById(`nav-habits`);
+      const navAnalytics = document.getElementById(`nav-analytics`);
+
+      if (habitsView) habitsView.classList.toggle(`active`, currentView === `habits`);
+      if (analyticsView) analyticsView.classList.toggle(`active`, currentView === `analytics`);
+      if (navHabits) navHabits.classList.toggle(`active`, currentView === `habits`);
+      if (navAnalytics) navAnalytics.classList.toggle(`active`, currentView === `analytics`);
+
+      if (currentView === `analytics`) {
+        renderAnalytics();
+      } else {
+        renderHabitsView();
+      }
+    }
+
+    function shiftActiveDate(delta) {
+      const today = getTodayIso();
+      const next = addDaysIso(activeDateStr, delta);
+      if (next > today) return;
+      activeDateStr = next;
+      renderHabitsView();
+    }
+
+    function jumpToToday() {
+      activeDateStr = getTodayIso();
+      renderHabitsView();
+    }
+
+    function selectCategory(catId) {
+      selectedCategory = catId;
+      renderHabitsView();
+      if (currentView === `analytics`) renderAnalytics();
+    }
+
+    function renderCategoryFilters(containerId) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      const allActive = selectedCategory === `All`;
+      let html = `<button type="button" class="cat-pill" role="tab" aria-selected="${allActive}" style="${
+        allActive
+          ? `background-color: var(--primary); border-color: var(--primary); color: var(--on-primary);`
+          : `background-color: var(--background); border-color: var(--outline-variant); color: var(--on-surface);`
+      }" onclick="selectCategory('All')">All</button>`;
+
+      for (const cat of appState.categories) {
+        const isActive = selectedCategory === cat.id;
+        const textCol = getContrastText(cat.color);
+        const pillStyle = isActive
+          ? `background-color: ${cat.color}; border-color: ${cat.color}; color: ${textCol};`
+          : `background-color: var(--background); border-color: ${cat.color}; color: var(--on-surface);`;
+        const dotColor = isActive ? textCol : cat.color;
+        html += `<button type="button" class="cat-pill" role="tab" aria-selected="${isActive}" style="${pillStyle}" onclick="selectCategory('${escapeHtml(cat.id)}')">` +
+          `<span class="cat-dot" style="background-color: ${dotColor};"></span>` +
+          `<span>${escapeHtml(cat.name)}</span>` +
+          `</button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function renderHabitsView() {
+      const today = getTodayIso();
+      const dateLabel = document.getElementById(`date-label`);
+      const nextBtn = document.getElementById(`date-next-btn`);
+      const todayBtn = document.getElementById(`date-today-btn`);
+      const progressPill = document.getElementById(`daily-progress-pill`);
+
+      if (dateLabel) dateLabel.textContent = formatHeaderDate(activeDateStr);
+      if (nextBtn) nextBtn.disabled = activeDateStr >= today;
+      if (todayBtn) todayBtn.style.display = activeDateStr < today ? `inline-flex` : `none`;
+
+      const totalHabits = appState.habits.length;
+      const doneHabits = appState.habits.filter(h => isHabitCompleted(h, activeDateStr)).length;
+      if (progressPill) progressPill.textContent = `${doneHabits} / ${totalHabits} done`;
+
+      renderCategoryFilters(`category-filters`);
+
+      const listEl = document.getElementById(`habits-list`);
+      const emptyEl = document.getElementById(`habits-empty-state`);
+      if (!listEl || !emptyEl) return;
+
+      const filtered = selectedCategory === `All`
+        ? appState.habits
+        : appState.habits.filter(h => h.category === selectedCategory);
+
+      if (!filtered.length) {
+        listEl.innerHTML = ``;
+        emptyEl.classList.add(`visible`);
+        return;
+      }
+      emptyEl.classList.remove(`visible`);
+
+      let cardsHtml = ``;
+      for (const habit of filtered) {
+        const cat = getCategoryMeta(habit.category);
+        const catColor = cat.color;
+        const badgeText = getContrastText(catColor);
+        const isDone = isHabitCompleted(habit, activeDateStr);
+        const streak = computeHabitStreak(habit);
+        const log = getHabitLog(habit, activeDateStr);
+
+        let controlHtml = ``;
+        if (habit.type === `boolean`) {
+          const btnStyle = isDone
+            ? `background-color: ${catColor}; border-color: ${catColor}; color: ${badgeText};`
+            : `background-color: var(--surface-container-low); border-color: ${catColor}; color: var(--on-surface);`;
+          controlHtml = `
+            <div class="bool-toggle-row">
+              <button type="button" class="check-pill-btn" style="${btnStyle}" onclick="toggleBooleanHabit('${escapeHtml(habit.id)}')">
+                <span class="check-box-square">
+                  ${isDone ? `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>` : ``}
+                </span>
+                <span>${isDone ? `Completed` : `Mark Done`}</span>
+              </button>
+            </div>`;
+        } else if (habit.type === `checklist`) {
+          const items = Array.isArray(habit.items) && habit.items.length ? habit.items : PRAYERS;
+          const checks = log.checks || {};
+          const checkedCount = items.filter(p => Boolean(checks[p])).length;
+          let chipsHtml = ``;
+          for (const pName of items) {
+            const pChecked = Boolean(checks[pName]);
+            const pStyle = pChecked
+              ? `background-color: ${catColor}; border-color: ${catColor}; color: ${badgeText};`
+              : `background-color: var(--surface-container-low); border-color: var(--outline-variant); color: var(--on-surface);`;
+            chipsHtml += `
+              <button type="button" class="prayer-chip" style="${pStyle}" aria-pressed="${pChecked}" onclick="toggleChecklistItem('${escapeHtml(habit.id)}', '${escapeHtml(pName)}')">
+                ${pChecked
+                  ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`
+                  : `<span style="width:12px; height:12px; border-radius:3px; border:1.5px solid ${catColor}; display:inline-block;"></span>`}
+                <span>${escapeHtml(pName)}</span>
+              </button>`;
+          }
+          controlHtml = `
+            <div class="prayer-wrap">
+              <div class="prayer-header">
+                <span>${checkedCount} / ${items.length} prayers</span>
+                <span>${Math.round((checkedCount / items.length) * 100)}%</span>
+              </div>
+              <div class="prayer-grid">${chipsHtml}</div>
+            </div>`;
+        } else {
+          const target = Math.max(1, Number(habit.target) || 1);
+          const val = Math.max(0, Number(log.value) || 0);
+          const unit = habit.unit || `units`;
+          const pct = Math.min(100, Math.round((val / target) * 100));
+          const quickBtnStyle = isDone
+            ? `background-color: ${catColor}; border-color: ${catColor}; color: ${badgeText};`
+            : `background-color: var(--surface-container-low); border-color: ${catColor}; color: var(--on-surface);`;
+          controlHtml = `
+            <div class="quant-wrap">
+              <div class="quant-bar-track">
+                <div class="quant-bar-fill" style="width: ${pct}%; background-color: ${catColor};"></div>
+              </div>
+              <div class="quant-controls">
+                <div class="stepper-group">
+                  <button type="button" class="step-btn" aria-label="Decrease ${escapeHtml(habit.title)}" onclick="adjustQuantHabit('${escapeHtml(habit.id)}', -1)">−</button>
+                  <span class="quant-value">${val} / ${target} ${escapeHtml(unit)}</span>
+                  <button type="button" class="step-btn" aria-label="Increase ${escapeHtml(habit.title)}" onclick="adjustQuantHabit('${escapeHtml(habit.id)}', 1)">+</button>
+                </div>
+                <button type="button" class="check-pill-btn" style="min-height:40px; padding:0 12px; ${quickBtnStyle}" onclick="toggleQuantComplete('${escapeHtml(habit.id)}')">
+                  <span>${isDone ? `Done ✓` : `Complete`}</span>
+                </button>
+              </div>
+            </div>`;
+        }
+
+        const deleteConfirmHtml = armedDeleteId === habit.id
+          ? `<div class="delete-confirm-bar">
+               <span class="delete-confirm-text">Delete "${escapeHtml(habit.title)}"?</span>
+               <div class="delete-confirm-actions">
+                 <button type="button" class="mini-btn" onclick="cancelDeleteHabit()">Cancel</button>
+                 <button type="button" class="mini-btn confirm-del" onclick="confirmDeleteHabit('${escapeHtml(habit.id)}')">Delete</button>
+               </div>
+             </div>`
+          : ``;
+
+        cardsHtml += `
+          <article class="habit-card" data-habit-id="${escapeHtml(habit.id)}" style="border-left: 5px solid ${catColor};">
+            <div class="drag-handle" title="Hold and drag to reorder" aria-label="Drag to reorder ${escapeHtml(habit.title)}">
+              <svg width="16" height="20" viewBox="0 0 16 20" fill="currentColor" aria-hidden="true">
+                <circle cx="5" cy="4" r="1.6"/><circle cx="11" cy="4" r="1.6"/>
+                <circle cx="5" cy="10" r="1.6"/><circle cx="11" cy="10" r="1.6"/>
+                <circle cx="5" cy="16" r="1.6"/><circle cx="11" cy="16" r="1.6"/>
+              </svg>
+            </div>
+            <div class="habit-main">
+              <div class="habit-meta-row">
+                <span class="cat-badge" style="background-color: ${catColor}; color: ${badgeText};">
+                  <span>${escapeHtml(cat.name)}</span>
+                </span>
+                ${streak > 0 ? `<span class="streak-pill">${streak}d streak</span>` : ``}
+              </div>
+              <h3 class="habit-title ${isDone ? `is-done` : ``}">${escapeHtml(habit.title)}</h3>
+              ${controlHtml}
+              ${deleteConfirmHtml}
+            </div>
+            <div class="habit-actions-col">
+              <button type="button" class="action-stack-btn" aria-label="Edit ${escapeHtml(habit.title)}" title="Edit habit" onclick="openHabitModal('${escapeHtml(habit.id)}')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+              </button>
+              <button type="button" class="action-stack-btn delete-btn" aria-label="Delete ${escapeHtml(habit.title)}" title="Delete habit" onclick="armDeleteHabit('${escapeHtml(habit.id)}')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              </button>
+            </div>
+          </article>`;
+      }
+
+      listEl.innerHTML = cardsHtml;
+      attachDragHandlers();
+    }
+
+    function ensureDayLog(dateStr) {
+      if (!appState.logs[dateStr] || typeof appState.logs[dateStr] !== `object`) {
+        appState.logs[dateStr] = {};
+      }
+      return appState.logs[dateStr];
+    }
+
+    function toggleBooleanHabit(habitId) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      const dayLog = ensureDayLog(activeDateStr);
+      const current = getHabitLog(habit, activeDateStr);
+      const nextDone = !current.completed;
+      dayLog[habitId] = { completed: nextDone, value: nextDone ? 1 : 0 };
+      persistState();
+      renderHabitsView();
+    }
+
+    function toggleChecklistItem(habitId, itemName) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      const items = Array.isArray(habit.items) && habit.items.length ? habit.items : PRAYERS;
+      const dayLog = ensureDayLog(activeDateStr);
+      const current = getHabitLog(habit, activeDateStr);
+      const checks = { ...(current.checks || {}) };
+      checks[itemName] = !checks[itemName];
+      const count = items.filter(name => Boolean(checks[name])).length;
+      dayLog[habitId] = {
+        completed: count >= items.length,
+        value: count,
+        checks
+      };
+      persistState();
+      renderHabitsView();
+    }
+
+    function adjustQuantHabit(habitId, delta) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      const target = Math.max(1, Number(habit.target) || 1);
+      const dayLog = ensureDayLog(activeDateStr);
+      const current = getHabitLog(habit, activeDateStr);
+      const nextVal = Math.max(0, (Number(current.value) || 0) + delta);
+      dayLog[habitId] = {
+        completed: nextVal >= target,
+        value: nextVal
+      };
+      persistState();
+      renderHabitsView();
+    }
+
+    function toggleQuantComplete(habitId) {
+      const habit = appState.habits.find(h => h.id === habitId);
+      if (!habit) return;
+      const target = Math.max(1, Number(habit.target) || 1);
+      const dayLog = ensureDayLog(activeDateStr);
+      const current = getHabitLog(habit, activeDateStr);
+      const alreadyDone = (Number(current.value) || 0) >= target;
+      const nextVal = alreadyDone ? 0 : target;
+      dayLog[habitId] = {
+        completed: !alreadyDone,
+        value: nextVal
+      };
+      persistState();
+      renderHabitsView();
+    }
+
+    function armDeleteHabit(habitId) {
+      armedDeleteId = armedDeleteId === habitId ? null : habitId;
+      renderHabitsView();
+    }
+
+    function cancelDeleteHabit() {
+      armedDeleteId = null;
+      renderHabitsView();
+    }
+
+    function confirmDeleteHabit(habitId) {
+      appState.habits = appState.habits.filter(h => h.id !== habitId);
+      armedDeleteId = null;
+      persistState();
+      renderHabitsView();
+      showToast(`Habit deleted`);
+    }
+
+    /* Long-Press Drag & Drop Reordering */
+    function attachDragHandlers() {
+      const cards = document.querySelectorAll(`.habit-card`);
+      cards.forEach(card => {
+        const handle = card.querySelector(`.drag-handle`);
+        if (handle) {
+          handle.addEventListener(`pointerdown`, ev => startImmediateDrag(ev, card));
+        }
+        card.addEventListener(`pointerdown`, ev => {
+          if (ev.target.closest(`button, input, select, .drag-handle`)) return;
+          scheduleLongPressDrag(ev, card);
+        });
+      });
+    }
+
+    function scheduleLongPressDrag(ev, card) {
+      clearDragTimers();
+      dragState.startX = ev.clientX;
+      dragState.startY = ev.clientY;
+      dragState.pointerId = ev.pointerId;
+      dragState.longPressTimer = setTimeout(() => {
+        beginDrag(ev, card);
+      }, 320);
+    }
+
+    function startImmediateDrag(ev, card) {
+      ev.preventDefault();
+      clearDragTimers();
+      dragState.startX = ev.clientX;
+      dragState.startY = ev.clientY;
+      dragState.pointerId = ev.pointerId;
+      beginDrag(ev, card);
+    }
+
+    function clearDragTimers() {
+      if (dragState.longPressTimer) {
+        clearTimeout(dragState.longPressTimer);
+        dragState.longPressTimer = null;
+      }
+    }
+
+    function beginDrag(ev, card) {
+      dragState.active = true;
+      dragState.habitId = card.getAttribute(`data-habit-id`);
+      dragState.sourceEl = card;
+      card.classList.add(`dragging`);
+      if (navigator.vibrate) {
+        try { navigator.vibrate(18); } catch (_) {}
+      }
+    }
+
+    function handleGlobalPointerMove(ev) {
+      if (dragState.longPressTimer && !dragState.active) {
+        const dx = Math.abs(ev.clientX - dragState.startX);
+        const dy = Math.abs(ev.clientY - dragState.startY);
+        if (dx > 8 || dy > 8) {
+          clearDragTimers();
+        }
+        return;
+      }
+      if (!dragState.active || !dragState.sourceEl) return;
+      ev.preventDefault();
+
+      const cards = Array.from(document.querySelectorAll(`.habit-card`));
+      cards.forEach(c => c.classList.remove(`drag-over`));
+
+      const targetCard = cards.find(c => {
+        if (c === dragState.sourceEl) return false;
+        const rect = c.getBoundingClientRect();
+        return ev.clientY >= rect.top && ev.clientY <= rect.bottom;
+      });
+
+      if (targetCard) {
+        targetCard.classList.add(`drag-over`);
+        const rect = targetCard.getBoundingClientRect();
+        const insertAfter = ev.clientY > rect.top + rect.height / 2;
+        const parent = targetCard.parentNode;
+        if (parent) {
+          if (insertAfter) {
+            parent.insertBefore(dragState.sourceEl, targetCard.nextSibling);
+          } else {
+            parent.insertBefore(dragState.sourceEl, targetCard);
+          }
+        }
+      }
+    }
+
+    function handleGlobalPointerEnd() {
+      clearDragTimers();
+      if (!dragState.active) return;
+
+      const cards = Array.from(document.querySelectorAll(`.habit-card`));
+      cards.forEach(c => c.classList.remove(`dragging`, `drag-over`));
+
+      const newOrderIds = cards.map(c => c.getAttribute(`data-habit-id`)).filter(Boolean);
+      if (newOrderIds.length) {
+        const idToHabit = new Map(appState.habits.map(h => [h.id, h]));
+        const reordered = [];
+        for (const id of newOrderIds) {
+          const h = idToHabit.get(id);
+          if (h) {
+            reordered.push(h);
+            idToHabit.delete(id);
+          }
+        }
+        // Keep habits filtered out of current category view in relative order
+        for (const remaining of idToHabit.values()) {
+          reordered.push(remaining);
+        }
+        appState.habits = reordered;
+        persistState();
+      }
+
+      dragState.active = false;
+      dragState.habitId = null;
+      dragState.sourceEl = null;
+    }
+
+    window.addEventListener(`pointermove`, handleGlobalPointerMove, { passive: false });
+    window.addEventListener(`pointerup`, handleGlobalPointerEnd);
+    window.addEventListener(`pointercancel`, handleGlobalPointerEnd);
+
+    /* Analytics Rendering */
+    function renderAnalytics() {
+      const today = getTodayIso();
+      const totalHabits = appState.habits.length;
+      const doneToday = appState.habits.filter(h => isHabitCompleted(h, today)).length;
+      const dailyPct = totalHabits > 0 ? Math.round((doneToday / totalHabits) * 100) : 0;
+      const { activeStreak, maxStreak } = computeOverallStreaks();
+
+      // 14-day window dates (oldest -> Today)
+      const days14 = [];
+      for (let i = 13; i >= 0; i--) {
+        days14.push(addDaysIso(today, -i));
+      }
+
+      let checkins14 = 0;
+      for (const dt of days14) {
+        for (const h of appState.habits) {
+          if (isHabitCompleted(h, dt)) checkins14 += 1;
+        }
+      }
+
+      const elDailyVal = document.getElementById(`metric-daily-val`);
+      const elDailySub = document.getElementById(`metric-daily-sub`);
+      const elStreakVal = document.getElementById(`metric-streak-val`);
+      const elMaxVal = document.getElementById(`metric-max-val`);
+      const elCheckinsVal = document.getElementById(`metric-checkins-val`);
+      const elRangeLabel = document.getElementById(`consistency-range-label`);
+
+      if (elDailyVal) elDailyVal.textContent = `${dailyPct}%`;
+      if (elDailySub) elDailySub.textContent = `${doneToday} of ${totalHabits} today`;
+      if (elStreakVal) elStreakVal.textContent = `${activeStreak} ${activeStreak === 1 ? `day` : `days`}`;
+      if (elMaxVal) elMaxVal.textContent = `${maxStreak} ${maxStreak === 1 ? `day` : `days`}`;
+      if (elCheckinsVal) elCheckinsVal.textContent = String(checkins14);
+      if (elRangeLabel) elRangeLabel.textContent = `${formatShortDate(days14[0])} – Today`;
+
+      renderCategoryFilters(`analytics-category-filters`);
+
+      const listEl = document.getElementById(`consistency-list`);
+      if (!listEl) return;
+
+      const filtered = selectedCategory === `All`
+        ? appState.habits
+        : appState.habits.filter(h => h.category === selectedCategory);
+
+      if (!filtered.length) {
+        listEl.innerHTML = `<div class="empty-state visible"><p class="empty-state-title">No habits to analyze</p><p class="empty-state-desc">Add habits in Daily Habits to view 14-day consistency logs.</p></div>`;
+        return;
+      }
+
+      let html = ``;
+      for (const habit of filtered) {
+        const cat = getCategoryMeta(habit.category);
+        const catColor = cat.color;
+        const badgeText = getContrastText(catColor);
+        let loggedDays = 0;
+        let squaresHtml = ``;
+
+        for (let idx = 0; idx < days14.length; idx++) {
+          const dt = days14[idx];
+          const ratio = getHabitRatio(habit, dt);
+          const isTodayCell = dt === today;
+          if (ratio >= 1) loggedDays += 1;
+
+          let squareStyle = `background-color: var(--surface-container); border-color: var(--outline-variant);`;
+          if (ratio >= 1) {
+            squareStyle = `background-color: ${catColor}; border-color: ${catColor};`;
+          } else if (ratio > 0) {
+            squareStyle = `background: linear-gradient(to top, ${catColor} ${Math.round(ratio * 100)}%, var(--surface-container) ${Math.round(ratio * 100)}%); border-color: ${catColor};`;
+          }
+
+          const statusText = formatSquareStatus(habit, dt, ratio);
+          squaresHtml += `<button type="button" class="day-square ${isTodayCell ? `is-today` : ``}" style="${squareStyle}" title="${escapeHtml(statusText)}" aria-label="${escapeHtml(statusText)}" onclick="showSquareDetail('${escapeHtml(habit.id)}', '${escapeHtml(statusText)}')"></button>`;
+        }
+
+        const consistencyPct = Math.round((loggedDays / days14.length) * 100);
+
+        html += `
+          <article class="consistency-card" style="border-left: 5px solid ${catColor};">
+            <div class="consistency-top">
+              <div class="consistency-title-group">
+                <span class="cat-badge" style="background-color: ${catColor}; color: ${badgeText}; align-self: flex-start;">${escapeHtml(cat.name)}</span>
+                <h3 class="consistency-title">${escapeHtml(habit.title)}</h3>
+              </div>
+              <div class="consistency-stats">
+                <div class="consistency-pct">${consistencyPct}%</div>
+                <div class="consistency-days">${loggedDays} / ${days14.length} days</div>
+              </div>
+            </div>
+            <div class="squares-grid">${squaresHtml}</div>
+            <div class="squares-axis">
+              <span>${formatShortDate(days14[0])}</span>
+              <span>${formatShortDate(days14[7])}</span>
+              <span class="squares-axis-today">Today</span>
+            </div>
+            <div class="square-detail-note" data-detail-for="${escapeHtml(habit.id)}">Tap a day square to inspect log</div>
+          </article>`;
+      }
+
+      listEl.innerHTML = html;
+    }
+
+    function formatSquareStatus(habit, dateStr, ratio) {
+      const label = dateStr === getTodayIso() ? `Today` : formatShortDate(dateStr);
+      const log = getHabitLog(habit, dateStr);
+      if (habit.type === `checklist`) {
+        const items = Array.isArray(habit.items) && habit.items.length ? habit.items : PRAYERS;
+        const done = items.filter(p => Boolean((log.checks || {})[p])).length;
+        return `${label}: ${done} / ${items.length} prayers`;
+      }
+      if (habit.type === `quantitative`) {
+        const target = Math.max(1, Number(habit.target) || 1);
+        const val = Number(log.value) || 0;
+        return `${label}: ${val} / ${target} ${habit.unit || `units`}`;
+      }
+      return `${label}: ${ratio >= 1 ? `Completed` : `Not logged`}`;
+    }
+
+    function showSquareDetail(habitId, text) {
+      const target = document.querySelector(`[data-detail-for="${habitId}"]`);
+      if (target) target.textContent = text;
+    }
+
+    /* Options Dropdown Menu */
+    function toggleOptionsMenu(ev) {
+      ev.stopPropagation();
+      const menu = document.getElementById(`options-menu`);
+      const btn = document.getElementById(`options-btn`);
+      if (!menu || !btn) return;
+      const willOpen = !menu.classList.contains(`open`);
+      menu.classList.toggle(`open`, willOpen);
+      btn.setAttribute(`aria-expanded`, String(willOpen));
+    }
+
+    function closeOptionsMenu() {
+      const menu = document.getElementById(`options-menu`);
+      const btn = document.getElementById(`options-btn`);
+      if (menu) menu.classList.remove(`open`);
+      if (btn) btn.setAttribute(`aria-expanded`, `false`);
+    }
+
+    document.addEventListener(`click`, ev => {
+      if (!ev.target.closest(`#options-menu`) && !ev.target.closest(`#options-btn`)) {
+        closeOptionsMenu();
+      }
+    });
+
+    /* Modals */
+    function closeModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.remove(`open`);
+    }
+
+    function closeModalOnBackdrop(ev, modalId) {
+      if (ev.target && ev.target.id === modalId) {
+        closeModal(modalId);
+      }
+    }
+
+    function populateCategorySelect(selectedCatId) {
+      const selectEl = document.getElementById(`habit-cat-select`);
+      if (!selectEl) return;
+      let html = ``;
+      for (const cat of appState.categories) {
+        html += `<option value="${escapeHtml(cat.id)}">${escapeHtml(cat.name)}</option>`;
+      }
+      selectEl.innerHTML = html;
+      if (selectedCatId && appState.categories.some(c => c.id === selectedCatId)) {
+        selectEl.value = selectedCatId;
+      }
+    }
+
+    function toggleQuantFields() {
+      const typeEl = document.getElementById(`habit-type-select`);
+      const quantEl = document.getElementById(`quant-fields`);
+      if (!typeEl || !quantEl) return;
+      quantEl.style.display = typeEl.value === `quantitative` ? `grid` : `none`;
+    }
+
+    function openHabitModal(editHabitId) {
+      closeOptionsMenu();
+      const modal = document.getElementById(`habit-modal`);
+      const titleEl = document.getElementById(`habit-modal-title`);
+      const editIdEl = document.getElementById(`habit-edit-id`);
+      const nameInput = document.getElementById(`habit-name-input`);
+      const typeSelect = document.getElementById(`habit-type-select`);
+      const targetInput = document.getElementById(`habit-target-input`);
+      const unitInput = document.getElementById(`habit-unit-input`);
+      const errEl = document.getElementById(`habit-form-error`);
+
+      if (!modal || !titleEl || !editIdEl || !nameInput || !typeSelect || !targetInput || !unitInput || !errEl) return;
+      errEl.textContent = ``;
+
+      if (editHabitId) {
+        const habit = appState.habits.find(h => h.id === editHabitId);
+        if (!habit) return;
+        titleEl.textContent = `Edit Habit`;
+        editIdEl.value = habit.id;
+        nameInput.value = habit.title;
+        populateCategorySelect(habit.category);
+        typeSelect.value = habit.type;
+        targetInput.value = habit.target || 10;
+        unitInput.value = habit.unit || `glasses`;
+      } else {
+        titleEl.textContent = `New Habit`;
+        editIdEl.value = ``;
+        nameInput.value = ``;
+        populateCategorySelect(selectedCategory !== `All` ? selectedCategory : `Health`);
+        typeSelect.value = `boolean`;
+        targetInput.value = `10`;
+        unitInput.value = `glasses`;
+      }
+
+      toggleQuantFields();
+      modal.classList.add(`open`);
+      nameInput.focus();
+    }
+
+    function saveHabitFromModal() {
+      const editIdEl = document.getElementById(`habit-edit-id`);
+      const nameInput = document.getElementById(`habit-name-input`);
+      const catSelect = document.getElementById(`habit-cat-select`);
+      const typeSelect = document.getElementById(`habit-type-select`);
+      const targetInput = document.getElementById(`habit-target-input`);
+      const unitInput = document.getElementById(`habit-unit-input`);
+      const errEl = document.getElementById(`habit-form-error`);
+
+      if (!nameInput || !catSelect || !typeSelect || !targetInput || !unitInput || !errEl || !editIdEl) return;
+
+      const title = nameInput.value.trim();
+      if (!title) {
+        errEl.textContent = `Please enter a habit name.`;
+        return;
+      }
+
+      const type = typeSelect.value;
+      const category = catSelect.value;
+      const target = type === `quantitative` ? Math.max(1, parseInt(targetInput.value, 10) || 1) : (type === `checklist` ? 5 : 1);
+      const unit = type === `quantitative` ? (unitInput.value.trim() || `units`) : (type === `checklist` ? `prayers` : `session`);
+
+      const editId = editIdEl.value;
+      if (editId) {
+        const existing = appState.habits.find(h => h.id === editId);
+        if (existing) {
+          existing.title = title;
+          existing.category = category;
+          existing.type = type;
+          existing.target = target;
+          existing.unit = unit;
+          if (type === `checklist` && (!existing.items || !existing.items.length)) {
+            existing.items = [...PRAYERS];
+          }
+        }
+        showToast(`Habit updated`);
+      } else {
+        appState.habits.push({
+          id: `habit_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+          title,
+          category,
+          type,
+          items: type === `checklist` ? [...PRAYERS] : undefined,
+          target,
+          unit,
+          createdAt: getTodayIso(),
+          order: appState.habits.length
+        });
+        showToast(`Habit added`);
+      }
+
+      persistState();
+      closeModal(`habit-modal`);
+      renderHabitsView();
+      if (currentView === `analytics`) renderAnalytics();
+    }
+
+    function openStockModal() {
+      closeOptionsMenu();
+      const modal = document.getElementById(`stock-modal`);
+      if (!modal) return;
+      renderStockList();
+      modal.classList.add(`open`);
+    }
+
+    function renderStockList() {
+      const container = document.getElementById(`stock-habits-list`);
+      if (!container) return;
+
+      let html = ``;
+      for (const stock of STOCK_HABITS) {
+        const cat = getCategoryMeta(stock.category);
+        const badgeText = getContrastText(cat.color);
+        const alreadyAdded = appState.habits.some(h => h.stockKey === stock.stockKey || h.title.toLowerCase() === stock.title.toLowerCase());
+        html += `
+          <div class="stock-item" style="border-left: 4px solid ${cat.color};">
+            <div class="stock-info">
+              <span class="cat-badge" style="background-color: ${cat.color}; color: ${badgeText}; align-self: flex-start;">${escapeHtml(cat.name)}</span>
+              <span class="stock-title">${escapeHtml(stock.title)}</span>
+              <span class="stock-desc">${escapeHtml(stock.description)}</span>
+            </div>
+            <button type="button" class="btn ${alreadyAdded ? `btn-outline` : `btn-primary`}" style="min-height:40px;" onclick="addStockHabit('${escapeHtml(stock.stockKey)}')">
+              ${alreadyAdded ? `Add Again` : `Add`}
+            </button>
+          </div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function addStockHabit(stockKey) {
+      const stock = STOCK_HABITS.find(s => s.stockKey === stockKey);
+      if (!stock) return;
+      appState.habits.push({
+        id: `habit_${stock.stockKey}_${Date.now()}`,
+        stockKey: stock.stockKey,
+        title: stock.title,
+        category: stock.category,
+        type: stock.type,
+        items: stock.items ? [...stock.items] : undefined,
+        target: stock.target,
+        unit: stock.unit,
+        createdAt: getTodayIso(),
+        order: appState.habits.length
+      });
+      persistState();
+      renderStockList();
+      renderHabitsView();
+      if (currentView === `analytics`) renderAnalytics();
+      showToast(`Added "${stock.title}"`);
+    }
+
+    function openCategoryModal() {
+      closeOptionsMenu();
+      const modal = document.getElementById(`category-modal`);
+      const nameInput = document.getElementById(`cat-name-input`);
+      const colorInput = document.getElementById(`cat-color-input`);
+      const errEl = document.getElementById(`cat-form-error`);
+      if (!modal || !nameInput || !colorInput || !errEl) return;
+
+      nameInput.value = ``;
+      errEl.textContent = ``;
+      renderColorSwatches(colorInput.value);
+      renderCustomCategoriesList();
+      modal.classList.add(`open`);
+      nameInput.focus();
+    }
+
+    function renderColorSwatches(activeHex) {
+      const container = document.getElementById(`cat-swatches`);
+      if (!container) return;
+      let html = ``;
+      for (const hex of SWATCH_COLORS) {
+        const selected = hex.toLowerCase() === String(activeHex).toLowerCase();
+        html += `<button type="button" class="swatch-btn ${selected ? `selected` : ``}" style="background-color: ${hex};" aria-label="Color ${hex}" onclick="pickCategorySwatch('${hex}')"></button>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function pickCategorySwatch(hex) {
+      const colorInput = document.getElementById(`cat-color-input`);
+      if (colorInput) colorInput.value = hex;
+      renderColorSwatches(hex);
+    }
+
+    function saveCategoryFromModal() {
+      const nameInput = document.getElementById(`cat-name-input`);
+      const colorInput = document.getElementById(`cat-color-input`);
+      const errEl = document.getElementById(`cat-form-error`);
+      if (!nameInput || !colorInput || !errEl) return;
+
+      const name = nameInput.value.trim();
+      if (!name) {
+        errEl.textContent = `Please enter a category name.`;
+        return;
+      }
+      if (appState.categories.some(c => c.name.toLowerCase() === name.toLowerCase())) {
+        errEl.textContent = `A category with that name already exists.`;
+        return;
+      }
+
+      appState.categories.push({
+        id: name,
+        name,
+        color: colorInput.value || `#ec4899`,
+        custom: true
+      });
+      persistState();
+      nameInput.value = ``;
+      errEl.textContent = ``;
+      renderCustomCategoriesList();
+      renderHabitsView();
+      if (currentView === `analytics`) renderAnalytics();
+      showToast(`Category "${name}" added`);
+    }
+
+    function renderCustomCategoriesList() {
+      const container = document.getElementById(`custom-cats-list`);
+      if (!container) return;
+      const customCats = appState.categories.filter(c => c.custom);
+      if (!customCats.length) {
+        container.innerHTML = ``;
+        return;
+      }
+      let html = `<div class="form-label" style="margin-top:6px;">Custom Categories</div>`;
+      for (const cat of customCats) {
+        html += `
+          <div class="custom-cat-row">
+            <span style="display:inline-flex; align-items:center; gap:8px; font-weight:600;">
+              <span class="cat-dot" style="background-color:${cat.color};"></span>
+              <span>${escapeHtml(cat.name)}</span>
+            </span>
+            <button type="button" class="mini-btn" onclick="deleteCustomCategory('${escapeHtml(cat.id)}')">Remove</button>
+          </div>`;
+      }
+      container.innerHTML = html;
+    }
+
+    function deleteCustomCategory(catId) {
+      appState.categories = appState.categories.filter(c => c.id !== catId);
+      appState.habits.forEach(h => {
+        if (h.category === catId) h.category = `Health`;
+      });
+      if (selectedCategory === catId) selectedCategory = `All`;
+      persistState();
+      renderCustomCategoriesList();
+      renderHabitsView();
+      if (currentView === `analytics`) renderAnalytics();
+      showToast(`Custom category removed`);
+    }
+
+    function openExitModal() {
+      closeOptionsMenu();
+      const modal = document.getElementById(`exit-modal`);
+      const textEl = document.getElementById(`exit-summary-text`);
+      if (!modal || !textEl) return;
+
+      const today = getTodayIso();
+      const done = appState.habits.filter(h => isHabitCompleted(h, today)).length;
+      textEl.textContent = `Today's progress: ${done} of ${appState.habits.length} habits completed. Your RozKia data is saved and ready whenever you return.`;
+      modal.classList.add(`open`);
+    }
+
+    function exportBackupJson() {
+      const payload = JSON.stringify(appState, null, 2);
+      const filename = `rozkia-backup-${getTodayIso()}.json`;
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === `function`) {
+        window.notebookAppApi.triggerFileDownload({
+          content: payload,
+          contentType: `text/plain`,
+          encoding: `UTF-8`,
+          filename
+        });
+      } else {
+        const blob = new Blob([payload], { type: `application/json` });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement(`a`);
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      }
+      showToast(`Backup exported`);
+    }
+
+    /* PWA Inline Blob Service Worker & Install Prompt */
+    function setupPwaSupport() {
+      window.addEventListener(`beforeinstallprompt`, ev => {
+        ev.preventDefault();
+        deferredInstallPrompt = ev;
+        const installBtn = document.getElementById(`install-pwa-btn`);
+        if (installBtn) installBtn.style.display = `flex`;
+      });
+
+      try {
+        if (
+          `serviceWorker` in navigator &&
+          typeof Blob !== `undefined` &&
+          typeof URL !== `undefined` &&
+          typeof URL.createObjectURL === `function` &&
+          window.location &&
+          window.location.protocol &&
+          window.location.protocol.indexOf(`http`) === 0
+        ) {
+          const swCode = [
+            `const CACHE_NAME = 'rozkia-pwa-v1';`,
+            `self.addEventListener('install', event => { self.skipWaiting(); });`,
+            `self.addEventListener('activate', event => { event.waitUntil(self.clients.claim()); });`,
+            `self.addEventListener('fetch', event => {`,
+            `  if (event.request.method !== 'GET') return;`,
+            `  event.respondWith(`,
+            `    caches.match(event.request).then(cached => cached || fetch(event.request).then(resp => {`,
+            `      const copy = resp.clone();`,
+            `      caches.open(CACHE_NAME).then(c => c.put(event.request, copy)).catch(() => {});`,
+            `      return resp;`,
+            `    }).catch(() => cached))`,
+            `  );`,
+            `});`
+          ].join(`\n`);
+
+          const swBlob = new Blob([swCode], { type: `application/javascript` });
+          const swUrl = URL.createObjectURL(swBlob);
+          navigator.serviceWorker.register(swUrl, { scope: `./` }).catch(() => {});
+        }
+      } catch (_) {
+        // Ignore in sandboxed iframe environments
+      }
+    }
+
+    function triggerPwaInstall() {
+      closeOptionsMenu();
+      if (!deferredInstallPrompt) {
+        showToast(`Use browser menu "Add to Home screen" to install`);
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.finally(() => {
+        deferredInstallPrompt = null;
+        const installBtn = document.getElementById(`install-pwa-btn`);
+        if (installBtn) installBtn.style.display = `none`;
+      });
+    }
+
+    async function initApp() {
+      setupPwaSupport();
+      await loadPersistedState();
+      applyTheme();
+      renderHabitsView();
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === `function`) {
+        window.notebookAppApi.notifyAppReady();
+      }
+    }
+
+    initApp();
+  </script>
+</body>
+</html>
